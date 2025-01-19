@@ -282,7 +282,7 @@ async function ha(F, M) {
     ka = parseInt(F.dataset.measurementX, 10);
     oa = parseInt(F.dataset.measurementY, 10);
     try {
-        var ta = "shop" != M && jf(F, E) || jc(oa, ka, ac(T[0],
+        var ta = "shop" != M && kf(F, E) || jc(oa, ka, ac(T[0],
             T[1], E));
         if (!ta) return !1;
         V = jQuery(N).offset();
@@ -333,7 +333,7 @@ function ac(F, M, N) {
     return E
 }
 
-function jf(F, M) {
+function kf(F, M) {
     let N = F.dataset.amount ? parseInt(F.dataset.amount, 10) : 1;
     for (var T = 0; T < M.length; T++)
         if (M[T].hash == F.dataset.hash && 100 >= M[T].amount + N) return {
@@ -382,19 +382,19 @@ function wa(F, M, N) {
     F.dispatchEvent(ka)
 }
 
-function kf() {
+function lf() {
     new Promise(F => {
         let M = 2,
             N = () => {
                 --M;
                 0 === M && F()
             };
-        if (lf.includes("mod=auction") && lf.includes("ttype=3")) {
-            var T = mf();
-            (T < localStorage.getItem("auctionMStatus") && nf("AuctionMEmpty") || 4 === T && nf("AuctionMEmpty")) && localStorage.setItem("auctionM.timeOut", 0);
+        if (mf.includes("mod=auction") && mf.includes("ttype=3")) {
+            var T = nf();
+            (T < localStorage.getItem("auctionMStatus") && of("AuctionMEmpty") || 4 === T && of("AuctionMEmpty")) && localStorage.setItem("auctionM.timeOut", 0);
             localStorage.setItem("auctionMStatus", T);
             N()
-        } else lf.includes("mod=auction") ? (T = mf(), (T < localStorage.getItem("auctionStatus") && nf("AuctionEmpty") || 4 === T && nf("AuctionEmpty")) && localStorage.setItem("auction.timeOut", 0), localStorage.setItem("auctionStatus",
+        } else mf.includes("mod=auction") ? (T = nf(), (T < localStorage.getItem("auctionStatus") && of("AuctionEmpty") || 4 === T && of("AuctionEmpty")) && localStorage.setItem("auction.timeOut", 0), localStorage.setItem("auctionStatus",
             T), N()) : (jQuery.get(G({
             mod: "auction",
             ttype: 3,
@@ -402,8 +402,8 @@ function kf() {
             itemQuality: 2,
             sh: W("sh")
         }), V => {
-            V = mf(jQuery(V));
-            (V < localStorage.getItem("auctionMStatus") && nf("AuctionMEmpty") || 4 === V && nf("AuctionMEmpty")) && localStorage.setItem("auctionM.timeOut", 0);
+            V = nf(jQuery(V));
+            (V < localStorage.getItem("auctionMStatus") && of("AuctionMEmpty") || 4 === V && of("AuctionMEmpty")) && localStorage.setItem("auctionM.timeOut", 0);
             localStorage.setItem("auctionMStatus", V);
             N()
         }), jQuery.get(G({
@@ -412,8 +412,8 @@ function kf() {
             itemQuality: 2,
             sh: W("sh")
         }), V => {
-            V = mf(jQuery(V));
-            (V < localStorage.getItem("auctionStatus") && nf("AuctionEmpty") || 4 === V && nf("AuctionEmpty")) && localStorage.setItem("auction.timeOut",
+            V = nf(jQuery(V));
+            (V < localStorage.getItem("auctionStatus") && of("AuctionEmpty") || 4 === V && of("AuctionEmpty")) && localStorage.setItem("auction.timeOut",
                 0);
             localStorage.setItem("auctionStatus", V);
             N()
@@ -421,21 +421,21 @@ function kf() {
     })
 }
 
-function of(F) {
+function pf(F) {
     if (document.querySelector("#inv div.spinner-img")) return setTimeout(() => {
-        of(F)
+        pf(F)
     }, 500), !1;
     F && F();
     return !0
 }
-var pf = new URLSearchParams(window.location.search);
+var qf = new URLSearchParams(window.location.search);
 
 function W(F) {
-    return pf.get(F)
+    return qf.get(F)
 }
-var lf = window.location.search.match(/mod=.*&sh/) ? window.location.search.match(/mod=.*&sh/)[0].slice(0, -3) : null,
-    Bf = window.location.hostname.split(/\./) ? window.location.hostname.split(/\./)[0] : null,
-    Cf = {
+var mf = window.location.search.match(/mod=.*&sh/) ? window.location.search.match(/mod=.*&sh/)[0].slice(0, -3) : null,
+    Cf = window.location.hostname.split(/\./) ? window.location.hostname.split(/\./)[0] : null,
+    Df = {
         lq: {
             l: "muito longo",
             h: "longo",
@@ -654,17 +654,17 @@ var lf = window.location.search.match(/mod=.*&sh/) ? window.location.search.matc
             m: "\u8d85\u77ed"
         }
     },
-    mf = (F = document) => {
+    nf = (F = document) => {
         F = jQuery(".description_span_right", F).text().trim().toLowerCase();
-        for (const M in Cf) {
-            const N = Cf[M],
+        for (const M in Df) {
+            const N = Df[M],
                 T = Object.values(N);
             for (const V in N)
                 if (N[V].toLowerCase() === F) return T.indexOf(N[V])
         }
         return -1
     };
-async function Df(F = "-1", M = "") {
+async function Ef(F = "-1", M = "") {
     const N = G({
         mod: "packages",
         submod: "sort",
@@ -676,9 +676,9 @@ async function Df(F = "-1", M = "") {
     });
     return Promise.all(Array.from({
         length: 2
-    }, (T, V) => V + 1).map(async T => await Ef(F, M, T))).then(T => T.reduce((V, E) => V.concat(E), []))
+    }, (T, V) => V + 1).map(async T => await Ff(F, M, T))).then(T => T.reduce((V, E) => V.concat(E), []))
 }
-async function Ef(F = "-1", M = "", N) {
+async function Ff(F = "-1", M = "", N) {
     F = await jQuery.get(G({
         mod: "packages",
         f: "0",
@@ -690,21 +690,21 @@ async function Ef(F = "-1", M = "", N) {
     return Array.from(jQuery(F).find(".packageItem"))
 }
 
-function Ff(F) {
+function Gf(F) {
     setTimeout(() => {
         window.location.reload(!1)
     }, F)
 }
 
-function Gf(F) {
+function Hf(F) {
     window.location.href = `${window.location.origin}/game/index.php?${F}&sh=${W("sh")}`
 }
 
-function Bh(F) {
+function Dh(F) {
     F && (F.classList.contains("disabled") ? window.location.reload() : F.click())
 }
 
-function Ch() {
+function Eh() {
     return {
         o: parseInt($("#header_values_hp_percent")[0].innerText, 10),
         gold: Number($("#sstat_gold_val")[0].innerHTML.replace(/\./g, "")),
@@ -719,22 +719,22 @@ function Ch() {
     }
 }
 
-function nf(F) {
+function of(F) {
     let M = (new Date).getTime(),
         N = localStorage.getItem(F + ".timeOut");
     null === N ? (localStorage.setItem(F + ".timeOut", 0), N = 0) : N = parseInt(N, 10);
     return N <= M ? !0 : !1
 }
 
-function Dh() {
+function Fh() {
     let F = 0;
     JSON.parse(localStorage.getItem("packagesPurchased") || "[]").forEach(M => {
         F += Math.round(.04 * M.price)
     });
-    return Ch().gold >= F ? !0 : !1
+    return Eh().gold >= F ? !0 : !1
 }
 
-function Eh(F, M) {
+function Gh(F, M) {
     M -= F;
     let N = .04 * F;
     JSON.parse(localStorage.getItem("packagesPurchased") || "[]").forEach(T => {
@@ -765,9 +765,9 @@ function Z(F, M) {
     }
 
     function T() {
-        qf = setInterval(function() {
-            rf++;
-            5 >= rf ? location.reload() : clearInterval(qf)
+        rf = setInterval(function() {
+            sf++;
+            5 >= sf ? location.reload() : clearInterval(rf)
         }, 12E4)
     }
 
@@ -888,7 +888,7 @@ function Z(F, M) {
             else if (h.success || h.s) {
                 const l = h.data || h.d;
                 if (l.valid && !l.expired) return aa.player.key = l.playerId, aa.player.supportDevelopersPlease = l.supportDevs, "true" !== localStorage.getItem("nana_lcn") && localStorage.setItem("nana_lcn", "true"), l.announcement && 0 <= l.announcement.length && localStorage.getItem("latestAnnouncement") !==
-                    l.announcement && localStorage.setItem("latestAnnouncement", l.announcement), await Mh(l.supportDevs).then(q => {
+                    l.announcement && localStorage.setItem("latestAnnouncement", l.announcement), await Oh(l.supportDevs).then(q => {
                         aa.player.Ed = q
                     }), !0;
                 if (l.expired && (sessionStorage.setItem("autoGoActive", "false"), l.newToken)) return l.newToken && (localStorage.setItem("token", l.newToken + 1), localStorage.setItem("nana_lcn", "false"), aa.player.key = bc() + "l", gb()), !1
@@ -898,11 +898,11 @@ function Z(F, M) {
         }
     }
 
-    function Nh(b) {
+    function Ph(b) {
         return ((localStorage.getItem("playerId") | 0) + 5 | 0) % 100 ===
             b
     }
-    async function Mh(b) {
+    async function Oh(b) {
         function c(l) {
             const q = [];
             for (let n = 0; n < l.length; n += 2) q.push(parseInt(l.substr(n, 2), 16));
@@ -924,18 +924,18 @@ function Z(F, M) {
         return b
     }
 
-    function Oh(b) {
+    function Qh(b) {
         (b.target.classList.contains("licotok-close") ||
             "licotok" === b.target.id) && document.getElementById("licotok").remove()
     }
-    async function Ph() {
+    async function Rh() {
         bc();
         const b = document.getElementById("licotok-input").value.trim(),
             c = localStorage.getItem("playerId"),
             e = document.getElementById("status_message");
         let g = null;
         try {
-            g = await (await fetch("https://fociisoftware.com/validate-license", {
+            g = await (await fetch("http://localhost:3000/validate-license", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -947,7 +947,7 @@ function Z(F, M) {
             })).json()
         } catch (k) {
             try {
-                g = await (await fetch("https://glad.fociisoftware.com/validate-license", {
+                g = await (await fetch("http://localhost:3000/validate-license", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -1031,13 +1031,13 @@ function Z(F, M) {
         })
     }
 
-    function Qh() {
+    function Sh() {
         var b = document.createElement("div");
         b.setAttribute("id", "licotok");
         b.innerHTML = '\n        <style>\n            .licotok-popup {\n            background: #ddd5b4; /* Beige background */\n            box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.3);\n            border-radius: 10px;\n            color: #333; /* Darker text color for better contrast */\n            padding: 20px;\n            border: 1px solid #c4ac70; /* Golden border */\n            font-family: Arial, sans-serif; /* Optional: Change the font */\n            }\n        \n            .licotok-popup h2 {\n            color: #333;\n            text-shadow: none; /* Removing text shadow for better readability */\n            background: linear-gradient(to right, #c4ac70, #ddd5b4); /* Gradient title background */\n            padding: 10px;\n            margin: -20px; /* To offset the padding of the parent */\n            margin-bottom: 15px;\n            border-radius: 10px 10px 0 0; /* Rounded corners on the top */\n            }\n        \n            .licotok-popup a {\n            text-decoration: none;\n            color: #fff; /* White text for buttons */\n            background-color: #c4ac70; /* Golden background */\n            border-radius: 5px;\n            padding: 5px 10px;\n            margin-right: 10px;\n            transition: background-color 0.3s ease;\n            }\n        \n            .licotok-popup a:hover {\n            background-color: #b3a369; /* Darker shade on hover */\n            }\n        \n            .licotok-popup input {\n            width: calc(100% - 10px); /* Full width minus padding */\n            padding: 5px;\n            margin-bottom: 10px;\n            border: 1px solid #c4ac70; /* Border color similar to the theme */\n            border-radius: 5px;\n            }\n        \n\n            \n            .licotok-popup #status_message {\n            margin-top: 10px;\n            }\n        </style>\n        <div class="licotok-popup">\n            <h2>Enter Your License Key</h2>\n            <input id="licotok-input" type="text" placeholder="License Key">\n            &nbsp&nbsp&nbsp<a href="https://fociisoftware.com/#gladbot" target="_blank">Gladbot Management Site</a>\n            <p>\n            <a href="https://gladbotius.gumroad.com/l/vntkyw" target="_blank">Buy with Gumroad</a>\n            <a href="https://fociisoftware.com/#gladbot" target="_blank">Buy with PayPal</a>\n            <p>\n            <a href="#" id="get-trial-key-a">Get a Trial Key</a>\n            <a href="https://discord.gg/dKCTFFnkjZ" target="_blank">Discord</a>\n            <a href="https://www.paypal.com/donate/?hosted_button_id=7TVLC3GZ9GLD8" target="_blank" rel="noopener noreferrer">Donate</a>\n\n            <div id="alertMessage" class="alert-message" style="display: none; font-weight: bold;"></div>\n\n            <li>\n            <span style="color: class="span-new">[ENGLISH] For better experience, install crazy-addon and open another tab for manual tasks. If you clear your caches or reinstall the browser. You have to enter your key again to enable the bot.</span>\n            </li>\n            <hr>\n            <li>\n            <span style="color: class="span-new">[TURKISH] Daha iyi kullanim icin, crazy-addon kurabilir ve manuel islerinizi yeni sekmeden yapabilirsiniz. Eger tarayici temizligi veya tekrar yukleme islemi yapmissaniz, lisansi tekrar girmeniz gerekebilir. Deneme surumu icin \'Get a trial key\' e basip, kirmizi cikan lisans kodunu kopyalayip submitleyebilirsiniz.</span>\n            </li>\n            <p>\n\n            <button class="awesome-button licotok-submit">Submit</button>\n            <button class="awesome-button licotok-close">Close</button>\n            <div id="status_message"></div>\n        </div>\n        ';
         document.getElementById("header_game").insertBefore(b, document.getElementById("header_game").children[0]);
-        b.addEventListener("click", Oh);
-        b.querySelector(".licotok-submit").addEventListener("click", Ph);
+        b.addEventListener("click", Qh);
+        b.querySelector(".licotok-submit").addEventListener("click", Rh);
         let c = localStorage.getItem("playerId");
         if (null == c) try {
             bc(), c = localStorage.getItem("playerId")
@@ -1088,12 +1088,12 @@ function Z(F, M) {
         return b ? (localStorage.setItem("playerId", b), localStorage.setItem("pid", b), b) : null
     }
 
-    function Rh() {
+    function Th() {
         let b = document.querySelector(".playername") || document.querySelector(".playername_achievement");
         b && (b = b.textContent.trim(),
             localStorage.setItem("Username", b))
     }
-    async function sf() {
+    async function tf() {
         try {
             const b = await jQuery.get(G({
                 mod: "premium",
@@ -1121,7 +1121,7 @@ function Z(F, M) {
         return null
     }
 
-    function tf(b) {
+    function uf(b) {
         document.cookie = `glautologin=${b?"true":"false"}; path=/; domain=.gameforge.com; samesite=strict`
     }
 
@@ -1143,26 +1143,26 @@ function Z(F, M) {
         b.style.transition = "background-color 0.2s"
     }
 
-    function uf() {
+    function vf() {
         localStorage.setItem("logMenuHeight", ra.style.height)
     }
 
-    function Sh() {
+    function Uh() {
         var b = document.querySelector(".playername.ellipsis");
         const c = xa;
         b && (b = `${b.textContent.trim()}-${c}`, localStorage.setItem("Username", b), document.cookie = `gllastusername=${b}; path=/; domain=.gameforge.com; samesite=strict`)
     }
-    async function Th() {
+    async function Vh() {
         var b = {
             async Wm() {
                 var c = `mod=guildMarket&fl=0&fq=-1&f=0&qry=&seller=&s=${localStorage.getItem("filterGM")}&p=1`;
-                if (lf !== c) Gf(c);
+                if (mf !== c) Hf(c);
                 else try {
                     const q = localStorage.getItem("guildPackHour");
                     let n = JSON.parse(localStorage.getItem("packagesPurchased") || "[]");
                     if (n.length) {
                         var e = n[0],
-                            g = await Df(e.quality, e.itemName);
+                            g = await Ef(e.quality, e.itemName);
                         g = g.filter(m => {
                             m = m.querySelector(".ui-draggable");
                             return e.itemLevel === vb(m) && e.itemName === Fb(m) && e.basis === Ea(m) && e.quality === Ba(m) && e.amount === Ra(m)
@@ -1179,7 +1179,7 @@ function Z(F, M) {
                                 h = parseInt(m.getAttribute("data-measurement-y"), 10),
                                 l = g[0].querySelector("input").value;
                             let {
-                                spot: t,
+                                spot: r,
                                 bag: w
                             } = await Zb(k, h);
                             const v = await jQuery.post(U({
@@ -1189,8 +1189,8 @@ function Z(F, M) {
                                     fromX: 1,
                                     fromY: 1,
                                     to: w,
-                                    toX: t.x + 1,
-                                    toY: t.y + 1,
+                                    toX: r.x + 1,
+                                    toY: r.y + 1,
                                     amount: e.amount
                                 }), {
                                     a: (new Date).getTime(),
@@ -1249,7 +1249,7 @@ function Z(F, M) {
                     "[]");
                 for (l = l.map(q => !q.startsWith("GUILD_") && h["GUILD_" + q] ? "GUILD_" + q : q); g;) {
                     const q = g.type;
-                    (0 === l.length || l.some(n => h[n]?.includes(q))) && Eh(g.price, e) && e >= g.price && (e -= g.price, await jQuery.post(G({
+                    (0 === l.length || l.some(n => h[n]?.includes(q))) && Gh(g.price, e) && e >= g.price && (e -= g.price, await jQuery.post(G({
                         mod: "guildMarket",
                         sh: W("sh")
                     }), {
@@ -1270,7 +1270,7 @@ function Z(F, M) {
                     e = JSON.parse(localStorage.getItem("Timers"));
                 let g = Number(localStorage.getItem("currentPage") || 1);
                 var k = `mod=guildMarket&fl=0&fq=-1&f=0&qry=&seller=&s=${c}&p=${g}`;
-                if (lf !== k) Gf(k);
+                if (mf !== k) Hf(k);
                 else if (!(ea.gold <= Number(localStorage.getItem("KasaHoldGold")))) {
                     var h = document.querySelectorAll("#market_item_table tr"),
                         l = document.querySelectorAll("#market_item_table input[name=buyid]");
@@ -1278,10 +1278,10 @@ function Z(F, M) {
                     for (let q = 1; q < h.length; q++) {
                         let n = h[q].querySelectorAll("td"),
                             m = n[0].querySelector("div"),
-                            t =
+                            r =
                             Number(n[2].innerText.replace(/\./g, "")),
                             w = n[5].querySelector("input");
-                        "cancel" === w.name || w.classList.contains("disabled") || t < Number(localStorage.getItem("minimumGoldAmount")) || t > Ch().gold - Number(localStorage.getItem("KasaHoldGold")) || k.push({
+                        "cancel" === w.name || w.classList.contains("disabled") || r < Number(localStorage.getItem("minimumGoldAmount")) || r > Eh().gold - Number(localStorage.getItem("KasaHoldGold")) || k.push({
                             id: l[q - 1].value,
                             itemLevel: vb(m),
                             itemName: Fb(m),
@@ -1290,15 +1290,15 @@ function Z(F, M) {
                             quality: Ba(m),
                             amount: Ra(m),
                             sellerName: n[1].querySelector("span").innerText,
-                            price: t
+                            price: r
                         })
                     }
-                    h = Ch().gold - Number(localStorage.getItem("KasaHoldGold") || 0);
-                    if (k.length && Dh()) await this.co(k, h) || Z("gold",
+                    h = Eh().gold - Number(localStorage.getItem("KasaHoldGold") || 0);
+                    if (k.length && Fh()) await this.co(k, h) || Z("gold",
                         e.GuildMarket || 2), window.location.reload();
                     else try {
                         const q = document.querySelector(".standalone").textContent.match(/(\d+)\s*\/\s*(\d+)/);
-                        g < (q ? parseInt(q[2], 10) : 1) ? (localStorage.setItem("currentPage", g + 1), Gf(`mod=guildMarket&fl=0&fq=-1&f=0&qry=&seller=&s=${c}&p=${g+1}`)) : (localStorage.setItem("currentPage", 1), Z("gold", e.GuildMarket || 2), window.location.reload())
+                        g < (q ? parseInt(q[2], 10) : 1) ? (localStorage.setItem("currentPage", g + 1), Hf(`mod=guildMarket&fl=0&fq=-1&f=0&qry=&seller=&s=${c}&p=${g+1}`)) : (localStorage.setItem("currentPage", 1), Z("gold", e.GuildMarket || 2), window.location.reload())
                     } catch (q) {
                         E("No items to buy in guild market today. :/"), localStorage.setItem("currentPage", 1), Z("gold", e.GuildMarket || 2), window.location.reload()
                     }
@@ -1308,7 +1308,7 @@ function Z(F, M) {
         0 < JSON.parse(localStorage.getItem("packagesPurchased") || "[]").length ? await b.Wm() : ea.gold > Number(localStorage.getItem("minimumGoldAmount")) + Number(localStorage.getItem("KasaHoldGold") || 0) ? await b.buy() : (b = JSON.parse(localStorage.getItem("Timers")), Z("gold", b.GuildMarket || 2), window.location.reload())
     }
 
-    function Uh() {
+    function Wh() {
         var b = document.getElementById("submenuhead1"),
             c = document.getElementById("submenu1"),
             e = document.getElementById("submenuhead2"),
@@ -1327,7 +1327,7 @@ function Z(F, M) {
         return isNaN(b) ? 0 : b
     }
 
-    function Vh() {
+    function Xh() {
         var b = document.querySelector(".contentboard_footer_long .contentboard_inner");
         if (b) {
             b.style.position = "relative";
@@ -1372,17 +1372,17 @@ function Z(F, M) {
             c.appendChild(h);
             b.addEventListener("click", async function() {
                 h.textContent = "Processing...";
-                await Wh()
+                await Yh()
             });
             e.addEventListener("click", function() {
                 h.textContent = "Process stopped by user. Completed!";
                 window.location.reload()
             });
-            Xh()
+            Zh()
         }
     }
 
-    function Xh() {
+    function Zh() {
         let b;
         var c = document.querySelector(".mysterybox_count");
         c = c ? parseInt(c.textContent, 10) : 0;
@@ -1399,7 +1399,7 @@ function Z(F, M) {
         localStorage.setItem("chestsLeft", c);
         localStorage.setItem("premiumDicesLeft", b)
     }
-    async function Wh() {
+    async function Yh() {
         0 >= parseInt(localStorage.getItem("premiumDicesLeft"), 10) ? alert("No dices left!") : await Mc()
     }
     async function Mc() {
@@ -1436,10 +1436,10 @@ function Z(F, M) {
                 const n = document.getElementById("dicesLeft"),
                     m = Lc();
                 n.textContent = `Dices left: ${m}`;
-                const t = (new DOMParser).parseFromString(q, "text/html").querySelectorAll(".mysterybox_reward_item_pool");
+                const r = (new DOMParser).parseFromString(q, "text/html").querySelectorAll(".mysterybox_reward_item_pool");
                 g = "Vulcano Feronia Neptun Aeolus Pluton Juno Ejderha Kartal nefesi".split(" ");
                 k = !1;
-                for (let w of t) {
+                for (let w of r) {
                     const v = w.getAttribute("data-tooltip");
                     if (v && g.some(x => v.includes(x))) {
                         k = !0;
@@ -1493,8 +1493,8 @@ function Z(F, M) {
                     n.style.display = "block";
                     n.style.margin = "0 auto";
                     const m = document.createElement("span"),
-                        t = l.closest(".mysterybox_reward_item_pool").getAttribute("data-tooltip").match(/"([^"]+)"/);
-                    m.textContent = t ? t[1] : "Unknown Item";
+                        r = l.closest(".mysterybox_reward_item_pool").getAttribute("data-tooltip").match(/"([^"]+)"/);
+                    m.textContent = r ? r[1] : "Unknown Item";
                     m.style.display = "block";
                     m.style.marginTop = "5px";
                     m.style.fontSize = "12px";
@@ -1536,7 +1536,7 @@ function Z(F, M) {
         localStorage.setItem("smeltingSettings", JSON.stringify(Nc))
     }
 
-    function Yh() {
+    function $h() {
         document.querySelectorAll(".item-icon").forEach(b => {
             b.addEventListener("click", function() {
                 this.classList.toggle("selected");
@@ -1545,7 +1545,7 @@ function Z(F, M) {
         })
     }
 
-    function Zh() {
+    function ai() {
         document.querySelectorAll(".color-circle").forEach(b => {
             b.addEventListener("click", function() {
                 this.classList.toggle("selected");
@@ -1554,7 +1554,7 @@ function Z(F, M) {
         })
     }
 
-    function $h() {
+    function bi() {
         document.querySelectorAll(".rule-row .rule-hammer-selection img").forEach(b => {
             b.addEventListener("click",
                 function() {
@@ -1565,7 +1565,7 @@ function Z(F, M) {
         })
     }
 
-    function ai() {
+    function ci() {
         document.querySelectorAll(".rule-condition-select").forEach(b => {
             b.addEventListener("change", function() {
                 const c = this.closest(".rule-row").querySelector(".rule-prefix-input"),
@@ -1577,7 +1577,7 @@ function Z(F, M) {
         })
     }
 
-    function bi() {
+    function di() {
         document.querySelectorAll(".rule-prefix-input, .rule-level").forEach(b => {
             b.addEventListener("input", Wa)
         });
@@ -1586,7 +1586,7 @@ function Z(F, M) {
         })
     }
 
-    function ci() {
+    function ei() {
         document.querySelectorAll(".rule-row .remove-rule-btn").forEach(b => {
             b.addEventListener("click", function() {
                 b.closest(".rule-row").remove();
@@ -1595,7 +1595,7 @@ function Z(F, M) {
         })
     }
 
-    function vf() {
+    function wf() {
         const b = document.querySelector(".rule-row-template").cloneNode(!0);
         b.classList.remove("rule-row-template");
         b.classList.add("rule-row");
@@ -1609,11 +1609,11 @@ function Z(F, M) {
             e = b.querySelector(".rule-suffix-input");
         "nameContains" === b.querySelector(".rule-condition-select").value ? (c.style.display = "block", e.style.display = "block") : (c.style.display = "none", e.style.display = "none");
         document.querySelector(".rule-container").insertBefore(b, document.querySelector(".add-rule-btn"));
-        wf();
+        xf();
         Wa()
     }
 
-    function di() {
+    function fi() {
         document.querySelectorAll(".rule-checkbox").forEach(b => {
             b.addEventListener("change", Wa)
         });
@@ -1626,22 +1626,22 @@ function Z(F, M) {
         })
     }
 
-    function wf() {
-        ai();
-        Yh();
-        Zh();
-        $h();
+    function xf() {
         ci();
+        $h();
+        ai();
         bi();
-        di()
+        ei();
+        di();
+        fi()
     }
 
-    function ei(b) {
+    function gi(b) {
         const c = "white green blue purple orange red".split(" ");
         return b.sort((e, g) => c.indexOf(e) - c.indexOf(g))
     }
 
-    function fi() {
+    function hi() {
         const b = document.querySelector(".rule-row-template");
         var c = JSON.parse(localStorage.getItem("smeltingSettings")) || [];
         document.querySelectorAll(".rule-row").forEach(e => {
@@ -1678,15 +1678,15 @@ function Z(F, M) {
             g.querySelector(".rule-checkbox").checked = !1 !== e.isEnabled;
             document.querySelector(".rule-container").insertBefore(g, document.querySelector(".add-rule-btn"))
         });
-        wf()
+        xf()
     }
 
     function Oc() {
-        Ca.colors = ei(Ca.colors);
+        Ca.colors = gi(Ca.colors);
         localStorage.setItem("smeltRandomlySettings", JSON.stringify(Ca))
     }
 
-    function gi() {
+    function ii() {
         document.querySelectorAll(".item-icon2").forEach(b => {
             b.addEventListener("click", function() {
                 const c = this.dataset.type;
@@ -1719,14 +1719,14 @@ function Z(F, M) {
         })
     }
 
-    function hi() {
+    function ji() {
         const b = JSON.parse(localStorage.getItem("resetColors")) || {};
         b.colors && b.colors.forEach(c => {
             (c = document.querySelector(`.rule-color-resetColors .color-circle3[data-color="${c}"]`)) && c.classList.add("selected")
         })
     }
 
-    function ii() {
+    function ki() {
         var b = JSON.parse(localStorage.getItem("smeltRandomlySettings")) || {};
         b.itemTypes && b.itemTypes.forEach(c => {
             (c = document.querySelector(`.item-icon2[data-type="${c}"]`)) &&
@@ -1832,7 +1832,7 @@ function Z(F, M) {
 
         function q() {
             setInterval(() => {
-                if (nf("randomPause")) {
+                if (of("randomPause")) {
                     const u = localStorage.getItem("selectedPauseDuration");
                     n(u)
                 }
@@ -1935,11 +1935,11 @@ function Z(F, M) {
         });
         e();
         b = document.querySelector(".add-rule-btn");
-        b.removeEventListener("click", vf);
-        b.addEventListener("click", vf);
-        fi();
+        b.removeEventListener("click", wf);
+        b.addEventListener("click", wf);
         hi();
-        ii();
+        ji();
+        ki();
         document.getElementById("smeltLootbox").checked =
             "true" === localStorage.getItem("smeltLootbox");
         document.getElementById("smeltLootbox").addEventListener("change", function() {
@@ -1962,10 +1962,10 @@ function Z(F, M) {
             function() {
                 localStorage.setItem("RepairBeforeSmelt", this.checked)
             });
-        const t = document.getElementById("expeditionSearchTypeX");
-        if (b = localStorage.getItem("nestSearchType")) t.value = b;
-        t.addEventListener("change", () => {
-            localStorage.setItem("nestSearchType", t.value)
+        const r = document.getElementById("expeditionSearchTypeX");
+        if (b = localStorage.getItem("nestSearchType")) r.value = b;
+        r.addEventListener("change", () => {
+            localStorage.setItem("nestSearchType", r.value)
         });
         const w = document.getElementById("NestDelay");
         w.addEventListener("change", function() {
@@ -1989,7 +1989,7 @@ function Z(F, M) {
             localStorage.setItem("runNestExpedition", D.checked)
         });
         document.getElementById("NestDelay").value = localStorage.getItem("NestDelay") ||
-            0;
+            200;
         document.getElementById("runNestUnderworld").checked = "true" === localStorage.getItem("runNestUnderworld");
         document.getElementById("runNestEvent").checked = "true" === localStorage.getItem("runNestEvent");
         document.getElementById("runNestDungeon").checked = "true" === localStorage.getItem("runNestDungeon");
@@ -2048,8 +2048,8 @@ function Z(F, M) {
         });
         b = document.getElementById("importFileBtn");
         const B = document.getElementById("importBtn"),
-            r = document.getElementById("importStatus");
-        b && B && r && (b.addEventListener("click", function() {
+            t = document.getElementById("importStatus");
+        b && B && t && (b.addEventListener("click", function() {
             B.click()
         }), B.addEventListener("change", function(u) {
             if (u = u.target.files[0]) {
@@ -2060,9 +2060,9 @@ function Z(F, M) {
                             JSON.parse(A.target.result);
                         A = "bidList license_remaining nana_lcn playerCountry pid itemsToSearch smeltedItems rtksn MarketboughtItems tkz_lcr trlky_lcr token tkn playerId underworld savedUnderworldStates playerTimeouts tempOpponentDetails smelt.timer".split(" ");
                         for (let H in I) A.includes(H) || localStorage.setItem(H, I[H]);
-                        r.textContent = "Import successful! Please refresh the page."
+                        t.textContent = "Import successful! Please refresh the page."
                     } catch (I) {
-                        r.textContent = "Import failed. Please check the input file and try again."
+                        t.textContent = "Import failed. Please check the input file and try again."
                     }
                 };
                 z.readAsText(u)
@@ -2085,7 +2085,7 @@ function Z(F, M) {
         })
     }
 
-    function ji() {
+    function li() {
         const b = document.getElementById("expeditionLocation"),
             c = document.getElementById("dungeonLocation");
         var e = document.querySelectorAll("#submenu2 a");
@@ -2130,7 +2130,7 @@ function Z(F, M) {
         localStorage.setItem(e, JSON.stringify(c))
     }
 
-    function ki() {
+    function mi() {
         const b = JSON.parse(localStorage.getItem("autoAttackList")) || [],
             c = JSON.parse(localStorage.getItem("autoAttackServerList")) || [],
             e = JSON.parse(localStorage.getItem("avoidAttackList")) || [],
@@ -2145,16 +2145,16 @@ function Z(F, M) {
         h.forEach(l => ob(l, "autoAttackCircusServerList", "autoAttackCircusServerList"))
     }
 
-    function xf() {
+    function yf() {
         sessionStorage.setItem("autoGoActive", "true");
         document.getElementById("autoGoButton").innerHTML =
             '<span style="position: relative; top: -9px;">&#9724;</span>';
-        document.getElementById("autoGoButton").removeEventListener("click", xf);
-        document.getElementById("autoGoButton").addEventListener("click", yf);
+        document.getElementById("autoGoButton").removeEventListener("click", yf);
+        document.getElementById("autoGoButton").addEventListener("click", zf);
         location.reload()
     }
 
-    function yf() {
+    function zf() {
         sessionStorage.setItem("autoGoActive", "false");
         window.location.reload()
     }
@@ -2167,110 +2167,110 @@ function Z(F, M) {
     }
 
     function hc() {
-        function b(r,
+        function b(t,
             u, z, A) {
-            $(`${r}_true`).click(() => u(z));
-            $(`${r}_false`).click(() => u(A))
+            $(`${t}_true`).click(() => u(z));
+            $(`${t}_false`).click(() => u(A))
         }
 
-        function c(r) {
-            Fa = r;
-            localStorage.setItem("doExpedition", r)
+        function c(t) {
+            Fa = t;
+            localStorage.setItem("doExpedition", t)
         }
 
-        function e(r) {
-            Ka = r;
-            localStorage.setItem("doDungeon", r)
+        function e(t) {
+            Ga = t;
+            localStorage.setItem("doDungeon", t)
         }
 
-        function g(r) {
-            La = r;
-            localStorage.setItem("doArena", r)
+        function g(t) {
+            Ha = t;
+            localStorage.setItem("doArena", t)
         }
 
-        function k(r) {
-            Ma = r;
-            localStorage.setItem("doCircus", r)
+        function k(t) {
+            Ma = t;
+            localStorage.setItem("doCircus", t)
         }
 
-        function h(r) {
-            Sa = r;
-            localStorage.setItem("doQuests", r)
+        function h(t) {
+            Sa = t;
+            localStorage.setItem("doQuests", t)
         }
 
-        function l(r) {
-            Ga = r;
-            localStorage.setItem("doEventExpedition", r)
+        function l(t) {
+            Ia = t;
+            localStorage.setItem("doEventExpedition", t)
         }
 
-        function q(r) {
-            hb = r;
-            localStorage.setItem("AutoAuction", r)
+        function q(t) {
+            hb = t;
+            localStorage.setItem("AutoAuction", t)
         }
 
-        function n(r) {
-            pb = r;
+        function n(t) {
+            pb = t;
             localStorage.setItem("doKasa",
-                r)
+                t)
         }
 
-        function m(r) {
+        function m(t) {
             $(".monster-button").removeClass("active");
-            $(`#set_dungeon_difficulty_${r}`).addClass("active")
+            $(`#set_dungeon_difficulty_${t}`).addClass("active")
         }
 
-        function t(r) {
-            ic = r;
-            localStorage.setItem("eventMonsterId", r);
+        function r(t) {
+            ic = t;
+            localStorage.setItem("eventMonsterId", t);
             gc();
             hc()
         }
 
         function w() {
-            var r = localStorage.getItem("doExpedition");
-            null !== r && (Fa = JSON.parse(r));
+            var t = localStorage.getItem("doExpedition");
+            null !== t && (Fa = JSON.parse(t));
             1 == Fa ? $("#doExpedition").prop("checked", !0) : $("#doExpedition").prop("checked", !1);
-            r = localStorage.getItem("doDungeon");
-            null !== r && (Ka = JSON.parse(r));
-            1 == Ka ? $("#doDungeon").prop("checked", !0) : $("#doDungeon").prop("checked", !1);
-            r = localStorage.getItem("doArena");
-            null !== r && (La = JSON.parse(r));
-            1 == La ? $("#doArena").prop("checked", !0) : $("#doArena").prop("checked", !1);
-            r = localStorage.getItem("doCircus");
-            null !== r && (Ma = JSON.parse(r));
+            t = localStorage.getItem("doDungeon");
+            null !== t && (Ga = JSON.parse(t));
+            1 == Ga ? $("#doDungeon").prop("checked", !0) : $("#doDungeon").prop("checked", !1);
+            t = localStorage.getItem("doArena");
+            null !== t && (Ha = JSON.parse(t));
+            1 == Ha ? $("#doArena").prop("checked", !0) : $("#doArena").prop("checked", !1);
+            t = localStorage.getItem("doCircus");
+            null !== t && (Ma = JSON.parse(t));
             1 == Ma ? $("#doCircus").prop("checked", !0) : $("#doCircus").prop("checked", !1);
-            r = localStorage.getItem("doQuests");
-            null !== r && (Sa = JSON.parse(r));
+            t = localStorage.getItem("doQuests");
+            null !== t && (Sa = JSON.parse(t));
             1 == Sa ? $("#doQuests").prop("checked", !0) : $("#doQuests").prop("checked", !1);
-            r = localStorage.getItem("AutoAuction");
-            null !== r && (hb = JSON.parse(r));
+            t = localStorage.getItem("AutoAuction");
+            null !== t && (hb = JSON.parse(t));
             1 == hb ? $("#activateAutoBid").prop("checked", !0) : $("#activateAutoBid").prop("checked",
                 !1);
-            r = localStorage.getItem("doKasa");
-            null !== r && (pb = JSON.parse(r));
+            t = localStorage.getItem("doKasa");
+            null !== t && (pb = JSON.parse(t));
             1 == pb ? $("#doKasa").prop("checked", !0) : $("#doKasa").prop("checked", !1);
-            r = localStorage.getItem("doEventExpedition");
-            null !== r && (Ga = JSON.parse(r));
-            1 == Ga ? $("#doEventExpedition").prop("checked", !0) : $("#doEventExpedition").prop("checked", !1);
+            t = localStorage.getItem("doEventExpedition");
+            null !== t && (Ia = JSON.parse(t));
+            1 == Ia ? $("#doEventExpedition").prop("checked", !0) : $("#doEventExpedition").prop("checked", !1);
             $("#expedition_settings").addClass(Fa ? "active" : "inactive");
             $(`#do_expedition_${Fa}`).addClass("active");
             $(`#set_monster_id_${Qc}`).addClass("active");
-            $("#dungeon_settings").addClass(Ka ? "active" : "inactive");
-            $(`#do_dungeon_${Ka}`).addClass("active");
+            $("#dungeon_settings").addClass(Ga ? "active" : "inactive");
+            $(`#do_dungeon_${Ga}`).addClass("active");
             $(`#set_dungeon_difficulty_${Hb}`).addClass("active");
-            $("#arena_settings").addClass(La ? "active" : "inactive");
-            $(`#do_arena_${La}`).addClass("active");
-            $(`#set_arena_opponent_level_${zf}`).addClass("active");
+            $("#arena_settings").addClass(Ha ? "active" : "inactive");
+            $(`#do_arena_${Ha}`).addClass("active");
+            $(`#set_arena_opponent_level_${Af}`).addClass("active");
             $("#circus_settings").addClass(Ma ? "active" : "inactive");
             $(`#do_circus_${Ma}`).addClass("active");
-            $(`#set_circus_opponent_level_${Af}`).addClass("active");
+            $(`#set_circus_opponent_level_${Bf}`).addClass("active");
             $("#quests_settings").addClass(Sa ? "active" : "inactive");
             $(`#do_quests_${Sa}`).addClass("active");
             for (const u in Na) Na[u] &&
                 $(`#do_${u}_quests`).addClass("active");
             $("#auto_auction_settings").addClass(hb ? "active" : "inactive");
-            $("#event_expedition_settings").addClass(Ga ? "active" : "inactive");
-            $(`#do_event_expedition_${Ga}`).addClass("active");
+            $("#event_expedition_settings").addClass(Ia ? "active" : "inactive");
+            $(`#do_event_expedition_${Ia}`).addClass("active");
             $(`#set_event_monster_id_${ic}`).addClass("active")
         }
         var v = document.getElementById("popup-header"),
@@ -2304,7 +2304,7 @@ function Z(F, M) {
 
             <div class="popup-menu">
                 <div class="popup-header" style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="display: inline-block;"><a style="color: white" href="https://www.paypal.com/donate/?hosted_button_id=7TVLC3GZ9GLD8" target="_blank">Version 3.3.4</a></span>
+                <span style="display: inline-block;"><a style="color: white" href="https://www.paypal.com/donate/?hosted_button_id=7TVLC3GZ9GLD8" target="_blank">Version 3.3.5</a></span>
                 <span style="display: inline-block;"><a style="color: white" href="https://discord.gg/dKCTFFnkjZ" target="_blank">Discord</a></span>
                 <span style="display: inline-block;"><a style="color: white" href="https://gladbotius.gumroad.com/l/vntkyw" target="_blank">News</a></span>
                 <div style="display: flex; justify-content: space-between; align-items: right;">    
@@ -5282,7 +5282,7 @@ function Z(F, M) {
                     
                     <ul>
                     <p>
-                    <b>3.3.4 Update</b>
+                    <b>3.3.5 Update</b>
                     <div class="scrollable-list">
                         <ul>
                         <li>Please check discord for patch notes</li>
@@ -5529,9 +5529,9 @@ function Z(F, M) {
         v.addEventListener("click", gc);
         document.getElementsByTagName("body")[0].appendChild(v);
         (function() {
-            var r = localStorage.getItem("lastActiveTab");
-            r ? (r =
-                document.querySelector(`.popup-tab[data-target="${r}"]`)) && Pc(r) : (r = document.querySelector(".popup-tab")) && Pc(r)
+            var t = localStorage.getItem("lastActiveTab");
+            t ? (t =
+                document.querySelector(`.popup-tab[data-target="${t}"]`)) && Pc(t) : (t = document.querySelector(".popup-tab")) && Pc(t)
         })();
         v = localStorage.getItem("license_remaining");
         null !== v && (v = (new Date(v)).toLocaleDateString("en-US", {
@@ -5539,10 +5539,10 @@ function Z(F, M) {
             month: "long",
             day: "numeric"
         }), document.getElementById("kydtexp").textContent = v, v = localStorage.getItem("trlky_lcr"), null !== v && (document.getElementById("kydt").textContent = v));
-        ji();
+        li();
         (function() {
-            document.querySelectorAll(".setting-row").forEach(function(r) {
-                r.addEventListener("mouseenter",
+            document.querySelectorAll(".setting-row").forEach(function(t) {
+                t.addEventListener("mouseenter",
                     function() {
                         var u = this.getAttribute("data-tooltip");
                         if (u && "" !== u.trim()) {
@@ -5556,78 +5556,78 @@ function Z(F, M) {
                             this.Am = z
                         }
                     });
-                r.addEventListener("mouseleave", function() {
+                t.addEventListener("mouseleave", function() {
                     this.Am && (document.body.removeChild(this.Am), this.Am = null)
                 })
             })
         })();
-        document.querySelectorAll(".popup-tab").forEach(r => {
-            r.addEventListener("click",
+        document.querySelectorAll(".popup-tab").forEach(t => {
+            t.addEventListener("click",
                 () => {
-                    Pc(r);
-                    localStorage.setItem("lastActiveTab", r.dataset.target)
+                    Pc(t);
+                    localStorage.setItem("lastActiveTab", t.dataset.target)
                 })
         });
         const C = document.querySelectorAll(".popup-tab"),
             D = document.querySelectorAll(".popup-box"),
             B = document.querySelector(`#${document.querySelector(".popup-tab.active").dataset.target}`);
         B.classList.add("active");
-        D.forEach(r => {
-            r !== B && (r.style.display = "none")
+        D.forEach(t => {
+            t !== B && (t.style.display = "none")
         });
-        C.forEach(r => {
-            r.addEventListener("click", () => {
+        C.forEach(t => {
+            t.addEventListener("click", () => {
                 C.forEach(u => u.classList.remove("active"));
-                r.classList.add("active");
+                t.classList.add("active");
                 D.forEach(u => {
                     u.style.display = "none"
                 });
-                document.querySelector(`#${r.dataset.target}`).style.display =
+                document.querySelector(`#${t.dataset.target}`).style.display =
                     "block"
             })
         });
-        "GB PL ES TR FR HG BR".split(" ").forEach(r => {
-            $(`#language${r}`).click(() => {
-                localStorage.setItem("settings.language", r);
-                switch (r) {
+        "GB PL ES TR FR HG BR".split(" ").forEach(t => {
+            $(`#language${t}`).click(() => {
+                localStorage.setItem("settings.language", t);
+                switch (t) {
                     case "EN":
-                        d = {
-                            ...Fh
-                        };
-                        break;
-                    case "PL":
-                        d = {
-                            ...Gh
-                        };
-                        break;
-                    case "ES":
                         d = {
                             ...Hh
                         };
                         break;
-                    case "TR":
+                    case "PL":
                         d = {
                             ...Ih
                         };
                         break;
-                    case "FR":
+                    case "ES":
                         d = {
                             ...Jh
                         };
                         break;
-                    case "HG":
+                    case "TR":
                         d = {
                             ...Kh
                         };
                         break;
-                    case "BR":
+                    case "FR":
                         d = {
                             ...Lh
                         };
                         break;
+                    case "HG":
+                        d = {
+                            ...Mh
+                        };
+                        break;
+                    case "BR":
+                        d = {
+                            ...Nh
+                        };
+                        break;
                     default:
                         d = {
-                            ...Fh
+                            ...Hh
                         }
                 }
                 gc();
@@ -5641,24 +5641,24 @@ function Z(F, M) {
         b("#do_quests", h, !0, !1);
         b("#do_event_expedition",
             l, !0, !1);
-        [0, 1, 2, 3].forEach(r => {
-            $(`#set_monster_id_${r}`).click(() => {
-                var u = `${r}`;
+        [0, 1, 2, 3].forEach(t => {
+            $(`#set_monster_id_${t}`).click(() => {
+                var u = `${t}`;
                 Qc = u;
                 localStorage.setItem("monsterId", u)
             })
         });
-        ["normal", "advanced"].forEach(r => {
-            $(`#set_dungeon_difficulty_${r}`).click(() => {
-                Hb = r;
-                localStorage.setItem("dungeonDifficulty", r);
-                m(r)
+        ["normal", "advanced"].forEach(t => {
+            $(`#set_dungeon_difficulty_${t}`).click(() => {
+                Hb = t;
+                localStorage.setItem("dungeonDifficulty", t);
+                m(t)
             })
         });
         (v = localStorage.getItem("dungeonDifficulty")) && m(v);
-        "combat arena circus expedition dungeon items".split(" ").forEach(r => {
-            $(`#do_${r}_quests`).click(() => {
-                Na[r] = !Na[r];
+        "combat arena circus expedition dungeon items".split(" ").forEach(t => {
+            $(`#do_${t}_quests`).click(() => {
+                Na[t] = !Na[t];
                 localStorage.setItem("questTypes", JSON.stringify(Na));
                 gc();
                 hc()
@@ -5668,7 +5668,7 @@ function Z(F, M) {
             q, !0, !1);
         b("#do_kasa", n, !0, !1);
         $(document).ready(function() {
-            function r(y) {
+            function t(y) {
                 var J = y.split(". "),
                     P = "<ol>";
                 J.forEach(function(Q, S) {
@@ -5953,7 +5953,7 @@ function Z(F, M) {
             async function qa() {
                 var y = !1;
                 if (!kc) return !1;
-                const J = await Hf();
+                const J = await If();
                 var P = ib.filter(X => !X.Mm);
                 for (let X of P)
                     for (const Rc of J) {
@@ -5963,22 +5963,22 @@ function Z(F, M) {
                                     '"')),
                                 S = parseInt(Ea(Ta).split("-")[0], 10);
                             P = 15 == S ? parseInt(Ta.getAttribute("data-tooltip").split(",")[5].match(/\d+/)[0], 10) : 0;
-                            let li = 15 == S ? parseInt(Ta.getAttribute("data-tooltip").split(",")[7].match(/\d+/)[0], 10) : 0,
-                                mi = 15 == S ? parseInt(Ta.getAttribute("data-tooltip").split(",")[9].match(/\d+/)[0], 10) : 0,
-                                ni = 15 == S ? parseInt(Ta.getAttribute("data-tooltip").split(",")[11].match(/\d+/)[0], 10) : 0,
-                                oi = 15 == S ? parseInt(Ta.getAttribute("data-tooltip").split(",")[13].match(/\d+/)[0], 10) : 0;
+                            let ni = 15 == S ? parseInt(Ta.getAttribute("data-tooltip").split(",")[7].match(/\d+/)[0], 10) : 0,
+                                oi = 15 == S ? parseInt(Ta.getAttribute("data-tooltip").split(",")[9].match(/\d+/)[0], 10) : 0,
+                                pi = 15 == S ? parseInt(Ta.getAttribute("data-tooltip").split(",")[11].match(/\d+/)[0], 10) : 0,
+                                qi = 15 == S ? parseInt(Ta.getAttribute("data-tooltip").split(",")[13].match(/\d+/)[0], 10) : 0;
                             S = 15 == S ? parseInt(Ta.getAttribute("data-tooltip").split(",")[15].match(/\d+/)[0],
                                 10) : 0;
                             var la = Ta.getAttribute("data-quality");
                             Q = Q[0][0][0];
-                            const pi = Ta.getAttribute("data-level");
-                            if (Number(pi) >= Number(X.xn) && Q.toLowerCase().includes(X.name.toLowerCase()) && (la >= X.quality || !la && "0" == X.quality)) {
+                            const ri = Ta.getAttribute("data-level");
+                            if (Number(ri) >= Number(X.xn) && Q.toLowerCase().includes(X.name.toLowerCase()) && (la >= X.quality || !la && "0" == X.quality)) {
                                 if (X.jm && X.xm && "none" !== X.jm && (la = !1, (P = {
                                         str: P,
-                                        dex: li,
-                                        agi: mi,
-                                        cot: ni,
-                                        chr: oi,
+                                        dex: ni,
+                                        agi: oi,
+                                        cot: pi,
+                                        chr: qi,
                                         "int": S
                                     } [X.jm]) && P >= X.xm && (la = !0), !la)) continue;
                                 X.Hm = Ta.cloneNode(!0);
@@ -6033,7 +6033,7 @@ function Z(F, M) {
                 localStorage.setItem("timeConditions", JSON.stringify(Jb))
             }
 
-            function If(y = {}) {
+            function Jf(y = {}) {
                 const J = document.createElement("div");
                 J.classList.add("condition-row");
                 J.innerHTML = `
@@ -6048,7 +6048,7 @@ function Z(F, M) {
                 `;
                 yb();
                 J.querySelector(".remove-condition").addEventListener("click", () => {
-                    Jf.removeChild(J);
+                    Kf.removeChild(J);
                     Jb = Jb.filter(P => P !== y);
                     yb()
                 });
@@ -6064,34 +6064,34 @@ function Z(F, M) {
                     y.action = P.target.value;
                     yb()
                 });
-                Jf.appendChild(J)
+                Kf.appendChild(J)
             }
 
-            function Kf() {
+            function Lf() {
                 document.getElementById("mercenarySearchOptions").style.display =
                     mc.checked ? "block" : "none"
             }
 
-            function qi(y) {
+            function si(y) {
                 document.querySelectorAll('#itemsToReset input[type="checkbox"]').forEach(J => {
                     J.checked = y
                 });
-                Ha()
+                Ja()
             }
 
             function Uc() {
                 localStorage.setItem("marketItems", JSON.stringify(jb));
                 Vc.innerHTML = "";
-                Lf.innerHTML = "";
+                Mf.innerHTML = "";
                 for (var y of Kb) {
                     var J = document.createElement("option");
                     J.textContent = y;
-                    Lf.appendChild(J)
+                    Mf.appendChild(J)
                 }
                 for (y = 0; y < jb.length; y++) J = document.createElement("option"), J.value = y, J.text = jb[y].un + " (Rarity: " + jb[y].um + ", Max price: " + jb[y].maxPrice + " " + jb[y].Soulbound + ")", Vc.appendChild(J)
             }
 
-            function Mf(y, J, P) {
+            function Nf(y, J, P) {
                 J[y.id] && y.classList.add("active");
                 y.addEventListener("click", function(Q) {
                     Q.preventDefault();
@@ -6100,30 +6100,30 @@ function Z(F, M) {
                 })
             }
 
-            function Nf(y, J, P, Q) {
+            function Of(y, J, P, Q) {
                 P.forEach(S => {
                     S in J || (J[S] = !1)
                 });
                 localStorage.setItem(Q, JSON.stringify(J))
             }
 
-            function Of() {
+            function Pf() {
                 const y = nc.checked;
-                ri.style.display = y ? "block" : "none";
-                si.style.display = y ? "block" : "none"
+                ti.style.display = y ? "block" : "none";
+                ui.style.display = y ? "block" : "none"
             }
-            const ti = document.getElementById("doExpedition"),
-                ui = document.getElementById("doDungeon"),
-                vi = document.getElementById("doArena"),
-                wi = document.getElementById("doCircus"),
-                xi = document.getElementById("doQuests"),
-                yi = document.getElementById("doEventExpedition"),
-                zi = document.getElementById("activateAutoBid"),
-                Ai = document.getElementById("doKasa"),
+            const vi = document.getElementById("doExpedition"),
+                wi = document.getElementById("doDungeon"),
+                xi = document.getElementById("doArena"),
+                yi = document.getElementById("doCircus"),
+                zi = document.getElementById("doQuests"),
+                Ai = document.getElementById("doEventExpedition"),
+                Bi = document.getElementById("activateAutoBid"),
+                Ci = document.getElementById("doKasa"),
                 oc = document.querySelector("#healPercentage"),
                 Wc = document.querySelector("#HealClothToggle"),
-                Pf = document.querySelector("#hellEnterHP"),
-                Qf = document.querySelector("#HellHealHP"),
+                Qf = document.querySelector("#hellEnterHP"),
+                Rf = document.querySelector("#HellHealHP"),
                 Xc = document.querySelector("#HealRubyToggle"),
                 Yc = document.querySelector("#storeResource"),
                 Zc = document.querySelector("#HighlightUnderworldItems");
@@ -6132,23 +6132,23 @@ function Z(F, M) {
             Xc.checked = "true" === localStorage.getItem("HealRubyToggle") || !1;
             Yc.checked = "true" === localStorage.getItem("storeResource") || !1;
             Zc.checked = "true" === localStorage.getItem("HighlightUnderworldItems") || !1;
-            const Rf = document.getElementById("minimumGoldAmount");
-            Rf.addEventListener("change", () => {
+            const Sf = document.getElementById("minimumGoldAmount");
+            Sf.addEventListener("change", () => {
                 localStorage.setItem("minimumGoldAmount",
-                    Rf.value)
+                    Sf.value)
             });
-            const Sf = "true" === localStorage.getItem("useGodPowers");
-            document.getElementById("useGodPowers").checked = Sf;
-            document.getElementById("godPowersSection").style.display = Sf ? "block" : "none";
-            const Bi = JSON.parse(localStorage.getItem("GodPowersHell")) || [];
+            const Tf = "true" === localStorage.getItem("useGodPowers");
+            document.getElementById("useGodPowers").checked = Tf;
+            document.getElementById("godPowersSection").style.display = Tf ? "block" : "none";
+            const Di = JSON.parse(localStorage.getItem("GodPowersHell")) || [];
             document.querySelectorAll(".god-power-checkbox").forEach(y => {
-                y.checked = Bi.includes(y.value)
-            });
-            const Ci = "true" === localStorage.getItem("useWeaponBuff");
-            document.getElementById("weaponBuff").checked = Ci;
-            const Di = JSON.parse(localStorage.getItem("ArmorBuffsHell")) || [];
-            document.querySelectorAll(".armor-checkbox").forEach(y => {
                 y.checked = Di.includes(y.value)
+            });
+            const Ei = "true" === localStorage.getItem("useWeaponBuff");
+            document.getElementById("weaponBuff").checked = Ei;
+            const Fi = JSON.parse(localStorage.getItem("ArmorBuffsHell")) || [];
+            document.querySelectorAll(".armor-checkbox").forEach(y => {
+                y.checked = Fi.includes(y.value)
             });
             document.getElementById("useGodPowers").addEventListener("change", function() {
                 const y = this.checked;
@@ -6171,9 +6171,9 @@ function Z(F, M) {
                     localStorage.setItem("ArmorBuffsHell", JSON.stringify(J))
                 })
             });
-            const Tf = document.getElementById("autoSmeltInfo"),
+            const Uf = document.getElementById("autoSmeltInfo"),
                 zb = document.getElementById("popupSmelt");
-            Tf.addEventListener("mouseenter",
+            Uf.addEventListener("mouseenter",
                 function() {
                     zb.style.display = "block";
                     const y = document.querySelector(".popup-menu").getBoundingClientRect();
@@ -6182,49 +6182,49 @@ function Z(F, M) {
                     zb.style.left = `${y.right+10}px`;
                     zb.style.top = `${y.top}px`
                 });
-            Tf.addEventListener("mouseleave", function() {
+            Uf.addEventListener("mouseleave", function() {
                 zb.style.display = "none"
             });
             var $c = document.getElementById("tabA"),
                 ad = document.getElementById("tabB"),
-                Uf = document.getElementById("contentA"),
-                Vf = document.getElementById("contentB"),
+                Vf = document.getElementById("contentA"),
+                Wf = document.getElementById("contentB"),
                 bd = document.getElementById("tabACircus"),
                 cd = document.getElementById("tabBCircus"),
-                Wf = document.getElementById("contentACircus"),
-                Xf = document.getElementById("contentBCircus");
+                Xf = document.getElementById("contentACircus"),
+                Yf = document.getElementById("contentBCircus");
             $c.addEventListener("click", function() {
-                Uf.style.display = "block";
-                Vf.style.display = "none";
+                Vf.style.display = "block";
+                Wf.style.display = "none";
                 $c.classList.add("active");
                 ad.classList.remove("active")
             });
             ad.addEventListener("click", function() {
-                Vf.style.display = "block";
-                Uf.style.display = "none";
+                Wf.style.display = "block";
+                Vf.style.display = "none";
                 ad.classList.add("active");
                 $c.classList.remove("active")
             });
             bd.addEventListener("click", function() {
-                Wf.style.display = "block";
-                Xf.style.display = "none";
+                Xf.style.display = "block";
+                Yf.style.display = "none";
                 bd.classList.add("active");
                 cd.classList.remove("active")
             });
             cd.addEventListener("click", function() {
-                Xf.style.display = "block";
-                Wf.style.display = "none";
+                Yf.style.display = "block";
+                Xf.style.display = "none";
                 cd.classList.add("active");
                 bd.classList.remove("active")
             });
-            const Ei = r(d.hc),
-                Fi = r(d.Pb);
-            document.querySelector(".instructions .span-new").innerHTML = Ei;
-            document.querySelector(".instructionsReset .span-new").innerHTML = Fi;
+            const Gi = t(d.hc),
+                Hi = t(d.Pb);
+            document.querySelector(".instructions .span-new").innerHTML = Gi;
+            document.querySelector(".instructionsReset .span-new").innerHTML = Hi;
             const dd = document.getElementById("announcement"),
                 ed = localStorage.getItem("latestAnnouncement");
             ed && "" !== ed ? (dd.style.display = "block", dd.innerHTML = ed) : dd.style.display = "none";
-            const Gi = [{
+            const Ii = [{
                 id: "Health",
                 buffs: ["Gingko", "Taigaroot", "Hawthorn"]
             }, {
@@ -6248,7 +6248,7 @@ function Z(F, M) {
             }];
             (function() {
                 const y = JSON.parse(localStorage.getItem("buffSelections")) || {};
-                Gi.forEach(J => {
+                Ii.forEach(J => {
                     y[J.id] =
                         y[J.id] || [];
                     J.buffs.forEach((P, Q) => {
@@ -6388,13 +6388,13 @@ function Z(F, M) {
                 localStorage.setItem("avoidAttackCircusList", JSON.stringify([]));
                 window.location.reload()
             });
-            const Yf = document.getElementById("keywordAcceptInput"),
-                Hi = document.getElementById("addKeywordAcceptBtn"),
-                Zf = document.getElementById("keywordAcceptList"),
+            const Zf = document.getElementById("keywordAcceptInput"),
+                Ji = document.getElementById("addKeywordAcceptBtn"),
+                $f = document.getElementById("keywordAcceptList"),
                 pc = document.getElementById("underworldKeywordSection"),
-                $f = document.getElementById("underworldKeywordInput"),
-                Ii = document.getElementById("addUnderworldKeywordBtn"),
-                ag = document.getElementById("underworldKeywordList");
+                ag = document.getElementById("underworldKeywordInput"),
+                Ki = document.getElementById("addUnderworldKeywordBtn"),
+                bg = document.getElementById("underworldKeywordList");
             let hd = document.getElementById("skipTimeQuests");
             hd.checked = "true" === localStorage.getItem("skipTimeQuests");
             hd.addEventListener("change", () => {
@@ -6430,32 +6430,32 @@ function Z(F, M) {
                 localStorage.setItem("acceptnotfilter", ld.checked)
             });
             const md = document.getElementById("keywordInput"),
-                Ji = document.getElementById("addKeywordBtn"),
-                bg = document.getElementById("keywordList"),
-                Ki = document.getElementById("keywordGuildInput"),
-                Li = document.getElementById("addGuildKeywordBtn"),
-                cg = document.getElementById("keywordGuildList");
-            H(cg, "guildKeywords");
-            Li.addEventListener("click",
+                Li = document.getElementById("addKeywordBtn"),
+                cg = document.getElementById("keywordList"),
+                Mi = document.getElementById("keywordGuildInput"),
+                Ni = document.getElementById("addGuildKeywordBtn"),
+                dg = document.getElementById("keywordGuildList");
+            H(dg, "guildKeywords");
+            Ni.addEventListener("click",
                 function() {
-                    const y = Ki.value.trim();
-                    "" !== y && (K(y, cg, "guildKeywords"), L(y, "guildKeywords"), md.value = "")
+                    const y = Mi.value.trim();
+                    "" !== y && (K(y, dg, "guildKeywords"), L(y, "guildKeywords"), md.value = "")
                 });
-            H(bg, "questKeywords");
-            H(ag, "underworldQuestKeywords");
-            Ji.addEventListener("click", function() {
+            H(cg, "questKeywords");
+            H(bg, "underworldQuestKeywords");
+            Li.addEventListener("click", function() {
                 const y = md.value.trim();
-                "" !== y && (K(y, bg, "questKeywords"), L(y, "questKeywords"), md.value = "")
+                "" !== y && (K(y, cg, "questKeywords"), L(y, "questKeywords"), md.value = "")
             });
-            H(Zf, "acceptQuestKeywords");
-            Hi.addEventListener("click", function() {
-                const y = Yf.value.trim();
-                "" !== y && (K(y, Zf, "acceptQuestKeywords"), L(y, "acceptQuestKeywords"), Yf.value = "")
+            H($f, "acceptQuestKeywords");
+            Ji.addEventListener("click", function() {
+                const y = Zf.value.trim();
+                "" !== y && (K(y, $f, "acceptQuestKeywords"), L(y, "acceptQuestKeywords"), Zf.value = "")
             });
-            Ii.addEventListener("click", function() {
+            Ki.addEventListener("click", function() {
                 const y =
-                    $f.value.trim();
-                "" !== y && (K(y, ag, "underworldQuestKeywords"), L(y, "underworldQuestKeywords"), $f.value = "")
+                    ag.value.trim();
+                "" !== y && (K(y, bg, "underworldQuestKeywords"), L(y, "underworldQuestKeywords"), ag.value = "")
             });
             let nd = document.getElementById("renewEvent");
             nd.checked = "true" === localStorage.getItem("renewEvent");
@@ -6473,42 +6473,42 @@ function Z(F, M) {
                 localStorage.setItem("useCostume", pd.checked)
             });
             let Mb = document.getElementById("wearUnderworld"),
-                dg = document.getElementById("costumeUnderworldWrapper");
+                eg = document.getElementById("costumeUnderworldWrapper");
             Mb.checked = "true" === localStorage.getItem("wearUnderworld");
-            dg.style.display = Mb.checked ? "block" : "none";
+            eg.style.display = Mb.checked ? "block" : "none";
             Mb.addEventListener("change", () => {
                 localStorage.setItem("wearUnderworld", Mb.checked);
-                dg.style.display = Mb.checked ? "block" : "none"
+                eg.style.display = Mb.checked ? "block" : "none"
             });
             document.getElementById("costumeUnderworld").addEventListener("change",
                 function() {
                     localStorage.setItem("costumeUnderworld", this.value)
                 });
-            const Mi = document.getElementById("costumeUnderworld"),
-                eg = localStorage.getItem("costumeUnderworld");
-            null !== eg && (Mi.value = eg);
-            const Ni = document.getElementById("costumeBasic"),
-                fg = localStorage.getItem("costumeBasic");
+            const Oi = document.getElementById("costumeUnderworld"),
+                fg = localStorage.getItem("costumeUnderworld");
+            null !== fg && (Oi.value = fg);
+            const Pi = document.getElementById("costumeBasic"),
+                gg = localStorage.getItem("costumeBasic");
             document.getElementById("costumeBasic").addEventListener("change", function() {
                 localStorage.setItem("costumeBasic", this.value)
             });
-            null !== fg && (Ni.value = fg);
+            null !== gg && (Pi.value = gg);
             document.getElementById("costumeDungeon").addEventListener("change", function() {
                 localStorage.setItem("costumeDungeon",
                     this.value)
             });
-            const Oi = document.getElementById("costumeDungeon"),
-                gg = localStorage.getItem("costumeDungeon");
-            null !== gg && (Oi.value = gg);
-            const Pi = document.getElementById("search_input"),
-                Qi = document.getElementById("search_reset"),
-                Ri = document.getElementById("search_button");
+            const Qi = document.getElementById("costumeDungeon"),
+                hg = localStorage.getItem("costumeDungeon");
+            null !== hg && (Qi.value = hg);
+            const Ri = document.getElementById("search_input"),
+                Si = document.getElementById("search_reset"),
+                Ti = document.getElementById("search_button");
             let qc = JSON.parse(localStorage.getItem("searchTerms") || "[]");
             qc.forEach(y => {
                 O(y, "search_list", "searchTerms")
             });
-            Ri.addEventListener("click", function() {
-                const y = Pi.value.trim();
+            Ti.addEventListener("click", function() {
+                const y = Ri.value.trim();
                 "" === y || qc.includes(y) || (qc.push(y), localStorage.setItem("searchTerms",
                     JSON.stringify(qc)), O(y, "search_list", "searchTerms"))
             });
@@ -6531,7 +6531,7 @@ function Z(F, M) {
                     name: y,
                     quality: J,
                     xn: P,
-                    qualityName: Si[J],
+                    qualityName: Ui[J],
                     jm: "none" !== Q ? Q : null,
                     xm: "none" !== Q ? S : null
                 });
@@ -6562,7 +6562,7 @@ function Z(F, M) {
                 await qa()
             });
             let kc = !0;
-            const Si = {
+            const Ui = {
                 0: "Green",
                 1: "Blue",
                 2: "Purple",
@@ -6570,7 +6570,7 @@ function Z(F, M) {
                 4: "Red"
             };
             ma();
-            gi();
+            ii();
             const Sc = document.querySelectorAll(".equipment-option-smelt");
             Sc.forEach(y => {
                 y.addEventListener("change", xb)
@@ -6588,7 +6588,7 @@ function Z(F, M) {
                 const J = [...Tc].find(P => P.value === y);
                 J && (J.checked = !0)
             });
-            Qi.addEventListener("click", function() {
+            Si.addEventListener("click", function() {
                 localStorage.setItem("AuctionSearch.timeOut", 0);
                 localStorage.setItem("ShopSearch.timeOut", 0);
                 location.reload()
@@ -6622,26 +6622,26 @@ function Z(F, M) {
                 const y = document.getElementById("autologinenable"),
                     J = "true" === localStorage.getItem("AutoLogin");
                 y.checked = J;
-                tf(J);
+                uf(J);
                 y.addEventListener("change", function() {
                     const P =
                         this.checked;
                     localStorage.setItem("AutoLogin", P);
-                    tf(P)
+                    uf(P)
                 })
             })();
-            const Jf = document.getElementById("timeConditions"),
-                Ti = document.getElementById("addCondition");
+            const Kf = document.getElementById("timeConditions"),
+                Vi = document.getElementById("addCondition");
             let Jb = JSON.parse(localStorage.getItem("timeConditions")) || [];
-            Jb.forEach(If);
-            Ti.addEventListener("click", () => {
+            Jb.forEach(Jf);
+            Vi.addEventListener("click", () => {
                 const y = {
                     start: "",
                     end: "",
                     action: "stop"
                 };
                 Jb.push(y);
-                If(y);
+                Jf(y);
                 yb()
             });
             const wd = document.getElementById("pauseButton");
@@ -6774,10 +6774,10 @@ function Z(F, M) {
             Td.value = localStorage.getItem("minDexterity") || 0;
             Ud.value = localStorage.getItem("minAgility") || 0;
             Vd.value = localStorage.getItem("minIntelligence") || 0;
-            Kf();
+            Lf();
             mc.addEventListener("change", () => {
                 localStorage.setItem("enableMercenarySearch", mc.checked);
-                Kf()
+                Lf()
             });
             Td.addEventListener("input", () => {
                 localStorage.setItem("minDexterity", Td.value)
@@ -6790,31 +6790,31 @@ function Z(F, M) {
             });
             const Wd =
                 document.getElementById("SearchQuality"),
-                hg = localStorage.getItem("SearchQuality");
-            hg && (Wd.value = hg);
+                ig = localStorage.getItem("SearchQuality");
+            ig && (Wd.value = ig);
             Wd.addEventListener("change", () => {
                 localStorage.setItem("SearchQuality", Wd.value)
             });
             const Xd = document.getElementById("HealPickBag"),
-                ig = localStorage.getItem("HealPickBag");
-            ig && (Xd.value = ig);
+                jg = localStorage.getItem("HealPickBag");
+            jg && (Xd.value = jg);
             Xd.addEventListener("change", () => {
                 localStorage.setItem("HealPickBag", Xd.value)
             });
             const Yd = document.getElementById("FoodAmount"),
-                jg = localStorage.getItem("FoodAmount");
-            jg && (Yd.value = jg);
+                kg = localStorage.getItem("FoodAmount");
+            kg && (Yd.value = kg);
             Yd.addEventListener("change",
                 () => {
                     localStorage.setItem("FoodAmount", Yd.value)
                 });
-            const kg = document.getElementById("questrewardvalue");
-            kg.addEventListener("change", () => {
-                localStorage.setItem("questrewardvalue", kg.value)
+            const lg = document.getElementById("questrewardvalue");
+            lg.addEventListener("change", () => {
+                localStorage.setItem("questrewardvalue", lg.value)
             });
             const Zd = document.getElementById("smeltTab"),
-                lg = localStorage.getItem("smeltTab");
-            lg && (Zd.value = lg);
+                mg = localStorage.getItem("smeltTab");
+            mg && (Zd.value = mg);
             Zd.addEventListener("change", () => {
                 localStorage.setItem("smeltTab", Zd.value)
             });
@@ -6855,25 +6855,25 @@ function Z(F, M) {
                 localStorage.setItem("repairPercentage", y)
             });
             const ce = document.getElementById("bidStatus"),
-                mg = localStorage.getItem("bidStatus");
-            mg && (ce.value = mg);
+                ng = localStorage.getItem("bidStatus");
+            ng && (ce.value = ng);
             ce.addEventListener("change", () => {
                 localStorage.setItem("bidStatus", ce.value)
             });
             const de = document.getElementById("auctionMinQuality"),
-                ng = localStorage.getItem("auctionMinQuality");
-            ng && (de.value = ng);
+                og = localStorage.getItem("auctionMinQuality");
+            og && (de.value = og);
             de.addEventListener("change", () => {
                 localStorage.setItem("auctionMinQuality", de.value)
             });
             const ee = document.getElementById("storeInShopQuality"),
-                og = localStorage.getItem("storeInShopQuality");
-            og && (ee.value = og);
+                pg = localStorage.getItem("storeInShopQuality");
+            pg && (ee.value = pg);
             ee.addEventListener("change", () => {
                 localStorage.setItem("storeInShopQuality",
                     ee.value)
             });
-            const Ha = function(y, J) {
+            const Ja = function(y, J) {
                 let P;
                 return function() {
                     const Q = this,
@@ -6896,25 +6896,25 @@ function Z(F, M) {
                 localStorage.setItem("itemsToReset2", JSON.stringify(S));
                 localStorage.setItem("itemsToResetGuild", JSON.stringify(la))
             }, 250);
-            document.getElementById("resetExpiredItems").addEventListener("change", Ha);
+            document.getElementById("resetExpiredItems").addEventListener("change", Ja);
             document.getElementById("resetUnderworld").addEventListener("change",
-                Ha);
-            document.getElementById("resetDays").addEventListener("change", Ha);
-            document.getElementById("itemsToReset").addEventListener("change", Ha);
-            document.getElementById("itemsToReset2").addEventListener("change", Ha);
-            document.getElementById("itemsToResetGuild").addEventListener("change", Ha);
-            document.getElementById("resetExpiredItems").addEventListener("touchend", Ha);
-            document.getElementById("resetUnderworld").addEventListener("touchend", Ha);
+                Ja);
+            document.getElementById("resetDays").addEventListener("change", Ja);
+            document.getElementById("itemsToReset").addEventListener("change", Ja);
+            document.getElementById("itemsToReset2").addEventListener("change", Ja);
+            document.getElementById("itemsToResetGuild").addEventListener("change", Ja);
+            document.getElementById("resetExpiredItems").addEventListener("touchend", Ja);
+            document.getElementById("resetUnderworld").addEventListener("touchend", Ja);
             document.getElementById("resetDays").addEventListener("touchend",
-                Ha);
-            document.getElementById("itemsToReset").addEventListener("touchend", Ha);
-            document.getElementById("itemsToReset2").addEventListener("touchend", Ha);
-            document.getElementById("itemsToResetGuild").addEventListener("touchend", Ha);
+                Ja);
+            document.getElementById("itemsToReset").addEventListener("touchend", Ja);
+            document.getElementById("itemsToReset2").addEventListener("touchend", Ja);
+            document.getElementById("itemsToResetGuild").addEventListener("touchend", Ja);
             document.getElementById("selectAllItems").addEventListener("click", function() {
                 let y = "true" !== this.dataset.checked;
                 this.innerHTML = (this.dataset.checked = y) ? '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">\n                        <polyline points="20 6 9 17 4 12"></polyline>\n                    </svg>' :
                     '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">\n                        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line> \n                    </svg>';
-                qi(y)
+                si(y)
             });
             (function() {
                 const y = "true" === localStorage.getItem("resetExpiredItems"),
@@ -6938,22 +6938,22 @@ function Z(F, M) {
                 })
             })();
             const fe = document.getElementById("guildPackHour"),
-                pg = localStorage.getItem("guildPackHour");
-            pg && (fe.value = pg);
+                qg = localStorage.getItem("guildPackHour");
+            qg && (fe.value = qg);
             fe.addEventListener("change", () => {
                 localStorage.setItem("guildPackHour", fe.value)
             });
             const ge = document.getElementById("filterGM"),
-                qg = localStorage.getItem("filterGM");
-            qg && (ge.value = qg);
+                rg = localStorage.getItem("filterGM");
+            rg && (ge.value = rg);
             ge.addEventListener("change", () => {
                 localStorage.setItem("filterGM", ge.value)
             });
             const rb = document.getElementById("delaySelect"),
-                rg = localStorage.getItem("DELAY");
-            if (rg)
+                sg = localStorage.getItem("DELAY");
+            if (sg)
                 for (let y = 0; y < rb.options.length; y++)
-                    if (rb.options[y].text === rg) {
+                    if (rb.options[y].text === sg) {
                         rb.value = rb.options[y].value;
                         break
                     } rb.addEventListener("change",
@@ -6961,42 +6961,42 @@ function Z(F, M) {
                     localStorage.setItem("DELAY", rb.options[rb.selectedIndex].text)
                 });
             const he = document.getElementById("questSpeed"),
-                sg = localStorage.getItem("questSpeed");
-            sg && (he.value = sg);
+                tg = localStorage.getItem("questSpeed");
+            tg && (he.value = tg);
             he.addEventListener("change", () => {
                 localStorage.setItem("questSpeed", he.value)
             });
-            let tg = document.getElementById("itemToBuy"),
-                ug = document.getElementById("rarity"),
-                vg = document.getElementById("marketItemType"),
-                wg = document.getElementById("itemsoulbound"),
-                xg = document.getElementById("maxPrice"),
-                Ui = document.getElementById("addItemBtn"),
-                Vi = document.getElementById("removeItemBtn"),
-                Wi = document.getElementById("MarketremoveItemBtn"),
+            let ug = document.getElementById("itemToBuy"),
+                vg = document.getElementById("rarity"),
+                wg = document.getElementById("marketItemType"),
+                xg = document.getElementById("itemsoulbound"),
+                yg = document.getElementById("maxPrice"),
+                Wi = document.getElementById("addItemBtn"),
+                Xi = document.getElementById("removeItemBtn"),
+                Yi = document.getElementById("MarketremoveItemBtn"),
                 Vc = document.getElementById("itemList"),
-                Lf = document.getElementById("MarketboughtItems"),
+                Mf = document.getElementById("MarketboughtItems"),
                 Kb = localStorage.getItem("MarketboughtItems");
             Kb ? Kb = JSON.parse(Kb) : Kb = [];
-            const yg = document.getElementById("MarketSearchInterval");
-            yg.addEventListener("change", () => {
-                localStorage.setItem("MarketSearchInterval", yg.value)
+            const zg = document.getElementById("MarketSearchInterval");
+            zg.addEventListener("change", () => {
+                localStorage.setItem("MarketSearchInterval", zg.value)
             });
             document.getElementById("MarketSearchInterval").addEventListener("input", function() {
                 3 > parseInt(this.value,
                     10) && (this.value = 3)
             });
-            const zg = document.getElementById("MarketMaxPerFoodPrice");
-            zg.addEventListener("change", () => {
-                localStorage.setItem("MarketMaxPerFoodPrice", zg.value)
-            });
-            const Ag = document.getElementById("MarketMaxFoodPrice");
+            const Ag = document.getElementById("MarketMaxPerFoodPrice");
             Ag.addEventListener("change", () => {
-                localStorage.setItem("MarketMaxFoodPrice", Ag.value)
+                localStorage.setItem("MarketMaxPerFoodPrice", Ag.value)
             });
-            const Bg = document.getElementById("MarketMinItemLevel");
+            const Bg = document.getElementById("MarketMaxFoodPrice");
             Bg.addEventListener("change", () => {
-                localStorage.setItem("MarketMinItemLevel", Bg.value)
+                localStorage.setItem("MarketMaxFoodPrice", Bg.value)
+            });
+            const Cg = document.getElementById("MarketMinItemLevel");
+            Cg.addEventListener("change", () => {
+                localStorage.setItem("MarketMinItemLevel", Cg.value)
             });
             let ie = document.getElementById("marketOnlyFood");
             ie.checked = "true" === localStorage.getItem("marketOnlyFood");
@@ -7004,26 +7004,26 @@ function Z(F, M) {
                 localStorage.setItem("marketOnlyFood", ie.checked)
             });
             let jb = JSON.parse(localStorage.getItem("marketItems")) || [];
-            Ui.onclick = function() {
+            Wi.onclick = function() {
                 jb.push({
-                    un: tg.value || 1,
-                    um: ug.value || 4,
-                    maxPrice: xg.value || 4,
-                    itemType: vg.value || 4,
-                    Soulbound: wg.value || 2
+                    un: ug.value || 1,
+                    um: vg.value || 4,
+                    maxPrice: yg.value || 4,
+                    itemType: wg.value || 4,
+                    Soulbound: xg.value || 2
                 });
-                tg.value = "";
-                ug.value = "White";
-                xg.value = "";
-                vg.value = "WEAPONS";
-                wg.value = "DontBuySoulbound";
+                ug.value = "";
+                vg.value = "White";
+                yg.value = "";
+                wg.value = "WEAPONS";
+                xg.value = "DontBuySoulbound";
                 Uc()
             };
-            Vi.onclick = function() {
+            Xi.onclick = function() {
                 jb.splice(Vc.value, 1);
                 Uc()
             };
-            Wi.onclick = function() {
+            Yi.onclick = function() {
                 document.getElementById("MarketboughtItems").innerHTML =
                     "";
                 localStorage.setItem("MarketboughtItems", JSON.stringify([]))
@@ -7040,15 +7040,15 @@ function Z(F, M) {
                 localStorage.setItem("usePacks", ke.checked)
             });
             const le = document.getElementById("scoreRange"),
-                Cg =
+                Dg =
                 localStorage.getItem("scoreRange");
-            Cg && (le.value = Cg);
+            Dg && (le.value = Dg);
             le.addEventListener("change", () => {
                 localStorage.setItem("scoreRange", le.value)
             });
             const me = document.getElementById("scoreRangeCircus"),
-                Dg = localStorage.getItem("scoreRangeCircus");
-            Dg && (me.value = Dg);
+                Eg = localStorage.getItem("scoreRangeCircus");
+            Eg && (me.value = Eg);
             me.addEventListener("change", () => {
                 localStorage.setItem("scoreRangeCircus", me.value)
             });
@@ -7108,18 +7108,18 @@ function Z(F, M) {
             se.addEventListener("change", () => {
                 localStorage.setItem("autoAvoidArena", se.checked)
             });
-            const Eg = document.getElementById("autoAddArenaAmount");
-            Eg.addEventListener("change", () => {
-                localStorage.setItem("autoAddArenaAmount", Eg.value)
-            });
-            const Fg = document.getElementById("ArenaSimulatorAmount");
+            const Fg = document.getElementById("autoAddArenaAmount");
             Fg.addEventListener("change", () => {
-                localStorage.setItem("ArenaSimulatorAmount", Fg.value)
+                localStorage.setItem("autoAddArenaAmount", Fg.value)
             });
-            const Gg = document.getElementById("CircusSimulatorAmount");
+            const Gg = document.getElementById("ArenaSimulatorAmount");
             Gg.addEventListener("change", () => {
+                localStorage.setItem("ArenaSimulatorAmount", Gg.value)
+            });
+            const Hg = document.getElementById("CircusSimulatorAmount");
+            Hg.addEventListener("change", () => {
                 localStorage.setItem("CircusSimulatorAmount",
-                    Gg.value)
+                    Hg.value)
             });
             let te = document.getElementById("autoAddCircus");
             te.checked = "true" === localStorage.getItem("autoAddCircus");
@@ -7131,10 +7131,10 @@ function Z(F, M) {
             ue.addEventListener("change", () => {
                 localStorage.setItem("autoAvoidCircus", ue.checked)
             });
-            const Hg = document.getElementById("autoAddCircusAmount");
-            Hg.addEventListener("change", () => {
+            const Ig = document.getElementById("autoAddCircusAmount");
+            Ig.addEventListener("change", () => {
                 localStorage.setItem("autoAddCircusAmount",
-                    Hg.value)
+                    Ig.value)
             });
             let ve = document.getElementById("UnderWorldUseRuby");
             ve.checked = "true" === localStorage.getItem("UnderWorldUseRuby");
@@ -7195,36 +7195,36 @@ function Z(F, M) {
                 () => {
                     localStorage.setItem("pauseBotEnable", Fe.checked)
                 });
-            const Ig = document.getElementById("pauseBot");
-            Ig.addEventListener("change", () => {
-                Z("pauseBot", Ig.value)
+            const Jg = document.getElementById("pauseBot");
+            Jg.addEventListener("change", () => {
+                Z("pauseBot", Jg.value)
             });
             let Ge = document.getElementById("storeGoldinAuction");
             Ge.checked = "true" === localStorage.getItem("storeGoldinAuction");
             Ge.addEventListener("change", () => {
                 localStorage.setItem("storeGoldinAuction", Ge.checked)
             });
-            const Jg = document.getElementById("storeGoldinAuctionmaxGold");
-            Jg.addEventListener("change", () => {
-                localStorage.setItem("storeGoldinAuctionmaxGold",
-                    Jg.value)
-            });
-            const Kg = document.getElementById("storeGoldinAuctionholdGold");
+            const Kg = document.getElementById("storeGoldinAuctionmaxGold");
             Kg.addEventListener("change", () => {
-                localStorage.setItem("storeGoldinAuctionholdGold", Kg.value)
+                localStorage.setItem("storeGoldinAuctionmaxGold",
+                    Kg.value)
             });
-            const Lg = document.getElementById("TrainingHoldGold");
+            const Lg = document.getElementById("storeGoldinAuctionholdGold");
             Lg.addEventListener("change", () => {
-                localStorage.setItem("TrainingHoldGold", Lg.value)
+                localStorage.setItem("storeGoldinAuctionholdGold", Lg.value)
             });
-            const Mg = document.getElementById("MarketHoldGold");
+            const Mg = document.getElementById("TrainingHoldGold");
             Mg.addEventListener("change", () => {
-                localStorage.setItem("MarketHoldGold", Mg.value)
+                localStorage.setItem("TrainingHoldGold", Mg.value)
             });
-            const Ng = document.getElementById("KasaHoldGold");
-            Ng.addEventListener("change",
+            const Ng = document.getElementById("MarketHoldGold");
+            Ng.addEventListener("change", () => {
+                localStorage.setItem("MarketHoldGold", Ng.value)
+            });
+            const Og = document.getElementById("KasaHoldGold");
+            Og.addEventListener("change",
                 () => {
-                    localStorage.setItem("KasaHoldGold", Ng.value)
+                    localStorage.setItem("KasaHoldGold", Og.value)
                 });
             let He = document.getElementById("guildBattleEnable");
             He.checked = "true" === localStorage.getItem("guildBattleEnable");
@@ -7241,24 +7241,24 @@ function Z(F, M) {
             Je.addEventListener("change", () => {
                 localStorage.setItem("GuildEnable", Je.checked)
             });
-            const Og = document.getElementById("GuildDonateAmount");
-            Og.addEventListener("change", () => {
-                localStorage.setItem("GuildDonateAmount", Og.value)
-            });
-            const Pg = document.getElementById("GuildDonateMore");
+            const Pg = document.getElementById("GuildDonateAmount");
             Pg.addEventListener("change", () => {
-                localStorage.setItem("GuildDonateMore", Pg.value)
+                localStorage.setItem("GuildDonateAmount", Pg.value)
             });
-            const Qg = document.getElementById("GuildDonateLess");
+            const Qg = document.getElementById("GuildDonateMore");
             Qg.addEventListener("change", () => {
-                localStorage.setItem("GuildDonateLess", Qg.value)
+                localStorage.setItem("GuildDonateMore", Qg.value)
+            });
+            const Rg = document.getElementById("GuildDonateLess");
+            Rg.addEventListener("change", () => {
+                localStorage.setItem("GuildDonateLess", Rg.value)
             });
             document.getElementById("hellDifficulty").addEventListener("change", function() {
                 localStorage.setItem("hellDifficulty", this.value)
             });
-            const Xi = document.getElementById("hellDifficulty"),
-                Rg = localStorage.getItem("hellDifficulty");
-            null !== Rg && (Xi.value = Rg);
+            const Zi = document.getElementById("hellDifficulty"),
+                Sg = localStorage.getItem("hellDifficulty");
+            null !== Sg && (Zi.value = Sg);
             let Ke = document.getElementById("useVillaMedici");
             Ke.checked = "true" === localStorage.getItem("useVillaMedici");
             Ke.addEventListener("change", () => {
@@ -7285,9 +7285,9 @@ function Z(F, M) {
             Oe.addEventListener("change", () => {
                 localStorage.setItem("activateRepair", Oe.checked)
             });
-            const Yi = JSON.parse(localStorage.getItem("ignoredMaterials")) || [];
+            const $i = JSON.parse(localStorage.getItem("ignoredMaterials")) || [];
             document.querySelectorAll('#ignoreMaterialsList input[type="checkbox"]').forEach(y => {
-                y.checked = Yi.includes(y.value)
+                y.checked = $i.includes(y.value)
             });
             document.querySelectorAll('#ignoreMaterialsList input[type="checkbox"]').forEach(y => {
                 y.addEventListener("change", () => {
@@ -7298,25 +7298,25 @@ function Z(F, M) {
                     localStorage.setItem("ignoredMaterials", JSON.stringify(J))
                 })
             });
-            const Sg = document.querySelectorAll(".gladiator-inventory .inventory-item"),
-                Tg = document.querySelectorAll(".mercenary-inventory .inventory-item"),
-                Ug = JSON.parse(localStorage.getItem("activeItemsGladiator")) || {},
-                Vg = JSON.parse(localStorage.getItem("activeItemsMercenary")) || {};
-            Sg.forEach(y => {
-                Mf(y, Ug, "activeItemsGladiator")
-            });
+            const Tg = document.querySelectorAll(".gladiator-inventory .inventory-item"),
+                Ug = document.querySelectorAll(".mercenary-inventory .inventory-item"),
+                Vg = JSON.parse(localStorage.getItem("activeItemsGladiator")) || {},
+                Wg = JSON.parse(localStorage.getItem("activeItemsMercenary")) || {};
             Tg.forEach(y => {
-                Mf(y, Vg, "activeItemsMercenary")
+                Nf(y, Vg, "activeItemsGladiator")
             });
-            Nf(Sg, Ug, "helmet necklace weapon armor shield gloves shoes rings1 rings2".split(" "), "activeItemsGladiator");
-            Nf(Tg, Vg, "helmetM necklaceM weaponM armorM shieldM glovesM shoesM rings1M rings2M".split(" "), "activeItemsMercenary");
-            const Wg = document.getElementById("expeditionLocation");
-            Wg.addEventListener("change", () => {
-                localStorage.setItem("expeditionLocation", Wg.value)
+            Ug.forEach(y => {
+                Nf(y, Wg, "activeItemsMercenary")
             });
-            const Xg = document.getElementById("dungeonLocation");
+            Of(Tg, Vg, "helmet necklace weapon armor shield gloves shoes rings1 rings2".split(" "), "activeItemsGladiator");
+            Of(Ug, Wg, "helmetM necklaceM weaponM armorM shieldM glovesM shoesM rings1M rings2M".split(" "), "activeItemsMercenary");
+            const Xg = document.getElementById("expeditionLocation");
             Xg.addEventListener("change", () => {
-                localStorage.setItem("dungeonLocation", Xg.value)
+                localStorage.setItem("expeditionLocation", Xg.value)
+            });
+            const Yg = document.getElementById("dungeonLocation");
+            Yg.addEventListener("change", () => {
+                localStorage.setItem("dungeonLocation", Yg.value)
             });
             const vc = document.getElementById("autoCollectBonuses");
             vc.checked = "true" === localStorage.getItem("autoCollectBonuses");
@@ -7341,36 +7341,36 @@ function Z(F, M) {
                 localStorage.setItem("EnableSmelt", Re.checked)
             });
             const Se = document.getElementById("EnableHellLimit"),
-                Yg = document.getElementById("hellLimit").closest(".setting-row"),
-                Zg = "true" === localStorage.getItem("EnableHellLimit"),
-                $g = localStorage.getItem("hellLimit") || 5;
-            Se.checked = Zg;
-            document.getElementById("hellLimit").value = $g;
-            Yg.style.display = Zg ? "block" : "none";
+                Zg = document.getElementById("hellLimit").closest(".setting-row"),
+                $g = "true" === localStorage.getItem("EnableHellLimit"),
+                ah = localStorage.getItem("hellLimit") || 5;
+            Se.checked = $g;
+            document.getElementById("hellLimit").value = ah;
+            Zg.style.display = $g ? "block" : "none";
             Se.addEventListener("change", function() {
                 const y = Se.checked;
                 localStorage.setItem("EnableHellLimit", y);
-                Yg.style.display = y ? "block" : "none"
+                Zg.style.display = y ? "block" : "none"
             });
             document.getElementById("hellLimit").addEventListener("input", function() {
                 const y = document.getElementById("hellLimit").value;
                 1 <= y && 200 >= y ? localStorage.setItem("hellLimit", y) : document.getElementById("hellLimit").value =
-                    $g
+                    ah
             });
             const nc = document.getElementById("farmEnable"),
-                ri = document.getElementById("farmLocation").closest(".setting-row"),
-                si = document.getElementById("farmEnemy").closest(".setting-row"),
-                Zi = "true" === localStorage.getItem("farmEnable"),
-                ah = localStorage.getItem("farmLocation"),
-                bh = localStorage.getItem("farmEnemy");
-            nc.checked = Zi;
-            ah && (document.getElementById("farmLocation").value = ah);
-            bh && (document.getElementById("farmEnemy").value = bh);
-            Of();
+                ti = document.getElementById("farmLocation").closest(".setting-row"),
+                ui = document.getElementById("farmEnemy").closest(".setting-row"),
+                aj = "true" === localStorage.getItem("farmEnable"),
+                bh = localStorage.getItem("farmLocation"),
+                ch = localStorage.getItem("farmEnemy");
+            nc.checked = aj;
+            bh && (document.getElementById("farmLocation").value = bh);
+            ch && (document.getElementById("farmEnemy").value = ch);
+            Pf();
             nc.addEventListener("change", function() {
                 localStorage.setItem("farmEnable",
                     nc.checked);
-                Of()
+                Pf()
             });
             document.getElementById("farmLocation").addEventListener("change", function() {
                 localStorage.setItem("farmLocation", this.value)
@@ -7412,26 +7412,26 @@ function Z(F, M) {
             document.getElementById("enemySelect").addEventListener("change", function() {
                 localStorage.setItem("selectedEnemy", this.value)
             });
-            const $i = document.getElementById("enemySelect"),
-                ch = localStorage.getItem("selectedEnemy");
-            null !== ch && ($i.value = ch);
+            const bj = document.getElementById("enemySelect"),
+                dh = localStorage.getItem("selectedEnemy");
+            null !== dh && (bj.value = dh);
             document.getElementById("autoCollectBonuses").addEventListener("change", function() {
                 document.getElementById("enemySelection").style.display = this.checked ? "none" : "block"
             });
-            ti.addEventListener("change", function() {
+            vi.addEventListener("change", function() {
                 this.checked ? (c(!0), Fa = !0) : (c(!1), Fa = !1);
                 localStorage.setItem("doExpedition", Fa);
                 w()
             });
-            ui.addEventListener("change", function() {
-                this.checked ? (e(!0), Ka = !0) : (e(!1), Ka = !1);
-                localStorage.setItem("doDungeon", Ka);
+            wi.addEventListener("change", function() {
+                this.checked ? (e(!0), Ga = !0) : (e(!1), Ga = !1);
+                localStorage.setItem("doDungeon", Ga);
                 w()
             });
-            vi.addEventListener("change",
+            xi.addEventListener("change",
                 function() {
-                    this.checked ? (g(!0), La = !0) : (g(!1), La = !1);
-                    localStorage.setItem("doArena", La);
+                    this.checked ? (g(!0), Ha = !0) : (g(!1), Ha = !1);
+                    localStorage.setItem("doArena", Ha);
                     w()
                 });
             document.getElementById("addAutoAttack").addEventListener("click", () => {
@@ -7451,31 +7451,31 @@ function Z(F, M) {
                 const y = document.getElementById("avoidAttackCircusInput").value.trim();
                 y && fc(y, "avoidAttackCircusList", "avoidAttackCircusList")
             });
-            ki();
-            wi.addEventListener("change", function() {
+            mi();
+            yi.addEventListener("change", function() {
                 this.checked ? (k(!0), Ma = !0) : (k(!1), Ma = !1);
                 localStorage.setItem("doCircus", Ma);
                 w()
             });
-            xi.addEventListener("change", function() {
+            zi.addEventListener("change", function() {
                 this.checked ?
                     (h(!0), Sa = !0) : (h(!1), Sa = !1);
                 localStorage.setItem("doQuests", Sa);
                 w()
             });
-            Ai.addEventListener("change", function() {
+            Ci.addEventListener("change", function() {
                 this.checked ? (n(!0), pb = !0) : (n(!1), pb = !1);
                 localStorage.setItem("doKasa", pb);
                 w()
             });
-            zi.addEventListener("change", function() {
+            Bi.addEventListener("change", function() {
                 this.checked ? (q(!0), hb = !0) : (q(!1), hb = !1);
                 localStorage.setItem("AutoAuction", hb);
                 w()
             });
-            yi.addEventListener("change", function() {
-                this.checked ? (l(!0), Ga = !0) : (l(!1), Ga = !1);
-                localStorage.setItem("doEventExpedition", Ga);
+            Ai.addEventListener("change", function() {
+                this.checked ? (l(!0), Ia = !0) : (l(!1), Ia = !1);
+                localStorage.setItem("doEventExpedition", Ia);
                 w()
             });
             oc.addEventListener("input", () => {
@@ -7485,11 +7485,11 @@ function Z(F, M) {
                 oc.value = y;
                 localStorage.setItem("healPercentage", y)
             });
-            Pf.addEventListener("input", () => {
-                localStorage.setItem("hellEnterHP", Pf.value)
-            });
             Qf.addEventListener("input", () => {
-                localStorage.setItem("HellHealHP", Qf.value)
+                localStorage.setItem("hellEnterHP", Qf.value)
+            });
+            Rf.addEventListener("input", () => {
+                localStorage.setItem("HellHealHP", Rf.value)
             });
             Wc.addEventListener("change", () => {
                 localStorage.setItem("HealClothToggle", Wc.checked)
@@ -7505,8 +7505,8 @@ function Z(F, M) {
                     localStorage.setItem("HighlightUnderworldItems", Zc.checked)
                 });
             const Ze = document.querySelectorAll(".stat-checkbox"),
-                aj = localStorage.getItem("selectedStat");
-            for (const y of Ze) y.checked = y.id === aj;
+                cj = localStorage.getItem("selectedStat");
+            for (const y of Ze) y.checked = y.id === cj;
             for (const y of Ze) y.addEventListener("change", () => {
                 if (y.checked) {
                     for (const J of Ze) J !== y && (J.checked = !1);
@@ -7516,20 +7516,20 @@ function Z(F, M) {
             })
         });
         $("#set_event_monster_id_0").click(function() {
-            t("0")
+            r("0")
         });
         $("#set_event_monster_id_1").click(function() {
-            t("1")
+            r("1")
         });
         $("#set_event_monster_id_2").click(function() {
-            t("2")
+            r("2")
         });
         $("#set_event_monster_id_3").click(function() {
-            t("3")
+            r("3")
         });
         w()
     }
-    async function bj() {
+    async function dj() {
         if ("true" === localStorage.getItem("storeResource")) {
             var b = new URL(window.location.href),
                 c = b.origin;
@@ -7555,7 +7555,7 @@ function Z(F, M) {
             }
         }
     }
-    async function cj() {
+    async function ej() {
         var b = new URL(window.location.href),
             c = b.origin;
         const e = b.searchParams.get("sh") || "";
@@ -7578,17 +7578,17 @@ function Z(F, M) {
         const l = [];
         (new DOMParser).parseFromString(c, "text/html").querySelectorAll("#training_box .training_inner").forEach((n, m) => {
             m += 1;
-            var t = n.nextElementSibling?.querySelector(".training_link .training_button");
-            t = t ? t.getAttribute("href") : null;
+            var r = n.nextElementSibling?.querySelector(".training_link .training_button");
+            r = r ? r.getAttribute("href") : null;
             (n = (n = (n =
-                n.nextElementSibling?.querySelector(".training_costs")) ? n.textContent.trim() : null) ? parseInt(n.replace(/[^\d]/g, ""), 10) : null) && t ? l.push({
+                n.nextElementSibling?.querySelector(".training_costs")) ? n.textContent.trim() : null) ? parseInt(n.replace(/[^\d]/g, ""), 10) : null) && r ? l.push({
                 wm: m,
                 pn: n,
-                On: t
+                On: r
             }) : l.push({
                 wm: m,
                 pn: n,
-                On: t
+                On: r
             })
         });
         for (const n of b) {
@@ -7601,15 +7601,15 @@ function Z(F, M) {
                 E(`No training available for ${c}`);
                 continue
             }
-            const t = q.pn;
+            const r = q.pn;
             q = q.On;
             const w = parseInt(localStorage.getItem("TrainingHoldGold"), 10) || 0;
-            if (ea.gold >= t + w) {
+            if (ea.gold >= r + w) {
                 await fetch(q);
                 --n.count;
                 n.count = Math.max(0, n.count);
                 localStorage.setItem("statSettings", JSON.stringify(b));
-                E(`Trained ${c} for ${t} gold`);
+                E(`Trained ${c} for ${r} gold`);
                 Z("Training", g.Training || 2);
                 return
             }
@@ -7626,18 +7626,18 @@ function Z(F, M) {
                     x = null;
                 jQuery(q).find(".packageItem").each(function(C, D) {
                     C = parseInt(jQuery(D).find(".ui-draggable").attr("data-price-gold"), 10);
-                    if (C >= t + w) return v = C, x = jQuery(D), !1
+                    if (C >= r + w) return v = C, x = jQuery(D), !1
                 });
                 if (0 < v && x) try {
                     await Zb(1, 1, async (C, D) => {
                         const B = x.find('input[name="packages[]"]').val(),
-                            r = x.find(".ui-draggable").attr("data-position-x"),
+                            t = x.find(".ui-draggable").attr("data-position-x"),
                             u = x.find(".ui-draggable").attr("data-position-y");
                         await jQuery.post(U({
                             mod: "inventory",
                             submod: "move",
                             from: "-" + B,
-                            fromX: r,
+                            fromX: t,
                             fromY: u,
                             to: D,
                             toX: C.x + 1,
@@ -7660,14 +7660,14 @@ function Z(F, M) {
         Z("Training", g.Training || 2)
     }
 
-    function dj() {
+    function fj() {
         const b = JSON.parse(localStorage.getItem("statSettings"));
         for (let c = 0; c < b.length; c++)
             if ("0" !== b[c].count || b[c].hn) return !0;
         return !1
     }
 
-    function ej() {
+    function gj() {
         var b = new URL(window.location.href),
             c = localStorage.getItem("scoreboardattackenable"),
             e = localStorage.getItem("scoreboardcircusenable");
@@ -7692,8 +7692,8 @@ function Z(F, M) {
                     g = parseFloat(h)
                 } catch (q) {}
                 b.href.includes("&t=2") ? (e = document.getElementById("reportHeader").classList.contains("reportWin"),
-                        b = JSON.parse(localStorage.getItem("tempOpponentDetails")), h = Bf.split("-")[0].slice(1), "true" !== localStorage.getItem("autoAvoidArena") || e || kb("avoidAttackList", k), "true" === localStorage.getItem("autoAddArena") && Number(g) >= Number(localStorage.getItem("autoAddArenaAmount")) && b && b.serverId && (h === b.serverId ? (kb("autoAttackList", b.playerName), localStorage.removeItem("tempOpponentDetails")) : "true" === c && k != b.playerName ? kb("autoAttackList", k) : h !== b.serverId && kb("autoAttackServerList", b))) : b.href.includes("&t=3") &&
-                    (c = document.getElementById("reportHeader").classList.contains("reportWin"), b = JSON.parse(localStorage.getItem("tempOpponentDetails")), h = Bf.split("-")[0].slice(1), "true" !== localStorage.getItem("autoAvoidCircus") || c || kb("avoidAttackCircusList", k), "true" === localStorage.getItem("autoAddCircus") && g >= Number(localStorage.getItem("autoAddCircusAmount")) && b && b.serverId && (h === b.serverId ? (kb("autoAttackCircusList", b.playerName), localStorage.removeItem("tempOpponentDetails")) : "true" === e && k != b.playerName ? kb("autoAttackCircusList",
+                        b = JSON.parse(localStorage.getItem("tempOpponentDetails")), h = Cf.split("-")[0].slice(1), "true" !== localStorage.getItem("autoAvoidArena") || e || kb("avoidAttackList", k), "true" === localStorage.getItem("autoAddArena") && Number(g) >= Number(localStorage.getItem("autoAddArenaAmount")) && b && b.serverId && (h === b.serverId ? (kb("autoAttackList", b.playerName), localStorage.removeItem("tempOpponentDetails")) : "true" === c && k != b.playerName ? kb("autoAttackList", k) : h !== b.serverId && kb("autoAttackServerList", b))) : b.href.includes("&t=3") &&
+                    (c = document.getElementById("reportHeader").classList.contains("reportWin"), b = JSON.parse(localStorage.getItem("tempOpponentDetails")), h = Cf.split("-")[0].slice(1), "true" !== localStorage.getItem("autoAvoidCircus") || c || kb("avoidAttackCircusList", k), "true" === localStorage.getItem("autoAddCircus") && g >= Number(localStorage.getItem("autoAddCircusAmount")) && b && b.serverId && (h === b.serverId ? (kb("autoAttackCircusList", b.playerName), localStorage.removeItem("tempOpponentDetails")) : "true" === e && k != b.playerName ? kb("autoAttackCircusList",
                         k) : h !== b.serverId && kb("autoAttackCircusServerList", b)))
             }
         }
@@ -7707,7 +7707,7 @@ function Z(F, M) {
         } else "string" === typeof c && (e.includes(c) || e.push(c));
         localStorage.setItem(b, JSON.stringify(e))
     }
-    async function dh(b) {
+    async function eh(b) {
         var c = new URL(window.location.href),
             e = c.origin,
             g = c.searchParams;
@@ -7726,7 +7726,7 @@ function Z(F, M) {
         b = await (await fetch(e.href)).text();
         return (new DOMParser).parseFromString(b, "text/html")
     }
-    async function Hf() {
+    async function If() {
         var b = new URL(window.location.href);
         const c = b.origin,
             e = b.searchParams.get("sh") ||
@@ -7746,31 +7746,68 @@ function Z(F, M) {
     function $e(b) {
         return JSON.parse(b.replace(/&quot;/g, '"'))[0][0][0]
     }
-    async function fj(b) {
+    async function hj(b) {
         b = (new TextEncoder).encode(b.toString());
         b = await crypto.subtle.digest("SHA-256",
             b);
         return Array.from(new Uint8Array(b)).map(c => c.toString(16).padStart(2, "0")).join("")
     }
+///// aaaa
+// İşlevlerinizi burada tanımlayın
 
-    function gb() {
-        (function(b) {
-            const c = setInterval(() => {
-                const e = document.getElementById("mainmenu");
-                e && (clearInterval(c), b(e))
-            }, 500)
-        })(b => {
-            if (!document.querySelector(".customButtonm")) {
-                var c = document.createElement("button");
-                c.className = "customButtonm";
-                c.innerHTML = '\n            <style>\n            .customButtonm {\n                vertical-align: middle;\n                width: 179px;\n                height: 50px;\n                background-image: linear-gradient(135deg, #f29b20 0%, #b18026 100%);\n                border: 2px solid #000;\n                color: white;\n                text-align: center;\n                text-decoration: none;\n                border-radius: 5px;\n                display: inline-block;\n                font-size: 16px;\n                margin: 4px auto;\n                cursor: pointer;\n                box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -1px 1px rgba(0, 0, 0, 0.3);\n                padding: 18px 34px;\n                transition-duration: 0.4s;\n            }\n        \n            .customButtonm span {\n                top: 50%;\n                position: relative;\n                transform: translateY(-50%);\n                display: block;\n                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);\n            }\n            </style>\n\n            <span class="span-new">License expired or Server Error. Check Discord</span>\n\n        ';
-                b.insertBefore(c, b.children[0]);
-                Ff(45E3)
-            }
-        });
-        return !1
+// 'va' değişkeni veya işlevi bir tür kontrol işlevi olabilir (başlat/durdur)
+let va = false;  // Başlangıçta durdurulmuş, değiştirebilirsiniz
+
+// 'zf' işlevi (başlatma işlevi olabilir)
+function zf() {
+    console.log("Başlatıldı");
+    va = true;  // Durum değişti
+    // Burada başlatmaya dair işlemleri ekleyebilirsiniz
+    // Örneğin, bir oyun fonksiyonunu tetiklemek gibi
+}
+
+// 'yf' işlevi (durdurma işlevi olabilir)
+function yf() {
+    console.log("Durduruldu");
+    va = false;  // Durum değişti
+    // Burada durdurma işlemini ekleyebilirsiniz
+    // Örneğin, bir oyun fonksiyonunu durdurmak gibi
+}
+
+// 'hc' işlevi (ayarlar veya başka bir işlevi tetikleyebilir)
+function hc() {
+    console.log("Ayarlar açıldı");
+    // Burada ayar penceresini açabilir veya başka bir işlem yapabilirsiniz
+}
+
+// Butonları ekle
+function addButtons(mainMenu) {
+    const e = document.createElement("button");
+    e.id = "autoGoButton";
+    e.className = "customButton";
+    e.innerHTML = `<span style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">${va ? "&#9724;" : "&#9658;"}</span>`;
+    e.addEventListener("click", va ? zf : yf);
+
+    const g = document.createElement("button");
+    g.className = "customButton2";
+    g.innerHTML = '<span style="position: relative; top: -12px;">&#9881;</span>';
+    g.addEventListener("click", hc);
+
+    // Butonları ana menüye ekle
+    mainMenu.insertBefore(g, mainMenu.children[0]);
+    mainMenu.insertBefore(e, mainMenu.children[1]);
+}
+
+// Ana menüyü kontrol et ve butonları ekle
+const checkMainMenu = setInterval(() => {
+    const mainMenu = document.getElementById("mainmenu");
+    if (mainMenu) {
+        clearInterval(checkMainMenu); // Ana menü bulundu, aramayı durdur
+        addButtons(mainMenu); // Butonları ekle
     }
-    async function gj(b, c, e) {
+}, 500); // 500ms arayla ana menüyü kontrol et
+	/////aaaaa
+    async function ij(b, c, e) {
         function g(k) {
             const h = [];
             for (let l = 0; l < k.length; l += 2) h.push(parseInt(k.substr(l, 2), 16));
@@ -7788,19 +7825,19 @@ function Z(F, M) {
                         69, 83) + "-CBC",
                     iv: l
                 }, n, q),
-                t = (new TextDecoder).decode(new Uint8Array(m)),
-                w = new Date(t);
+                r = (new TextDecoder).decode(new Uint8Array(m)),
+                w = new Date(r);
             w.setHours(0, 0, 0, 0);
             if (!0 !== c) return !1;
             const v = new Date,
                 x = new Date(v.setMonth(v.getMonth() + 13));
-            return w > x || t < v ? !1 : !0
+            return w > x || r < v ? !1 : !0
         } catch {
             throw gb(), Error("supportDev");
         }
     }
 
-    function hj() {
+    function jj() {
         function b(h, l) {
             sb ? alert("A repair process is already running.") : (k.Gn = l, jQuery(".gladbot-worbench-button").addClass("disabled"), k.u(), k.Fn = [], k.queue = 0, jQuery(document.body).addClass("workbench-cursor"), jQuery(document.body).on("contextmenu", function(q) {
                 q.preventDefault();
@@ -7810,14 +7847,14 @@ function Z(F, M) {
                 q = q.target;
                 var n = q.className.match(/item-i-(\d+)-\d+/)[1],
                     m = document.querySelector(".charmercsel.active").getAttribute("onclick").toString().match(/doll=(\d+)/),
-                    t = k.freeSlots.shift()["forge_slots.slot"];
+                    r = k.freeSlots.shift()["forge_slots.slot"];
                 m = m[1];
-                t = {
+                r = {
                     item: {
                         type: n,
                         name: Fb(q),
                         quality: Ba(q),
-                        slot: t,
+                        slot: r,
                         container: q.getAttribute("data-container-number"),
                         doll: m
                     },
@@ -7827,7 +7864,7 @@ function Z(F, M) {
                         y: q.getAttribute("data-position-y")
                     }
                 };
-                localStorage.setItem("workbench_itemList1", JSON.stringify(t));
+                localStorage.setItem("workbench_itemList1", JSON.stringify(r));
                 if (jQuery(q).parents("#char").length)
                     if (sb) alert("A repair process is already running.");
                     else {
@@ -7893,8 +7930,8 @@ function Z(F, M) {
                             n = m["forge_slots.slot"];
                             break
                         } for (let m of l) {
-                        const t = parseInt(m.getAttribute("data-content-type"), 10);
-                        if (q.includes(t)) {
+                        const r = parseInt(m.getAttribute("data-content-type"), 10);
+                        if (q.includes(r)) {
                             const w = m.getAttribute("data-item-id"),
                                 v = Fb(m),
                                 x = parseInt(m.getAttribute("data-amount"), 10) || 1,
@@ -7930,7 +7967,7 @@ function Z(F, M) {
                             };
                             await jQuery.post(U({}), B);
                             ab(`Item name : ${v} has been sent to the packages.`);
-                            await new Promise(r => setTimeout(r, 500))
+                            await new Promise(t => setTimeout(t, 500))
                         }
                     }
                     window.location.reload()
@@ -7963,9 +8000,9 @@ function Z(F, M) {
                         case "toInv":
                             k.em()
                     }
-                }) : q && 0 < h.length ? "mod=overview&doll=1" != lf ? Gf("mod=overview&doll=1") : this.u(() => {
+                }) : q && 0 < h.length ? "mod=overview&doll=1" != mf ? Hf("mod=overview&doll=1") : this.u(() => {
                     0 < k.spaces && this.sm(aa.workbench.itemList1)
-                }) : n && 0 < l.length && ("mod=overview&doll=2" != lf ? Gf("mod=overview&doll=2") : this.u(() => {
+                }) : n && 0 < l.length && ("mod=overview&doll=2" != mf ? Hf("mod=overview&doll=2") : this.u(() => {
                     0 < k.spaces && this.sm(aa.workbench.itemList2)
                 }))
             },
@@ -8002,14 +8039,14 @@ function Z(F, M) {
                         a: (new Date).getTime(),
                         sh: W("sh")
                     }, m => {
-                        let t = {
+                        let r = {
                             item: l,
                             iid: JSON.parse(m).to.data.itemId,
                             status: "toWorkbench",
                             spot: q,
                             bag: n
                         };
-                        localStorage.setItem("workbench_selectedItem", JSON.stringify(t));
+                        localStorage.setItem("workbench_selectedItem", JSON.stringify(r));
                         this.nj(JSON.parse(m).to.data.itemId)
                     })
                 })
@@ -8039,23 +8076,23 @@ function Z(F, M) {
                             v = JSON.parse(w);
                         if (v.error) this.Sm(h, l + 1, q);
                         else {
-                            var t = {
+                            var r = {
                                 item: h,
                                 iid: v.to.data.itemId,
                                 status: "toWorkbench",
                                 spot: m,
                                 bag: n
                             };
-                            localStorage.setItem("workbench_selectedItem", JSON.stringify(t));
+                            localStorage.setItem("workbench_selectedItem", JSON.stringify(r));
                             localStorage.setItem("workbench_itemBag",
-                                JSON.stringify(t.bag));
+                                JSON.stringify(r.bag));
                             await this.nj(v.to.data.itemId)
                         }
                     } catch (w) {} else this.Sm(h, l + 1)
                 }
             },
             async nj(h) {
-                ij();
+                kj();
                 E(`${d.Ab}`);
                 let l = 5;
                 for (let q of k.slots) "closed" == q["forge_slots.state"] && (l = q["forge_slots.slot"]);
@@ -8070,7 +8107,7 @@ function Z(F, M) {
                     sh: W("sh")
                 }, q => {
                     k.needed = JSON.parse(q).slots[l].formula.needed;
-                    Ch().gold > JSON.parse(q).slots[l].formula.rent[2] ? jQuery.post(U({}), {
+                    Eh().gold > JSON.parse(q).slots[l].formula.rent[2] ? jQuery.post(U({}), {
                         mod: "forge",
                         submod: "rent",
                         mode: "workbench",
@@ -8174,11 +8211,11 @@ function Z(F, M) {
                 m.searchParams.set("sh", n);
                 m = await (await fetch(m.href)).text();
                 m = (new DOMParser).parseFromString(m, "text/html");
-                var t = m.querySelector(".ui-draggable");
-                n = Da(t);
-                Ba(t);
-                t = Fb(t);
-                l.name == t && l.type == n && (q = !0, jQuery.post(U({
+                var r = m.querySelector(".ui-draggable");
+                n = Da(r);
+                Ba(r);
+                r = Fb(r);
+                l.name == r && l.type == n && (q = !0, jQuery.post(U({
                     mod: "inventory",
                     submod: "move",
                     from: m.querySelector("[data-container-number]").getAttribute("data-container-number"),
@@ -8263,7 +8300,7 @@ function Z(F, M) {
                 let n =
                     k.freeSlots.shift()["forge_slots.slot"],
                     m = k.Fn.shift(),
-                    t = null !== l ? l : m.getAttribute("data-item-id"),
+                    r = null !== l ? l : m.getAttribute("data-item-id"),
                     w = null !== q ? q : {
                         bag: m.getAttribute("data-container-number"),
                         x: m.getAttribute("data-position-x"),
@@ -8274,19 +8311,19 @@ function Z(F, M) {
                     submod: "getWorkbenchPreview",
                     mode: "workbench",
                     slot: n,
-                    iid: t,
+                    iid: r,
                     amount: 1,
                     a: (new Date).getTime(),
                     sh: W("sh")
                 }, v => {
                     let x = JSON.parse(v).slots[n].formula.needed;
-                    Ch().gold > JSON.parse(v).slots[n].formula.rent[2] && jQuery.post(U({}), {
+                    Eh().gold > JSON.parse(v).slots[n].formula.rent[2] && jQuery.post(U({}), {
                         mod: "forge",
                         submod: "rent",
                         mode: "workbench",
                         slot: n,
                         rent: 2,
-                        item: t,
+                        item: r,
                         a: (new Date).getTime(),
                         sh: W("sh")
                     }, () => {
@@ -8298,14 +8335,14 @@ function Z(F, M) {
                 let n = [];
                 q = k.needed;
                 for (let m in q) {
-                    const t = parseInt(m, 10);
-                    0 < q[m].amount && !storedMaterials.some(w => parseInt(w, 10) + 18E3 === t) && n.push({
-                        type: t,
+                    const r = parseInt(m, 10);
+                    0 < q[m].amount && !storedMaterials.some(w => parseInt(w, 10) + 18E3 === r) && n.push({
+                        type: r,
                         amount: q[m].amount
                     })
                 }
-                k.Gl(n, (m, t) => {
-                    m && t ? k.Hl(l, m, t, w => {
+                k.Gl(n, (m, r) => {
+                    m && r ? k.Hl(l, m, r, w => {
                         w || console.warn("pickMaterialFromPack did not return an iid. Skipping material picking.");
                         jQuery.post(U({}), {
                             mod: "forge",
@@ -8356,7 +8393,7 @@ function Z(F, M) {
                 }).done(() => l && l(h[q], n)).fail(() => k.Gl(h, l, ++q, n))
             },
             Hl(h, l, q, n = !1, m = 1) {
-                let t = !1;
+                let r = !1;
                 jQuery.get(G({
                     mod: "packages",
                     f: 18,
@@ -8370,7 +8407,7 @@ function Z(F, M) {
                         v = C.context.querySelector("input").getAttribute("value");
                         x = Ea(C[0]).split("-")[1];
                         C = Ba(C[0]);
-                        l == x && q == C && (t = !0, jQuery.post(U({
+                        l == x && q == C && (r = !0, jQuery.post(U({
                             mod: "inventory",
                             submod: "move",
                             from: "-" + v,
@@ -8387,7 +8424,7 @@ function Z(F, M) {
                             n && n(JSON.parse(D).to.data.itemId)
                         }))
                     });
-                    t || k.Hl(h, l, q, n, ++m)
+                    r || k.Hl(h, l, q, n, ++m)
                 })
             }
         };
@@ -8427,7 +8464,7 @@ function Z(F, M) {
         }, 3E3)
     }
 
-    function eh(b, c, e, g, k, h) {
+    function fh(b, c, e, g, k, h) {
         const l = document.createElement("span");
         l.className = c;
         l.innerHTML = b;
@@ -8441,7 +8478,7 @@ function Z(F, M) {
         return l
     }
 
-    function fh(b, c) {
+    function gh(b, c) {
         try {
             var e = JSON.parse(b.replace(/&quot;/g, '"'))
         } catch (q) {
@@ -8472,7 +8509,7 @@ function Z(F, M) {
             mn: e
         }
     }
-    async function ij() {
+    async function kj() {
         const b =
             G({
                 mod: "packages",
@@ -8484,7 +8521,7 @@ function Z(F, M) {
             packageSorting: "in_desc"
         })
     }
-    async function jj() {
+    async function lj() {
         var b = localStorage.getItem("PackageSort") || "in_desc",
             c = await ja.pm();
         let e = [];
@@ -8509,8 +8546,8 @@ function Z(F, M) {
         }
         return g.flat()
     }
-    async function kj(b, c) {
-        if ("mod=guildMarket" != lf) Gf("mod=guildMarket");
+    async function mj(b, c) {
+        if ("mod=guildMarket" != mf) Hf("mod=guildMarket");
         else {
             E(`${d.yf}`);
             var e = {
@@ -8536,7 +8573,7 @@ function Z(F, M) {
                 },
                 k = "true" === localStorage.getItem("resetUnderworld"),
                 h =
-                (await jj()).map(x => jQuery(x).find(".packageItem").toArray()).flat();
+                (await lj()).map(x => jQuery(x).find(".packageItem").toArray()).flat();
             b = 24 * b;
             var l = !1;
             for (const x of h) {
@@ -8554,31 +8591,31 @@ function Z(F, M) {
                     var n = void 0,
                         m = void 0;
                     h = (m = x.querySelector("div[data-amount]")) ? m.getAttribute("data-amount") : null;
-                    var t = m ? m.getAttribute("data-quality") : null;
+                    var r = m ? m.getAttribute("data-quality") : null;
                     k && (n = m ? m.getAttribute("data-basis") : null, m = m ? m.getAttribute("data-hash") : null, n = wb(n, m));
                     if (!k || n)
-                        if (!(null !== t && 0 < g.colors.length) || g.colors.includes(t)) {
+                        if (!(null !== r && 0 < g.colors.length) || g.colors.includes(r)) {
                             q = q ? q.getAttribute("data-container-number") : null;
-                            t = x.querySelector("div[data-measurement-x]").getAttribute("data-measurement-x");
+                            r = x.querySelector("div[data-measurement-x]").getAttribute("data-measurement-x");
                             m = x.querySelector("div[data-measurement-y]").getAttribute("data-measurement-y");
                             l = x.querySelector("div[data-tooltip]").getAttribute("data-tooltip");
                             var w = $e(l);
                             l = !0;
                             await new Promise(D => setTimeout(D, 200));
-                            await lj(x, q, w, h, t, m);
+                            await nj(x, q, w, h, r, m);
                             h = W("sh");
                             h = `${window.location.origin}/game/index.php?mod=guildMarket&fl=0&fq=-1&f=0&qry=&seller=&s=p&p=1&&sh=${h}`;
                             q = await (await fetch(h)).text();
                             q = (new DOMParser).parseFromString(q, "text/html").querySelectorAll("#market_table tr");
-                            if ((t = document.querySelector('input[type="submit"][name="anbieten"][value="Offer"]')) &&
-                                t.disabled) h = JSON.parse(localStorage.getItem("Timers")), Z("resetExpired", h.ResetExpired || 10), E(`${d.Gf}`);
+                            if ((r = document.querySelector('input[type="submit"][name="anbieten"][value="Offer"]')) &&
+                                r.disabled) h = JSON.parse(localStorage.getItem("Timers")), Z("resetExpired", h.ResetExpired || 10), E(`${d.Gf}`);
                             else
-                                for (t = 1; t < q.length; t++) {
-                                    var v = q[t];
+                                for (r = 1; r < q.length; r++) {
+                                    var v = q[r];
                                     m = v.querySelectorAll("td")[2];
                                     w = v.querySelector('input[name="cancel"]');
                                     v = (v = v.querySelector("div[data-item-id]")) ? v.getAttribute("data-item-id") : null;
-                                    w && Number(m.textContent.replace(/\./g, "")) === Number(gh) && (await fetch(h, {
+                                    w && Number(m.textContent.replace(/\./g, "")) === Number(hh) && (await fetch(h, {
                                         method: "POST",
                                         headers: {
                                             "Content-Type": "application/x-www-form-urlencoded"
@@ -8602,7 +8639,7 @@ function Z(F, M) {
             if (!l || l) c = JSON.parse(localStorage.getItem("Timers")), Z("resetExpired", c.ResetExpired || 10), window.location.reload()
         }
     }
-    async function lj(b, c, e, g, k, h) {
+    async function nj(b, c, e, g, k, h) {
         let {
             spot: l,
             bag: q
@@ -8624,16 +8661,16 @@ function Z(F, M) {
             });
             if (n) {
                 const m = Math.floor(41 * Math.random()) + 10;
-                gh = m;
-                const t = JSON.parse(n).to.data.itemId;
-                await mj(c,
-                    m, t)
+                hh = m;
+                const r = JSON.parse(n).to.data.itemId;
+                await oj(c,
+                    m, r)
             }
         } catch (n) {
             E(`${d.Af}`), b = JSON.parse(localStorage.getItem("Timers")), Z("resetExpired", b.ResetExpired || 10), window.location.reload()
         }
     }
-    async function mj(b, c, e) {
+    async function oj(b, c, e) {
         await jQuery.post(G({
             mod: "guildMarket",
             sh: W("sh")
@@ -8645,9 +8682,9 @@ function Z(F, M) {
             anbieten: "Offer"
         })
     }
-    async function nj() {
+    async function pj() {
         if (!1 !== JSON.parse(localStorage.getItem("underworld") || "{}").isUnderworld || "true" !== localStorage.getItem("BuffUnderworldOnly")) {
-            "mod=overview&doll=1" != lf && Gf("mod=overview&doll=1");
+            "mod=overview&doll=1" != mf && Hf("mod=overview&doll=1");
             var b = {
                     "11-23": {
                         type: "Health",
@@ -8770,7 +8807,7 @@ function Z(F, M) {
                             let n = !1,
                                 m = null;
                             for (k = 1; 3 >= k; k++) {
-                                const t = await jQuery.get(G({
+                                const r = await jQuery.get(G({
                                     mod: "packages",
                                     f: 11,
                                     fq: -1,
@@ -8778,7 +8815,7 @@ function Z(F, M) {
                                     page: k,
                                     sh: W("sh")
                                 }));
-                                jQuery(t).find(".packageItem").each(function(w, v) {
+                                jQuery(r).find(".packageItem").each(function(w, v) {
                                     w = jQuery(v).find(".ui-draggable").attr("data-basis");
                                     if ((w = b[w]) && w.type === h && w.item === q) {
                                         const x = w.item;
@@ -8792,7 +8829,7 @@ function Z(F, M) {
                                 if (n) break
                             }
                             if (n && m) try {
-                                await Zb(1, 1, async (t, w) => {
+                                await Zb(1, 1, async (r, w) => {
                                     const v = m.find('input[name="packages[]"]').val(),
                                         x = m.find(".ui-draggable").attr("data-position-x"),
                                         C = m.find(".ui-draggable").attr("data-position-y");
@@ -8805,8 +8842,8 @@ function Z(F, M) {
                                         fromX: x,
                                         fromY: C,
                                         to: w,
-                                        toX: t.x + 1,
-                                        toY: t.y + 1,
+                                        toX: r.x + 1,
+                                        toY: r.y + 1,
                                         amount: 1,
                                         doll: 1,
                                         a: (new Date).getTime(),
@@ -8818,8 +8855,8 @@ function Z(F, M) {
                                         mod: "inventory",
                                         submod: "move",
                                         from: w,
-                                        fromX: t.x + 1,
-                                        fromY: t.y + 1,
+                                        fromX: r.x + 1,
+                                        fromY: r.y + 1,
                                         to: 8,
                                         toX: 1,
                                         toY: 1,
@@ -8834,8 +8871,8 @@ function Z(F, M) {
                                     localStorage.setItem("buffs",
                                         JSON.stringify(c))
                                 })
-                            } catch (t) {
-                                Z("BuffCheck", e.BuffTimer || 60), E(`Error moving or using ${h} buff (${q}):`, t)
+                            } catch (r) {
+                                Z("BuffCheck", e.BuffTimer || 60), E(`Error moving or using ${h} buff (${q}):`, r)
                             } else Z("BuffCheck", e.BuffTimer || 60), E(`No ${h} buff found for ${q}.`)
                         } catch (n) {
                             Z("BuffCheck", e.BuffTimer || 60), E("Error fetching buffs from packages:", n)
@@ -8844,7 +8881,7 @@ function Z(F, M) {
         }
     }
 
-    function oj() {
+    function qj() {
         const b = Date.now(),
             c = JSON.parse(localStorage.getItem("activeItemsGladiator") || "{}"),
             e = JSON.parse(localStorage.getItem("disabledTimeGladiator") || "{}"),
@@ -8863,7 +8900,7 @@ function Z(F, M) {
         localStorage.setItem("disabledTimeMercenary", JSON.stringify(k))
     }
 
-    function pj(b) {
+    function rj(b) {
         if (!b || "string" !== typeof b || !/\d/.test(b)) return NaN;
         b = b.split(":").map(c => parseInt(c, 10));
         if (3 === b.length) {
@@ -8877,7 +8914,7 @@ function Z(F, M) {
         return NaN
     }
 
-    function hh() {
+    function ih() {
         let b = document.getElementById("nextActionWindow");
         if (!b) {
             b = document.createElement("div");
@@ -8889,14 +8926,14 @@ function Z(F, M) {
         return b
     }
 
-    function ih() {
+    function jh() {
         var b = [];
-        for (var c of qj)
+        for (var c of sj)
             if (c.enabled) {
                 var e = Infinity;
                 if (c.il) {
                     var g = document.querySelector(c.il);
-                    g && (e = pj(g.innerText), e = isNaN(e) ? 0 : e)
+                    g && (e = rj(g.innerText), e = isNaN(e) ? 0 : e)
                 } else if (g = localStorage.getItem("eventPoints.timeOut")) e = Number(g) - Date.now(), e = 0 < e ? e : 0;
                 b.push({
                     ...c,
@@ -8905,12 +8942,12 @@ function Z(F, M) {
             } c = null;
         for (var k of b)
             if (!c || k.timeLeft < c.timeLeft) c = k;
-        c ? (Ia.N = c, Ia.tm = c.timeLeft, (0 >= c.timeLeft || c.fm()) && c.im() && console.debug(`[AutoClick] Performed action: ${c.name}`)) :
-            (Ia.N = null, Ia.tm = 0);
-        Ia.hm || (Ia.hm = hh());
-        !Ia.N || isNaN(Ia.tm) ? Ia.hm.innerHTML = "\n        <span>Please select an action. [Exp|Dungeon|Arena|Circus]</span>" : (b = Ia.tm, !b || 1E3 > b ? b = "0:00:00" : (b = Math.round(b / 1E3), k = b % 60, c = Math.floor(b % 3600 / 60), b = `${Math.floor(b/3600)}:${10>c?"0"+c:c}:${10>k?"0"+k:k}`), Ia.hm.innerHTML = `
+        c ? (Ka.N = c, Ka.tm = c.timeLeft, 0 >= c.timeLeft && c.fm() && c.im() && console.debug(`[AutoClick] Performed action: ${c.name}`)) :
+            (Ka.N = null, Ka.tm = 0);
+        Ka.hm || (Ka.hm = ih());
+        !Ka.N || isNaN(Ka.tm) ? Ka.hm.innerHTML = "\n        <span>Please select an action. [Exp|Dungeon|Arena|Circus]</span>" : (b = Ka.tm, !b || 1E3 > b ? b = "0:00:00" : (b = Math.round(b / 1E3), k = b % 60, c = Math.floor(b % 3600 / 60), b = `${Math.floor(b/3600)}:${10>c?"0"+c:c}:${10>k?"0"+k:k}`), Ka.hm.innerHTML = `
         <div style="text-align: center;">
-          <div style="color: black; margin-bottom: 5px;">${d.N} ${d[Ia.N.name]||"Unknown Action"}</div>
+          <div style="color: black; margin-bottom: 5px;">${d.N} ${d[Ka.N.name]||"Unknown Action"}</div>
           <div style="color: black; margin-bottom: 2px;">${d.lj}: ${b}</div>
         </div>
       `)
@@ -8918,11 +8955,11 @@ function Z(F, M) {
 
     function af() {
         if (aa?.player?.Ed < new Date) throw gb(), Error("SupportDevs");
-        Ia.hm = hh();
-        ih();
-        setInterval(ih, 1E3)
+        Ka.hm = ih();
+        jh();
+        setInterval(jh, 1E3)
     }
-    const Ia = {
+    const Ka = {
         N: null,
         tm: 0,
         hm: null
@@ -8994,7 +9031,7 @@ function Z(F, M) {
             window.location.reload()
         }, 18E4)
     })();
-    const rj = {
+    const tj = {
         start() {
             const b = async () => {
                 const g = nb("gf-token-production");
@@ -9094,15 +9131,16 @@ function Z(F, M) {
         }
     };
     window.location.href.includes("index.php?mod=overview&submod=achievements") ||
-        window.location.href.includes("index.php?mod=overview&submod=stats") || rj.start();
-    const jh = localStorage.getItem("underworld"),
-        Ab = jh ? JSON.parse(jh) : null,
-        kh = document.querySelector('input[name="cancelTravel"]');
+        window.location.href.includes("index.php?mod=overview&submod=stats") || tj.start();
+    const kh = localStorage.getItem("underworld"),
+        Ab = kh ? JSON.parse(kh) : null,
+        lh = document.querySelector('input[name="cancelTravel"]');
     try {
-        document.querySelector("#header_LoginBonus") && !kh && Ab && !window.location.href.includes("/index.php?mod=hermit") && !1 === Ab.isUnderworld && document.querySelector("#linkLoginBonus").click()
+        document.querySelector("#header_LoginBonus") && !lh && Ab && !window.location.href.includes("/index.php?mod=hermit") && !1 === Ab.isUnderworld && document.querySelector("#linkLoginBonus").click()
     } catch {}
-    let lh = document.getElementById("wrapper_game");
-    if (lh && "underworld" === lh.className) {
+    let mh = document.getElementById("wrapper_game"),
+        bf = mh && "underworld" === mh.className;
+    if (bf) {
         const b = JSON.parse(localStorage.getItem("underworld") ||
             "{}");
         b.isUnderworld = !0;
@@ -9113,72 +9151,28 @@ function Z(F, M) {
         localStorage.setItem("underworld", JSON.stringify(b))
     }
     try {
-        if ((window.location.href.includes("/index.php?mod=hermit&submod=travel") || kh || window.location.href.includes("/index.php?mod=hermit&submod=enterUnderworld")) && "true" === sessionStorage.getItem("autoGoActive") && "true" === localStorage.getItem("autoEnterHell")) {
+        if ((window.location.href.includes("/index.php?mod=hermit&submod=travel") || lh || window.location.href.includes("/index.php?mod=hermit&submod=enterUnderworld")) && "true" === sessionStorage.getItem("autoGoActive") && "true" === localStorage.getItem("autoEnterHell")) {
             const b = document.querySelector('span[data-ticker-type="countdown"]');
             if (b) {
                 const c = parseInt(b.getAttribute("data-ticker-time-left"), 10);
                 await new Promise(e => setTimeout(e, c - 7E3 || 358E3))
             } else await new Promise(c => setTimeout(c, 3E5));
-            Gf("mod=overview")
+            Hf("mod=overview")
         }
     } catch (b) {
         E(`Error in underworld wait: ${b.message}`)
     }
-    const sj = "true" === localStorage.getItem("nestSearchType");
-    await async function() {
-        var b = "true" === localStorage.getItem("runNestDungeon");
-        const c = "true" === localStorage.getItem("runNestExpedition"),
-            e = "true" === localStorage.getItem("runNestEvent"),
-            g = "true" === localStorage.getItem("runNestUnderworld");
-        var k = document.querySelector('span[data-ticker-type="countdown"]');
-        if (window.location.href.includes("/index.php?mod=reports") && !k || window.location.href.includes("/index.php?mod=guildMarket") && !k || window.location.href.includes("/index.php?mod=quests") && !k) {
-            localStorage.getItem("NestDelay");
-            k = document.getElementById("blackoutDialog");
-            var h = document.getElementById("blackoutDialognotification");
-            const l = document.getElementById("blackoutDialogLoginBonus");
-            if (null !== k && "none" !== window.getComputedStyle(k).display) {
-                h =
-                    localStorage.getItem("nestSearchType");
-                const q = document.querySelector("#blackoutDialog.loot-modal"),
-                    n = "true" === sessionStorage.getItem("autoGoActive");
-                if (h && q && n && (F() && b || N() && e || M() && c || (JSON.parse(localStorage.getItem("underworld")) || {}).isUnderworld && g || !(b || e || c || g))) {
-                    b = null;
-                    b = k.querySelectorAll(".action_buttons button");
-                    switch (h) {
-                        case "quick":
-                            b = b[1];
-                            E("Quick Search clicked");
-                            break;
-                        case "thorough":
-                            b = b[2];
-                            E("Thorough Search clicked");
-                            break;
-                        case "nothing":
-                            b = b[0];
-                            E("Return to Safety clicked");
-                            break;
-                        default:
-                            b = b[2], E("Thorough Search clicked")
-                    }
-                    b && b.click()
-                }
-            } else null !== l && Ab && !1 === Ab.isUnderworld ? setTimeout(() => {
-                l.getElementsByTagName("input")[0]?.click()
-            }, 100) : null !== h && "none" !== window.getComputedStyle(h).display && setTimeout(() => {
-                const q = document.getElementById("breakDiv");
-                q && q.click()
-            }, 100)
-        }
-    }();
-    const tj = localStorage.getItem("NestDelay") || 250;
-    sj && await new Promise(b => setTimeout(b, tj));
-    let bf = !0;
+    let nh = "true" === localStorage.getItem("nestSearchType");
+    "nothing" !== localStorage.getItem("nestSearchType") && (nh = !0);
+    const uj = localStorage.getItem("NestDelay") || 250;
+    nh && window.location.href.includes("/index.php?mod=reports") && await new Promise(b => setTimeout(b, uj));
+    let cf = !0;
     const bb = new URL(window.location.href);
-    let mh = document.createElement("style");
-    mh.innerHTML = "\n    #logMenu {\n      resize: vertical;\n      overflow: auto;\n      max-height: 500px;\n    }\n  ";
-    document.head.appendChild(mh);
-    let qf = null,
-        rf = 0;
+    let oh = document.createElement("style");
+    oh.innerHTML = "\n    #logMenu {\n      resize: vertical;\n      overflow: auto;\n      max-height: 500px;\n    }\n  ";
+    document.head.appendChild(oh);
+    let rf = null,
+        sf = 0;
     null === localStorage.getItem("HealClothToggle") && localStorage.setItem("HealClothToggle", "false");
     window.location.href.includes("mod=auction") && T();
     const na = JSON.parse(localStorage.getItem("userStats")) || {
@@ -9195,24 +9189,67 @@ function Z(F, M) {
         mm: 0
     };
     let fb;
-    localStorage.getItem("playerId") && Nh((localStorage.getItem("playerId") | 0) % 100 | 0);
+    localStorage.getItem("playerId") && Ph((localStorage.getItem("playerId") | 0) % 100 | 0);
     (function() {
         var b = "true" === localStorage.getItem("MoveButtons");
         let c = document.createElement("button");
-        c.className =
-            "menuitem breathing-light";
+        c.className = "menuitem breathing-light";
         c.innerHTML = "GladBOT License";
         c.setAttribute("id", "lico");
-        c.addEventListener("click", Qh);
-        b ? ((b = document.getElementById("lico")) && b.remove(), c.style.position = "fixed", c.style.left = "13px", c.style.bottom = "60px", c.style.zIndex = "1000", document.body.appendChild(c)) : (b = document.getElementById("mainmenu")) && b.children[0] && b.insertBefore(c, b.children[0]);
+        c.addEventListener("click", Sh);
+        b ? ((b = document.getElementById("lico")) && b.remove(), c.style.position = "fixed", c.style.left = "13px", c.style.bottom = "60px", c.style.zIndex = "1000", document.body.appendChild(c)) : (b = document.getElementById("mainmenu")) &&
+            b.children[0] && b.insertBefore(c, b.children[0]);
         document.head.appendChild(document.createElement("style"))
     })();
+    await async function() {
+        var b = "true" === localStorage.getItem("runNestDungeon");
+        const c = "true" === localStorage.getItem("runNestExpedition"),
+            e = "true" === localStorage.getItem("runNestEvent"),
+            g = "true" === localStorage.getItem("runNestUnderworld");
+        var k = document.querySelector('span[data-ticker-type="countdown"]');
+        if (window.location.href.includes("/index.php?mod=reports") && !k || window.location.href.includes("/index.php?mod=guildMarket") &&
+            !k || window.location.href.includes("/index.php?mod=quests") && !k) {
+            k = document.getElementById("blackoutDialog");
+            var h = document.getElementById("blackoutDialognotification");
+            const l = document.getElementById("blackoutDialogLoginBonus");
+            if (null !== k && "none" !== window.getComputedStyle(k).display) {
+                h = localStorage.getItem("nestSearchType");
+                const q = document.querySelector("#blackoutDialog.loot-modal"),
+                    n = "true" === sessionStorage.getItem("autoGoActive");
+                if (h && q && n && (F() && b || N() && e || M() && c || (JSON.parse(localStorage.getItem("underworld")) || {}).isUnderworld && g || !(b || e || c || g))) {
+                    b = null;
+                    b = k.querySelectorAll(".action_buttons button");
+                    switch (h) {
+                        case "quick":
+                            E("Quick Search clicked");
+                            b = b[1];
+                            break;
+                        case "thorough":
+                            E("Thorough Search clicked");
+                            b = b[2];
+                            break;
+                        case "nothing":
+                            E("Return to Safety clicked");
+                            b = b[0];
+                            break;
+                        default:
+                            E("Thorough Search clicked"), b = b[2]
+                    }
+                    b && b.click()
+                }
+            } else null !== l && Ab && !1 === Ab.isUnderworld ? setTimeout(() => {
+                l.getElementsByTagName("input")[0]?.click()
+            }, 100) : null !== h && "none" !== window.getComputedStyle(h).display && setTimeout(() => {
+                const q = document.getElementById("breakDiv");
+                q && q.click()
+            }, 100)
+        }
+    }();
     if (window.location.href.includes("/index.php?mod=player&p") || window.location.href.includes("/index.php?mod=player&doll")) {
-        var cf =
-            document.querySelector(".playername.ellipsis") || document.querySelector(".playername_achievement.ellipsis"),
-            tb = cf.textContent.trim();
+        var df = document.querySelector(".playername.ellipsis") || document.querySelector(".playername_achievement.ellipsis"),
+            tb = df.textContent.trim();
         if (2 < tb.length) {
-            var df = document.getElementById("char");
+            var ef = document.getElementById("char");
 
             function b(e, g, k, h) {
                 if (null !== document.getElementById("container_start")) {
@@ -9226,44 +9263,44 @@ function Z(F, M) {
                         serverId: q ? q[1] : null,
                         country: n ? n[1] : null
                     };
-                    k = 2 === h ? "arenacrosslist" :
-                        "circuscrosslist";
+                    k = 2 === h ? "arenacrosslist" : "circuscrosslist";
                     var m = 2 === h ? "removeArenaList" : "removeCircusList";
                     q = JSON.parse(nb(k) || "[]");
-                    var t = JSON.parse(nb(m) || "[]");
+                    var r = JSON.parse(nb(m) || "[]");
                     n = q.findIndex(v => v.opponentId === l);
-                    var w = t.findIndex(v => v.opponentId === l); - 1 !== n ? (q.splice(n, 1), -1 === w && (t.push(g), mb(m, JSON.stringify(t), 7)), e.classList.remove("added"), e.setAttribute("data-tooltip", "Add to " + (2 === h ? "Arena" : "Circus"))) : (q.push(g), -1 !== w && (t.splice(w, 1), mb(m, JSON.stringify(t), 7)), e.classList.add("added"), e.setAttribute("data-tooltip", "Remove from " + (2 === h ? "Arena" :
-                        "Circus")));
+                    var w = r.findIndex(v => v.opponentId === l); - 1 !== n ? (q.splice(n, 1), -1 === w && (r.push(g), mb(m, JSON.stringify(r), 7)), e.classList.remove("added"), e.setAttribute("data-tooltip",
+                        "Add to " + (2 === h ? "Arena" : "Circus"))) : (q.push(g), -1 !== w && (r.splice(w, 1), mb(m, JSON.stringify(r), 7)), e.classList.add("added"), e.setAttribute("data-tooltip", "Remove from " + (2 === h ? "Arena" : "Circus")));
                     mb(k, JSON.stringify(q), 7)
-                } else q = JSON.parse(localStorage.getItem(k)) || [], n = q.indexOf(g), -1 !== n ? (q.splice(n, 1), e.classList.remove("added"), e.setAttribute("data-tooltip", "Add to " + ("autoAttackList" === k ? "Arena" : "Circus"))) : (q.push(g), e.classList.add("added"), e.setAttribute("data-tooltip", "Remove from " + ("autoAttackList" === k ? "Arena" : "Circus"))), localStorage.setItem(k, JSON.stringify(q))
+                } else q = JSON.parse(localStorage.getItem(k)) || [], n = q.indexOf(g), -1 !== n ? (q.splice(n, 1), e.classList.remove("added"), e.setAttribute("data-tooltip", "Add to " + ("autoAttackList" === k ? "Arena" : "Circus"))) : (q.push(g), e.classList.add("added"), e.setAttribute("data-tooltip", "Remove from " + ("autoAttackList" ===
+                    k ? "Arena" : "Circus"))), localStorage.setItem(k, JSON.stringify(q))
             }
 
             function c(e, g, k, h, l) {
                 var q = document.createElement("a");
                 q.className = "gladbot-button gladbot-" + e;
-                q.textContent =
-                    g;
+                q.textContent = g;
                 q.setAttribute("data-tooltip", k);
-                df.appendChild(q);
+                ef.appendChild(q);
                 (JSON.parse(localStorage.getItem(h)) || []).includes(tb) && (q.classList.add("added"), q.setAttribute("data-tooltip", "Remove from " + ("autoAttackList" === h ? "Arena" : "Circus")));
                 q.addEventListener("click", function() {
                     b(q, tb, h, l)
                 })
             }
-            c("arena", "A", "GladB: Add to Arena List", "autoAttackList", 2);
+            c("arena", "A", "GladB: Add to Arena List", "autoAttackList",
+                2);
             c("circus", "C", "GladB: Add to Circus List", "autoAttackCircusList", 3)
         }
     }
-    const uj = localStorage.getItem("Username"),
+    const vj = localStorage.getItem("Username"),
         xa = localStorage.getItem("pid");
-    let vj = localStorage.getItem("tkz_lcr");
-    const wj = localStorage.getItem("tkn"),
-        cc = await ta(vj, wj, xa, uj);
+    let wj = localStorage.getItem("tkz_lcr");
+    const xj = localStorage.getItem("tkn"),
+        cc = await ta(wj, xj, xa, vj);
     window.location.href.includes("/index.php?mod") && sessionStorage.setItem("loggedIn", "false");
     if (window.location.href.includes("/index.php?mod=overview")) {
         const b = [3, 4, 5, 2, 9, 10, 6, 7, 11],
             c = [1, 2, 4, 8, 48, 256, 512, 1024];
-        Rh();
+        Th();
         (function() {
             const k = {
                     dbfa266e60c28ce109de4d9c216a2a: "Health - Gingko Leaves",
@@ -9299,7 +9336,8 @@ function Z(F, M) {
                 q = new Set;
             h.forEach(n => {
                 var m = n.querySelector("img");
-                m = (m = m ? m.getAttribute("src") : null) ? m.split("/").pop().split(".")[0] : null;
+                m = (m = m ? m.getAttribute("src") :
+                    null) ? m.split("/").pop().split(".")[0] : null;
                 if (m = k[m])
                     if (n = (n = n.parentElement.querySelector(".ticker")) ? n.getAttribute("data-ticker-time-left") : null) l[m] = {
                         timeLeft: Math.round(Number(n) / 6E4)
@@ -9320,9 +9358,8 @@ function Z(F, M) {
             k.classList.add("tooltip");
             k.appendChild(h);
             k.onclick = async function() {
-                let n =
-                    Array.from(document.querySelectorAll("#char .ui-droppable")).filter(m => b.includes(parseInt(m.dataset.containerNumber, 10) || "0"));
-                for (let m = 0; m < n.length; m++) await new Promise(t => setTimeout(t, 100)), da(n[m], "inv");
+                let n = Array.from(document.querySelectorAll("#char .ui-droppable")).filter(m => b.includes(parseInt(m.dataset.containerNumber, 10) || "0"));
+                for (let m = 0; m < n.length; m++) await new Promise(r => setTimeout(r, 100)), da(n[m], "inv");
                 await new Promise(m => setTimeout(m, 500))
             };
             e.appendChild(k);
@@ -9335,19 +9372,19 @@ function Z(F, M) {
             l.appendChild(q);
             l.onclick = async function() {
                 let n = Array.from(document.querySelectorAll("#inv .ui-draggable")).filter(m => c.includes(parseInt(m.dataset.contentType, 10)));
-                for (let m = 0; m < n.length; m++) await new Promise(t => setTimeout(t, 100)), da(n[m], "char");
+                for (let m = 0; m < n.length; m++) await new Promise(r => setTimeout(r, 100)), da(n[m], "char");
                 await new Promise(m => setTimeout(m, 500))
             };
             e.appendChild(l)
         }
         if (document.getElementById("inv")) {
-            async function k(n, m, t, w, v, x) {
+            async function k(n, m, r, w, v, x) {
                 await jQuery.post(U({
                     mod: "inventory",
                     submod: "move",
                     from: x,
                     fromX: m + 1,
-                    fromY: t + 1,
+                    fromY: r + 1,
                     to: x,
                     toX: w + 1,
                     toY: v + 1,
@@ -9370,12 +9407,12 @@ function Z(F, M) {
             q && (q.insertAdjacentElement("afterend", h), h.insertAdjacentElement("afterend", l));
             h.addEventListener("click", async function() {
                 function n(B,
-                    r, u) {
+                    t, u) {
                     for (let z = 0; 5 > z; z++)
                         for (let A = 0; 8 > A; A++)
                             if (!v[z][A]) {
                                 let I = !0;
-                                for (let H = z; H < z + r && I; H++)
+                                for (let H = z; H < z + t && I; H++)
                                     for (let K = A; K < A + B; K++)
                                         if (5 <= H || 8 <= K || v[H][K]) I = !1;
                                 if (I) {
@@ -9391,7 +9428,7 @@ function Z(F, M) {
                                             y: z - 1
                                         }, {
                                             x: A,
-                                            y: z + r
+                                            y: z + t
                                         }];
                                         for (const H of B)
                                             if (0 <= H.x && 8 > H.x && 0 <= H.y && 5 > H.y && w.find(K => {
@@ -9408,41 +9445,41 @@ function Z(F, M) {
                 }
                 var m = document.getElementById("inv");
                 document.getElementById("sort-button");
-                var t = document.getElementById("loading-indicator");
-                t.textContent = "Sorting...";
-                t.style.display = "inline-block";
+                var r = document.getElementById("loading-indicator");
+                r.textContent = "Sorting...";
+                r.style.display = "inline-block";
                 const w = Array.from(m.getElementsByClassName("ui-draggable"));
-                w.sort((B, r) => {
+                w.sort((B, t) => {
                     const u = parseInt(B.dataset.basis.split("-")[0], 10) || 0,
-                        z = parseInt(r.dataset.basis.split("-")[0], 10) || 0;
-                    return u !== z ? u - z : (parseInt(B.dataset.measurementX, 10) * parseInt(B.dataset.measurementY, 10) || 1) - (parseInt(r.dataset.measurementX, 10) * parseInt(r.dataset.measurementY, 10) || 1)
+                        z = parseInt(t.dataset.basis.split("-")[0], 10) || 0;
+                    return u !== z ? u - z : (parseInt(B.dataset.measurementX, 10) * parseInt(B.dataset.measurementY, 10) || 1) - (parseInt(t.dataset.measurementX, 10) * parseInt(t.dataset.measurementY, 10) || 1)
                 });
                 const v = Array.from({
                     length: 5
                 }, () => Array(8).fill(!1));
                 w.forEach(B => {
-                    const r = parseInt(B.style.left, 10) / 32,
+                    const t = parseInt(B.style.left, 10) / 32,
                         u = parseInt(B.style.top, 10) / 32,
                         z = parseInt(B.dataset.measurementX, 10);
                     B = parseInt(B.dataset.measurementY, 10);
                     for (let A = u; A < u + B; A++)
-                        for (let I = r; I < r + z; I++) v[A][I] = !0
+                        for (let I = t; I < t + z; I++) v[A][I] = !0
                 });
                 for (m = 0; m < w.length; m++) {
                     var x = w[m];
-                    t = parseInt(x.dataset.measurementX, 10);
+                    r = parseInt(x.dataset.measurementX, 10);
                     const B = parseInt(x.dataset.measurementY, 10);
                     var C = x.dataset.basis.split("-")[0];
-                    const r = parseInt(x.style.left, 10) / 32,
+                    const t = parseInt(x.style.left, 10) / 32,
                         u = parseInt(x.style.top, 10) / 32;
-                    var D = n(t, B, C);
-                    if (D && (C = D.x, D = D.y, r !== C || u !== D)) {
-                        await k(x, r, u, C, D,
+                    var D = n(r, B, C);
+                    if (D && (C = D.x, D = D.y, t !== C || u !== D)) {
+                        await k(x, t, u, C, D,
                             x.dataset.containerNumber);
                         for (x = D; x < D + B; x++)
-                            for (let z = C; z < C + t; z++) v[x][z] = !0;
+                            for (let z = C; z < C + r; z++) v[x][z] = !0;
                         for (C = u; C < u + B; C++)
-                            for (x = r; x < r + t; x++) v[C][x] = !1
+                            for (x = t; x < t + r; x++) v[C][x] = !1
                     }
                 }
                 window.location.reload()
@@ -9518,12 +9555,12 @@ function Z(F, M) {
         "99999";
     Pa.style.left = "0";
     cb.appendChild(Pa);
-    const Ja = document.createElement("button");
-    Ja.id = "clearLogsButton";
-    Ja.textContent = "Clear Logs";
-    Kc(Ja, "rgba(221, 213, 180, 0.8)");
-    Pa.appendChild(Ja);
-    Ja.addEventListener("click", function() {
+    const La = document.createElement("button");
+    La.id = "clearLogsButton";
+    La.textContent = "Clear Logs";
+    Kc(La, "rgba(221, 213, 180, 0.8)");
+    Pa.appendChild(La);
+    La.addEventListener("click", function() {
         const b = document.querySelector("#logMenu");
         if (b) {
             for (; b.firstChild;) b.removeChild(b.firstChild);
@@ -9549,9 +9586,9 @@ function Z(F, M) {
             b.sort((e, g) => {
                 e = e.split(" ")[0];
                 g = g.split(" ")[0];
-                return bf ? e.localeCompare(g) : g.localeCompare(e)
+                return cf ? e.localeCompare(g) : g.localeCompare(e)
             });
-            bf = !bf;
+            cf = !cf;
             for (var c = document.querySelector("#logMenu"); c.firstChild;) c.removeChild(c.firstChild);
             for (let e of b) {
                 const g = document.createElement("p");
@@ -9565,11 +9602,11 @@ function Z(F, M) {
         }
     });
     ra.style.transition = "height 0.1s ease";
-    const nh = localStorage.getItem("logMenuVisible"),
-        oh = "true" === localStorage.getItem("disableLogMenu");
-    null === nh ? localStorage.setItem("logMenuVisible", "true") : 1 == oh ? (ra.style.display = "none;", ra.style.height = "0px", ra.style.width = "0px", ra.style.border = "0px", Ja.style.display = "none", Ja.style.height = "0px", Ja.style.width =
-        "0px", Ja.style.border = "0px", Qa.style.display = "none", Qa.style.height = "0px", Qa.style.width = "0px", Qa.style.border = "0px") : "true" === nh ? localStorage.getItem("logMenuHeight") : ra.style.height = "38px";
-    window.location.href.includes("/hub") && (ra.style.display = "none;", ra.style.height = "0px", ra.style.width = "0px", ra.style.border = "0px", Ja.style.display = "none", Ja.style.height = "0px", Ja.style.width = "0px", Ja.style.border = "0px", Qa.style.display = "none", Qa.style.height = "0px", Qa.style.width = "0px", Qa.style.border = "0px");
+    const ph = localStorage.getItem("logMenuVisible"),
+        qh = "true" === localStorage.getItem("disableLogMenu");
+    null === ph ? localStorage.setItem("logMenuVisible", "true") : 1 == qh ? (ra.style.display = "none;", ra.style.height = "0px", ra.style.width = "0px", ra.style.border = "0px", La.style.display = "none", La.style.height = "0px", La.style.width =
+        "0px", La.style.border = "0px", Qa.style.display = "none", Qa.style.height = "0px", Qa.style.width = "0px", Qa.style.border = "0px") : "true" === ph ? localStorage.getItem("logMenuHeight") : ra.style.height = "38px";
+    window.location.href.includes("/hub") && (ra.style.display = "none;", ra.style.height = "0px", ra.style.width = "0px", ra.style.border = "0px", La.style.display = "none", La.style.height = "0px", La.style.width = "0px", La.style.border = "0px", Qa.style.display = "none", Qa.style.height = "0px", Qa.style.width = "0px", Qa.style.border = "0px");
     db.addEventListener("click",
         function() {
             if ("38px" !== ra.style.height) ra.style.height = "38px", localStorage.setItem("logMenuVisible", "false");
@@ -9579,34 +9616,30 @@ function Z(F, M) {
                 localStorage.setItem("logMenuVisible", "true")
             }
         });
-    ra.addEventListener("resize", uf);
-    "38px" !== ra.style.height && uf();
-    if (Ic()) {
-        const b = "true" === localStorage.getItem("MoveButtons");
-        let c = document.getElementById("mainmenu"),
-            e = document.createElement("button");
-        e.id = "autoGoButton";
-        e.className = "customButton";
-        e.innerHTML = `<span style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">${va?
-"&#9724;":"&#9658;"}</span>`;
-        e.addEventListener("click", va ? yf : xf);
-        let g = document.createElement("button");
-        g.className = "customButton2";
-        g.innerHTML = '<span style="position: relative; top: -12px;">&#9881;</span>';
-        g.addEventListener("click", hc);
-        b ? (g.style.position = "fixed", g.style.bottom = "10px", g.style.left = "10px", g.style.zIndex = "1000", e.style.position = "fixed", e.style.bottom = "10px", e.style.left = "105px", e.style.zIndex = "1000", document.body.appendChild(g), document.body.appendChild(e)) : c && (c.insertBefore(g,
-            c.children[0]), c.insertBefore(e, c.children[1]))
-    } else return gb(), !1;
+    ra.addEventListener("resize", vf);
+    "38px" !== ra.style.height && vf();
+// Bu kısımdan lisans doğrulama kontrollerini çıkarıyoruz ve direkt olarak butonları ekliyoruz
+if (Ic()) {
+    const b = "true" === localStorage.getItem("MoveButtons");
+    let c = document.getElementById("mainmenu");
+    if (c) {
+        addButtons(c); // Mainmenu varsa butonları ekle
+    }
+} else {
+    // Mainmenu bulunursa butonları ekleyelim
+    gb();
+}
+;
     (function() {
         try {
-            if ("mod=arena&submod=serverArena&aType=2" == lf || "mod=arena&submod=serverArena&aType=3" == lf) {
+            if ("mod=arena&submod=serverArena&aType=2" == mf || "mod=arena&submod=serverArena&aType=3" == mf) {
                 let l = JSON.parse(localStorage.getItem("autoAttackList")) || [],
                     q = JSON.parse(localStorage.getItem("autoAttackServerList")) || [],
                     n = JSON.parse(localStorage.getItem("autoAttackCircusList")) || [],
                     m = JSON.parse(localStorage.getItem("autoAttackCircusServerList")) || [],
-                    t = [...l, ...q, ...n, ...m].map(w => w.playerName);
+                    r = [...l, ...q, ...n, ...m].map(w => w.playerName);
                 Array.from(document.querySelectorAll("#own2 tr")).forEach(w => {
-                    (w = w.querySelector("a")) && t.includes(w.innerText) && (w.style.color = "orange", w.style.fontWeight = "bold", w.style.textShadow = "1px 1px 2px #000000")
+                    (w = w.querySelector("a")) && r.includes(w.innerText) && (w.style.color = "orange", w.style.fontWeight = "bold", w.style.textShadow = "1px 1px 2px #000000")
                 })
             }
             var b = JSON.parse(nb("arenacrosslist") || "[]"),
@@ -9628,8 +9661,8 @@ function Z(F, M) {
             E("Something is wrong with HandlePlayers")
         }
     })();
-    "mod=overview" == lf && Sh();
-    if ("mod=location" !== lf && "mod=arena" !== lf && 0 == localStorage.getItem("eventPoints_")) {
+    "mod=overview" == mf && Uh();
+    if ("mod=location" !== mf && "mod=arena" !== mf && 0 == localStorage.getItem("eventPoints_")) {
         const b = document.getElementById("ServerQuestTime");
         if (b) {
             const c = b.querySelector("span");
@@ -9654,41 +9687,40 @@ function Z(F, M) {
     localStorage.getItem("doExpedition") && (Fa = "true" === localStorage.getItem("doExpedition") ? !0 : !1);
     let Qc = 0;
     localStorage.getItem("monsterId") && (Qc = Number(localStorage.getItem("monsterId")));
-    let Ka = !0;
-    localStorage.getItem("doDungeon") && (Ka = "true" === localStorage.getItem("doDungeon") ? !0 : !1);
-    10 > ea.level && (Ka = !1);
-    let Hb = "advanced" === localStorage.getItem("dungeonDifficulty") ? "advanced" : "normal",
-        La = !0;
-    localStorage.getItem("doArena") && (La = "true" === localStorage.getItem("doArena") ? !0 : !1);
-    2 > ea.level && (La = !1);
-    let zf = "min";
-    localStorage.getItem("arenaOpponentLevel") && (zf = localStorage.getItem("arenaOpponentLevel"));
-    let Ma = !0;
-    localStorage.getItem("doCircus") && (Ma = "true" === localStorage.getItem("doCircus") ?
-        !0 : !1);
-    10 > ea.level && (Ma = !1);
-    let Af = "min";
-    localStorage.getItem("circusOpponentLevel") && (Af = localStorage.getItem("circusOpponentLevel"));
     let Ga = !0;
-    localStorage.getItem("doEventExpedition") && (Ga = "true" === localStorage.getItem("doEventExpedition") ? !0 : !1);
+    localStorage.getItem("doDungeon") && (Ga = "true" === localStorage.getItem("doDungeon") ? !0 : !1, bf && (Ga = !1));
+    10 > ea.level && (Ga = !1);
+    let Hb = "advanced" === localStorage.getItem("dungeonDifficulty") ? "advanced" : "normal",
+        Ha = !0;
+    localStorage.getItem("doArena") && (Ha = "true" === localStorage.getItem("doArena") ? !0 : !1, bf && "false" === localStorage.getItem("EnableArenaHell") && (Ha = !1));
+    2 > ea.level && (Ha = !1);
+    let Af = "min";
+    localStorage.getItem("arenaOpponentLevel") && (Af = localStorage.getItem("arenaOpponentLevel"));
+    let Ma = !0;
+    localStorage.getItem("doCircus") && (Ma = "true" === localStorage.getItem("doCircus") ? !0 : !1);
+    10 > ea.level && (Ma = !1);
+    let Bf = "min";
+    localStorage.getItem("circusOpponentLevel") && (Bf = localStorage.getItem("circusOpponentLevel"));
+    let Ia = !0;
+    localStorage.getItem("doEventExpedition") && (Ia = "true" === localStorage.getItem("doEventExpedition") ? !0 : !1);
     try {
-        document.getElementById("submenu2").getElementsByClassName("menuitem glow")[0] || (Ga = !1)
+        document.getElementById("submenu2").getElementsByClassName("menuitem glow")[0] || (Ia = !1)
     } catch {}
     let ic = 0;
     localStorage.getItem("eventMonsterId") && (ic = Number(localStorage.getItem("eventMonsterId")));
     let hb = !1;
-    localStorage.getItem("AutoAuction") && (hb =
-        "true" === localStorage.getItem("AutoAuction") ? !0 : !1);
+    localStorage.getItem("AutoAuction") && (hb = "true" === localStorage.getItem("AutoAuction") ? !0 : !1);
     localStorage.getItem("DoOther") && localStorage.getItem("DoOther");
     let pb = !1;
     localStorage.getItem("doKasa") && (pb = "true" === localStorage.getItem("doKasa") ? !0 : !1);
-    const qj = [{
+    const sj = [{
         name: "expedition",
         enabled: Fa,
         il: "#cooldown_bar_text_expedition",
         fm: () => {
             var b = document.getElementById("cooldown_bar_expedition");
-            return b && "none" !== b.style.display ? (b = b.querySelector(".cooldown_bar_text")) && !b.classList.contains("ticker") : !1
+            return b && "none" !== b.style.display ? (b = b.querySelector(".cooldown_bar_text")) && !b.classList.contains("ticker") :
+                !1
         },
         im: () => {
             var b = document.getElementById("cooldown_bar_expedition");
@@ -9698,7 +9730,7 @@ function Z(F, M) {
         }
     }, {
         name: "dungeon",
-        enabled: Ka,
+        enabled: Ga,
         il: "#cooldown_bar_text_dungeon",
         fm: () => {
             var b = document.getElementById("cooldown_bar_dungeon");
@@ -9707,12 +9739,13 @@ function Z(F, M) {
         im: () => {
             var b = document.getElementById("cooldown_bar_dungeon");
             if (!b) return !1;
-            (b = b.querySelector(".cooldown_bar_link")) && b.click();
+            (b = b.querySelector(".cooldown_bar_link")) &&
+            b.click();
             return !!b
         }
     }, {
         name: "arena",
-        enabled: La,
+        enabled: Ha,
         il: "#cooldown_bar_text_arena",
         fm: () => {
             var b = document.getElementById("cooldown_bar_arena");
@@ -9730,8 +9763,7 @@ function Z(F, M) {
         il: "#cooldown_bar_text_ct",
         fm: () => {
             var b = document.getElementById("cooldown_bar_ct");
-            return b && "none" !== b.style.display ? (b = b.querySelector(".cooldown_bar_text")) &&
-                !b.classList.contains("ticker") : !1
+            return b && "none" !== b.style.display ? (b = b.querySelector(".cooldown_bar_text")) && !b.classList.contains("ticker") : !1
         },
         im: () => {
             var b = document.getElementById("cooldown_bar_ct");
@@ -9741,13 +9773,14 @@ function Z(F, M) {
         }
     }, {
         name: "eventExpedition",
-        enabled: Ga,
+        enabled: Ia,
         il: null,
-        fm: () => Ga && nf("eventPoints") && ea.o > (Number(localStorage.getItem("healPercentage")) || 25),
+        fm: () => Ia && of("eventPoints") && ea.o > (Number(localStorage.getItem("healPercentage")) || 25),
         im: () => {
             try {
                 const b = document.getElementById("submenu2")?.getElementsByClassName("menuitem glow")[0];
-                if (b) return b.click(), !0
+                if (b) return b.click(),
+                    !0
             } catch (b) {}
             return !1
         }
@@ -9756,42 +9789,42 @@ function Z(F, M) {
     switch (localStorage.getItem("settings.language")) {
         case "EN":
             d = {
-                ...Fh
+                ...Hh
             };
             break;
         case "PL":
             d = {
-                ...Gh
+                ...Ih
             };
             break;
         case "ES":
             d = {
-                ...Hh
+                ...Jh
             };
             break;
         case "TR":
             d = {
-                ...Ih
+                ...Kh
             };
             break;
         case "FR":
             d = {
-                ...Jh
+                ...Lh
             };
             break;
         case "HG":
             d = {
-                ...Kh
+                ...Mh
             };
             break;
         case "BR":
             d = {
-                ...Lh
+                ...Nh
             };
             break;
         default:
             d = {
-                ...Fh
+                ...Hh
             }
     }
     if (!window.location.href.includes("lobby") && aa.player.Ed < new Date) sessionStorage.setItem("autoGoActive", "false"), gb();
@@ -9799,12 +9832,12 @@ function Z(F, M) {
         if ("true" === localStorage.getItem("activateAuction2")) {
             function b(n) {
                 n.style.position = "flex";
-                n.style.width = "150px";
+                n.style.width =
+                    "150px";
                 n.style.marginLeft = "8px";
                 n.style.marginTop = "10px";
                 n.style.height = "16px";
-                n.style.backgroundColor =
-                    "rgba(221, 213, 180, 0.8)";
+                n.style.backgroundColor = "rgba(221, 213, 180, 0.8)";
                 n.style.border = "1px solid #c4ac70";
                 n.style.padding = "10px";
                 n.style.borderRadius = "10px";
@@ -9817,13 +9850,13 @@ function Z(F, M) {
             c.id = "auctionMPopup";
             b(c, "calc(55px + 200px + 100px + 10px + 10px + -5px)");
             c.addEventListener("click", async () => {
-                Gf("mod=auction&ttype=3")
+                Hf("mod=auction&ttype=3")
             });
             const e = document.createElement("div");
             e.id = "auctionPopup";
             b(e, "calc(100px + 200px + 100px + 10px)");
             e.addEventListener("click", async () => {
-                Gf("mod=auction")
+                Hf("mod=auction")
             });
 
             function g(n, m) {
@@ -9835,10 +9868,10 @@ function Z(F, M) {
             cb.appendChild(c);
             const l = localStorage.getItem("auctionStatus"),
                 q = localStorage.getItem("auctionMStatus");
-            null !== l ? (k.textContent = g(parseInt(l, 10), "Gladiator"), e.appendChild(k), e.style.display = "block") : e.style.display = "none";
-            null !== q ? (h.textContent = g(parseInt(q, 10), "Mercenary"), c.appendChild(h),
-                c.style.display = "block") : c.style.display = "none";
-            oh && (e.style.display = "none", e.style.height = "0px", c.style.display = "none", c.style.height = "0px")
+            null !== l ? (k.textContent = g(parseInt(l, 10), "Gladiator"), e.appendChild(k), e.style.display =
+                "block") : e.style.display = "none";
+            null !== q ? (h.textContent = g(parseInt(q, 10), "Mercenary"), c.appendChild(h), c.style.display = "block") : c.style.display = "none";
+            qh && (e.style.display = "none", e.style.height = "0px", c.style.display = "none", c.style.height = "0px")
         }
         var wc = localStorage.getItem("savedLogs");
         wc && (wc = JSON.parse(wc), wc.forEach(b => {
@@ -9852,7 +9885,7 @@ function Z(F, M) {
         var za = {
                 async start() {
                     return new Promise(() => {
-                        za.ol = Ch().gold;
+                        za.ol = Eh().gold;
                         za.form = document.querySelectorAll("#auction_table form");
                         za.I = [];
                         const b = localStorage.getItem("auctiongladiatorenable"),
@@ -9864,50 +9897,50 @@ function Z(F, M) {
                             l = localStorage.getItem("auctionminlevel") || 0;
                         let q = "true" === localStorage.getItem("enableMercenarySearch");
                         const n = JSON.parse(localStorage.getItem("Timers")),
-                            m = async (w, v) => {
+                            m = async (w,
+                                v) => {
                                 try {
                                     E(`${d.wf}`);
                                     const x = await (await fetch(w)).text(),
                                         C = (new DOMParser).parseFromString(x, "text/html");
                                     await za.fo(C);
-                                    0 < za.I.length ?
-                                        (E(`${d.xf}`), "auction" === v ? await za.dn(2, za.I.length) : await za.dn(3, za.I.length)) : ("auction" === v ? Z("auction", n.AuctionCheck || 10) : Z("auctionM", n.AuctionCheck || 10), window.location.reload());
+                                    0 < za.I.length ? (E(`${d.xf}`), "auction" === v ? await za.dn(2, za.I.length) : await za.dn(3, za.I.length)) : ("auction" === v ? Z("auction", n.AuctionCheck || 10) : Z("auctionM", n.AuctionCheck || 10), window.location.reload());
                                     1 != localStorage.getItem("AuctionTurbo") && Z("AuctionEmpty", 1)
                                 } catch (x) {
                                     window.location.reload()
                                 }
-                            }, t = async () => {
+                            }, r = async () => {
                                 var w = JSON.parse(localStorage.getItem("auctionPrefixes")) || [];
-                                let v = JSON.parse(localStorage.getItem("auctionSuffixes")) || [],
+                                let v =
+                                    JSON.parse(localStorage.getItem("auctionSuffixes")) || [],
                                     x;
                                 var C = (new URL(window.location.href)).origin;
                                 try {
-                                    1 === w.length ? x = Yb(w[0]) : 1 ===
-                                        v.length && (x = Yb(v[0]))
+                                    1 === w.length ? x = Yb(w[0]) : 1 === v.length && (x = Yb(v[0]))
                                 } catch (D) {
                                     x = ""
                                 }
-                                if (q && Number(k) >= Number(g) && nf("auction") || "true" == e && Number(k) >= Number(g) && nf("auction")) lf != `mod=auction&itemType=0&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=0&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction"));
-                                else if ((1 == w.length || 1 == v.length) && "true" == b && Number(k) >= Number(g) && "false" == e && nf("auction")) w = `mod=auction&qry=${encodeURIComponent(x)}&itemType=0&itemLevel=${l}`, lf !== w && (C = `${C}/game/index.php?${w}&sh=${W("sh")}`, m(C, "auction"));
-                                else if (q &&
-                                    Number(k) >= Number(g) && "true" == e && nf("auction")) lf != `mod=auction&itemType=0&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=0&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction"));
-                                else if ((1 == w.length || 1 == v.length) && "true" == c && Number(h) >= Number(g) && "false" == e && nf("auctionM")) lf != `mod=auction&qry=${encodeURIComponent(x)}&itemType=0&ttype=3&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&qry=${x}&itemType=0&ttype=3&itemLevel=${l}&sh=${W("sh")}`, m(C, "auctionM"));
-                                else if (("true" === b || "true" ===
-                                        e) && !q && Number(k) >= Number(g) && nf("auction"))
-                                    if ("true" === e && 1 > w.length && 1 > v.length) lf != `mod=auction&itemType=7&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=7&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction"));
+                                if (q && Number(k) >= Number(g) && of("auction") || "true" == e && Number(k) >= Number(g) && of("auction")) mf != `mod=auction&itemType=0&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=0&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction"));
+                                else if ((1 == w.length || 1 == v.length) && "true" == b && Number(k) >= Number(g) && "false" == e && of("auction")) w = `mod=auction&qry=${encodeURIComponent(x)}&itemType=0&itemLevel=${l}`,
+                                    mf !== w && (C = `${C}/game/index.php?${w}&sh=${W("sh")}`, m(C, "auction"));
+                                else if (q && Number(k) >= Number(g) && "true" == e && of("auction")) mf != `mod=auction&itemType=0&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=0&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction"));
+                                else if ((1 == w.length || 1 == v.length) && "true" == c && Number(h) >= Number(g) && "false" == e && of("auctionM")) mf != `mod=auction&qry=${encodeURIComponent(x)}&itemType=0&ttype=3&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&qry=${x}&itemType=0&ttype=3&itemLevel=${l}&sh=${W("sh")}`,
+                                    m(C, "auctionM"));
+                                else if (("true" === b || "true" === e) && !q && Number(k) >= Number(g) && of("auction"))
+                                    if ("true" === e && 1 > w.length && 1 > v.length) mf != `mod=auction&itemType=7&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=7&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction"));
                                     else {
-                                        if (("true" === b || "true" === e) && !q && Number(k) >= Number(g) && nf("auction"))
-                                            if ("true" === e && "false" === b && (0 < w.length || 0 < v.length)) lf != `mod=auction&itemType=7&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=7&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction"));
-                                            else if ("true" ===
-                                            e && (0 < w.length || 0 < v.length)) lf != `mod=auction&itemType=0&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=0&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction"));
-                                        else if (lf != `mod=auction&itemType=0&itemLevel=${l}` && 0 < w.length || lf != `mod=auction&itemType=0&itemLevel=${l}` && 0 < v.length) C = `${C}/game/index.php?mod=auction&itemType=0&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction")
+                                        if (("true" === b || "true" === e) && !q && Number(k) >= Number(g) && of("auction"))
+                                            if ("true" === e && "false" === b && (0 < w.length || 0 < v.length)) mf != `mod=auction&itemType=7&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=7&itemLevel=${l}&sh=${W("sh")}`,
+                                                m(C, "auction"));
+                                            else if ("true" === e && (0 < w.length || 0 < v.length)) mf != `mod=auction&itemType=0&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=0&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction"));
+                                        else if (mf != `mod=auction&itemType=0&itemLevel=${l}` && 0 < w.length || mf != `mod=auction&itemType=0&itemLevel=${l}` && 0 < v.length) C = `${C}/game/index.php?mod=auction&itemType=0&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction")
                                     }
-                                else if ("true" == c && Number(h) >= Number(g) && (0 < w.length || 0 < v.length) && nf("auctionM")) {
-                                    if (lf != `mod=auction&itemType=0&ttype=3&itemLevel=${l}` &&
-                                        0 < w.length || lf != `mod=auction&itemType=0&ttype=3&itemLevel=${l}` && 0 < v.length) C = `${C}/game/index.php?mod=auction&itemType=0&ttype=3&itemLevel=${l}&sh=${W("sh")}`, m(C, "auctionM")
-                                } else q ? lf != `mod=auction&itemType=15&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=15&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction")) : setTimeout(t, 3E3)
+                                else if ("true" == c && Number(h) >= Number(g) && (0 < w.length || 0 < v.length) && of("auctionM")) {
+                                    if (mf !=
+                                        `mod=auction&itemType=0&ttype=3&itemLevel=${l}` && 0 < w.length || mf != `mod=auction&itemType=0&ttype=3&itemLevel=${l}` && 0 < v.length) C = `${C}/game/index.php?mod=auction&itemType=0&ttype=3&itemLevel=${l}&sh=${W("sh")}`, m(C, "auctionM")
+                                } else q ? mf != `mod=auction&itemType=15&itemLevel=${l}` && (C = `${C}/game/index.php?mod=auction&itemType=15&itemLevel=${l}&sh=${W("sh")}`, m(C, "auction")) : setTimeout(r, 3E3)
                             };
-                        t()
+                        r()
                     })
                 },
                 eo(b) {
@@ -9930,14 +9963,14 @@ function Z(F, M) {
                             q = localStorage.getItem("maximumBid"),
                             n = localStorage.getItem("auctiongladiatorenable"),
                             m = localStorage.getItem("auctionmercenaryenable"),
-                            t = Ba(b),
+                            r = Ba(b),
                             w = localStorage.getItem("auctionMinQuality") || 0,
                             v = localStorage.getItem("bidFood"),
                             x = parseInt(Ea(b).split("-")[0], 10),
                             C = 15 == x ? parseInt(b.getAttribute("data-tooltip").split(",")[7].match(/\d+/)[0], 10) : 0,
                             D = 15 == x ? parseInt(b.getAttribute("data-tooltip").split(",")[9].match(/\d+/)[0], 10) : 0,
                             B = 15 == x ? parseInt(b.getAttribute("data-tooltip").split(",")[15].match(/\d+/)[0], 10) : 0,
-                            r = !1,
+                            t = !1,
                             u = "true" === localStorage.getItem("enableMercenarySearch"),
                             z = parseInt(localStorage.getItem("minDexterity"), 10) || 0,
                             A = parseInt(localStorage.getItem("minAgility"),
@@ -9956,20 +9989,20 @@ function Z(F, M) {
                             return ca.endsWith(" " + fa) || ca === fa ? K = !0 : !1
                         });
                         if ("true" === Y) {
-                            if (H || K) r = !0
-                        } else if (H && K || H && 0 === O.length || K && 0 === L.length) r = !0;
+                            if (H || K) t = !0
+                        } else if (H && K || H && 0 === O.length || K && 0 === L.length) t = !0;
                         "string" === typeof h &&
                             (h = [h]);
                         null == w && (w = 5);
-                        r = r && 0 === l.length || r && l.includes("9999") || r && l.some(fa => h.includes(fa)) ? !0 : !1;
-                        "true" === v && 7 == x && g < ea.gold && (r = !0);
-                        if (Number(t) < w) {
-                            if ("true" !== v || 7 != x) r = !1
-                        } else "true" === v && 7 == x && (r = !0);
-                        "false" !== n || "false" !== m || "true" === v && 7 == x || (r = !1);
+                        t = t && 0 === l.length || t && l.includes("9999") || t && l.some(fa => h.includes(fa)) ? !0 : !1;
+                        "true" === v && 7 == x && g < ea.gold && (t = !0);
+                        if (Number(r) < w) {
+                            if ("true" !== v || 7 != x) t = !1
+                        } else "true" === v && 7 == x && (t = !0);
+                        "false" !== n || "false" !== m || "true" === v && 7 == x || (t = !1);
                         1E3 > ea.gold && (Z("AuctionEmpty", 1), Z("AuctionMEmpty", 1));
-                        c && u && 15 == x && Number(g) < Number(q) && (0 == z || C >= z) && (0 == A || D >= A) && (0 == I || B >= I) && (r = !0);
-                        r && c && Number(g) < Number(q) && this.I.push([{
+                        c && u && 15 == x && Number(g) < Number(q) && (0 == z || C >= z) && (0 == A || D >= A) && (0 == I || B >= I) && (t = !0);
+                        t && c && Number(g) < Number(q) && this.I.push([{
                                 itemLevel: vb(b),
                                 itemName: k,
                                 basis: Ea(b),
@@ -10058,8 +10091,8 @@ function Z(F, M) {
                     var c = "513";
                     c = (c = localStorage.getItem("smeltTab")) ? (513 + parseInt(c, 10)).toString() : "513";
                     c = document.querySelector(`[data-bag-number="${c}"]`);
-                    if ("mod=forge&submod=smeltery" != lf) Gf("mod=forge&submod=smeltery");
-                    else if (c.classList.contains("current") && of()) {
+                    if ("mod=forge&submod=smeltery" != mf) Hf("mod=forge&submod=smeltery");
+                    else if (c.classList.contains("current") && pf()) {
                         this.slots = await this.u();
                         const e = this.slots.filter(h => "closed" === h["forge_slots.state"]);
                         this.Vm(this.slots);
@@ -10075,7 +10108,7 @@ function Z(F, M) {
                                 }
                                 of c) try {
                                 if (b) {
-                                    const n = await xj.Wo(h);
+                                    const n = await yj.Wo(h);
                                     if (n && 0 != n) try {
                                         await ja.vm(l, n, q, h)
                                     } catch {
@@ -10088,7 +10121,7 @@ function Z(F, M) {
                             window.location.reload()
                         } else 1 > c.length && 1 == k ? (E("No items to smelt, reloading page"), Z("smelt", g.SmeltingNoItem || 10), window.location.reload()) : 0 < e.length ? await this.pickItems() : 0 < e.length && "true" === localStorage.getItem("smelteverything3") ? ja.move() : (E("No free slots, reloading page"), Z("smelt", g.SmeltingNoItem ||
                             10), window.location.reload())
-                    } else c.click(), of(() => this.start())
+                    } else c.click(), pf(() => this.start())
                 },
                 Uo(b, c) {
                     b = JSON.parse(localStorage.getItem("smeltedItems")) || [];
@@ -10184,9 +10217,9 @@ function Z(F, M) {
                                 } [e];
                                 if (m) {
                                     var l = Array.from(document.querySelectorAll("#inventory_nav a.awesome-tabs"));
-                                    const t = l.findIndex(v => v.classList.contains("current")),
-                                        w = l.slice(t).concat(l.slice(0,
-                                            t));
+                                    const r = l.findIndex(v => v.classList.contains("current")),
+                                        w = l.slice(r).concat(l.slice(0,
+                                            r));
                                     g = !1;
                                     h = null;
                                     for (l = 0; l < w.length; l++) {
@@ -10224,7 +10257,7 @@ function Z(F, M) {
                                 } else E("Proceeding to smelt without a hammer.")
                             }
                         } catch (m) {}
-                        if (q < Ch().gold) await jQuery.post(U({
+                        if (q < Eh().gold) await jQuery.post(U({
                             mod: "forge",
                             submod: "rent",
                             mode: "smelting",
@@ -10257,7 +10290,7 @@ function Z(F, M) {
                         sh: W("sh")
                     });
                     e = JSON.parse(e).slots[b].formula.rent[2];
-                    e < Ch().gold ? jQuery.post(U({
+                    e < Eh().gold ? jQuery.post(U({
                         mod: "forge",
                         submod: "rent",
                         mode: "smelting",
@@ -10391,7 +10424,7 @@ function Z(F, M) {
                         for (let m of b) {
                             if (!1 === m.isEnabled) continue;
                             if ("isUnderworldItem" !== m.condition && 2 > m.prefix.length && 2 > m.suffix.length) continue;
-                            let t = [];
+                            let r = [];
                             var l = "";
                             "nameContains" === m.condition && 2 < m.prefix.length && "" !== m.prefix.trim() ? l = m.prefix.trim() : !m.prefix && "nameContains" === m.condition && 2 < m.suffix.length &&
                                 "" !== m.suffix.trim() && (l = m.suffix.trim());
@@ -10409,9 +10442,9 @@ function Z(F, M) {
                                 k && x.sort((C, D) => w[D] - w[C]);
                                 x.forEach(C => {
                                     C = w[C];
-                                    void 0 !== C && t.push(C)
+                                    void 0 !== C && r.push(C)
                                 })
-                            } else t = Object.values(w), k && t.sort((x, C) => C - x);
+                            } else r = Object.values(w), k && r.sort((x, C) => C - x);
                             var q = {
                                     2: 1,
                                     4: 2,
@@ -10425,11 +10458,11 @@ function Z(F, M) {
                                 n = 0;
                             const v = [];
                             if (2 < l.length) {
-                                for (let x of t)
+                                for (let x of r)
                                     for (let C of m.itemTypes) {
                                         const D = q[C];
-                                        await new Promise(r =>
-                                            setTimeout(r, 400));
+                                        await new Promise(t =>
+                                            setTimeout(t, 400));
                                         const B = await this.nn(1, x, l, D);
                                         v.push(...B);
                                         5 <= n && (localStorage.setItem("smelt.timeOut", 0), window.location.reload())
@@ -10451,24 +10484,24 @@ function Z(F, M) {
                             } else if ("isUnderworldItem" === m.condition) {
                                 E("Looking for underworld items...");
                                 n = 0;
-                                for (let x of t) {
+                                for (let x of r) {
                                     if (5 <=
                                         n) break;
                                     const C = await this.pm(x);
                                     l = [];
                                     for (q = 1; q <= Math.min(C, 5); q++) l.push(q);
                                     for (q = 0; q < l.length && !(5 <= n); q += 2) {
-                                        const D = l.slice(q, q + 2).map(async r => {
+                                        const D = l.slice(q, q + 2).map(async t => {
                                                 try {
-                                                    return await this.nn(r, x)
+                                                    return await this.nn(t, x)
                                                 } catch (u) {
                                                     return []
                                                 }
                                             }),
                                             B = await Promise.all(D);
-                                        for (let r of B) {
+                                        for (let t of B) {
                                             if (5 <= n) break;
-                                            for (let u of r) {
+                                            for (let u of t) {
                                                 const z = u.item;
                                                 let A = this.qm(z, m);
                                                 if (A && (ja.g.push({
@@ -10485,7 +10518,7 @@ function Z(F, M) {
                         }
                         if (!h && "true" === localStorage.getItem("smeltAnything")) {
                             const m = c.itemTypes || [],
-                                t = c.hammerState ||
+                                r = c.hammerState ||
                                 "none",
                                 w = {
                                     white: "-1",
@@ -10504,11 +10537,11 @@ function Z(F, M) {
                                 for (let D of C) {
                                     if (5 <= b) break;
                                     const B = D.item,
-                                        r = Fb(B),
+                                        t = Fb(B),
                                         u = parseInt(Ba(B), 10),
                                         z = new Set(JSON.parse(localStorage.getItem("playerEquipmentIDs") || "[]")),
                                         A = new Set(JSON.parse(localStorage.getItem("mercenaryEquipmentIDs") || "[]"));
-                                    if (!z.has(r) && !A.has(r)) {
+                                    if (!z.has(t) && !A.has(t)) {
                                         if (Ca.colors && 0 < Ca.colors.length) {
                                             const I = {
                                                     white: -1,
@@ -10524,7 +10557,7 @@ function Z(F, M) {
                                         m.includes(B.getAttribute("data-content-type")) && (ja.g.push({
                                             item: B,
                                             id: D.id,
-                                            hammerState: t
+                                            hammerState: r
                                         }), b++, h = !0)
                                     }
                                 }
@@ -10605,8 +10638,8 @@ function Z(F, M) {
                         const m = n.querySelector("input").value;
                         if (q = jQuery(n).find(".ui-draggable")[0]) {
                             n = Fb(q);
-                            var t = q.getAttribute("data-content-type");
-                            g.some(w => w.id === m) || h.has(n) || l.has(n) || k.includes(t) && g.push({
+                            var r = q.getAttribute("data-content-type");
+                            g.some(w => w.id === m) || h.has(n) || l.has(n) || k.includes(r) && g.push({
                                 item: q,
                                 id: m
                             })
@@ -10645,8 +10678,8 @@ function Z(F, M) {
                     b.getAttribute("data-level");
                     m = wb(m, n);
                     n = new Set(JSON.parse(localStorage.getItem("playerEquipmentIDs") || "[]"));
-                    const t = new Set(JSON.parse(localStorage.getItem("mercenaryEquipmentIDs") || "[]"));
-                    if (n.has(k) || t.has(k)) return !1;
+                    const r = new Set(JSON.parse(localStorage.getItem("mercenaryEquipmentIDs") || "[]"));
+                    if (n.has(k) || r.has(k)) return !1;
                     for (let w of e)
                         if (n = w.hammerState || "none", !1 !== w.isEnabled && this.no(b, w, {
                                 itemName: k,
@@ -10761,14 +10794,14 @@ function Z(F, M) {
                     }
                 }
             };
-        window.location.href.includes("index.php?mod=mysterybox") && (Uh(), Vh());
+        window.location.href.includes("index.php?mod=mysterybox") && (Wh(), Xh());
         window.location.href.includes("/index.php?mod=forge&submod=smeltery") && (ja.init(),
             ja.slots = await ja.u(), await ja.Vm(ja.slots), "true" == localStorage.getItem("activateSmeltMode") && ja.bn());
         try {
             window.location.href.includes("/index.php?mod=location&submod=serverQuest") && (window.location.href.includes("submod=serverQuestHighscore&loc=hadrians_wall") || localStorage.setItem("eventPoints_", parseInt(document.querySelectorAll(".section-header p")[1].innerText.match(/\d+/g)[0], 10)))
         } catch {
             localStorage.setItem("doEventExpedition", !1);
-            Gf("mod=overview");
+            Hf("mod=overview");
             return
         }
         try {
@@ -10782,10 +10815,10 @@ function Z(F, M) {
                 }
             }
         } catch {
-            Gf("mod=overview");
+            Hf("mod=overview");
             return
         }
-        var yj = {
+        var zj = {
                 async start() {
                     const b = await Promise.all([new Promise(c => {
                         jQuery.get(G({
@@ -10810,7 +10843,7 @@ function Z(F, M) {
                     b[1] && Z("CheckDolls", 1)
                 }
             },
-            ef = {
+            ff = {
                 async check(b = !1) {
                     return new Promise(async c => {
                         await new Promise(e => {
@@ -10828,7 +10861,7 @@ function Z(F, M) {
                     })
                 },
                 async start() {
-                    if ("mod=costumes" != lf) Gf("mod=costumes");
+                    if ("mod=costumes" != mf) Hf("mod=costumes");
                     else {
                         let e = localStorage.getItem("costumeUnderworld"),
                             g = localStorage.getItem("costumeUnderworld");
@@ -10842,17 +10875,17 @@ function Z(F, M) {
                         b = ["9", "10", "11"];
                         const m = JSON.parse(localStorage.getItem("underworld"));
                         for (var c of b) try {
-                            const t = h[Number(c) - 1].querySelector(".costumes_button_single").getAttribute("onclick");
-                            if (t && !t.includes("dropCostume")) {
+                            const r = h[Number(c) - 1].querySelector(".costumes_button_single").getAttribute("onclick");
+                            if (r && !r.includes("dropCostume")) {
                                 l = !0;
                                 break
                             }
-                        } catch (t) {}
+                        } catch (r) {}
                         0 < h.length && null !== n && (c = Number(n) - 1, 0 <= c && c < h.length && (c = h[c].querySelector(".costumes_button_single") || h[c].querySelector(".costumes_button_active_single")) &&
                             (q = c.getAttribute("onclick")));
                         ["9", "10", "11"].includes(e) && q && q.includes("dropCostume") ? (b = !0, m.mj = !0, localStorage.setItem("underworld", JSON.stringify(m)), Z("CheckDolls", 15)) : (b = !1, m.mj = !1, localStorage.setItem("underworld", JSON.stringify(m)));
                         b ? (Z("CheckDolls", 30), window.location.reload()) : await this.check(async () => {
-                            let t = [];
+                            let r = [];
                             if (k) {
                                 let w = 0;
                                 const v = ["9", "10", "11"];
@@ -10862,22 +10895,22 @@ function Z(F, M) {
                                         l = !0;
                                         const D = Number(n) - 1;
                                         0 <= D && D < h.length && (l = h[D].querySelector(".costumes_button_single") || h[D].querySelector(".costumes_button_active_single") ? !0 : !1);
-                                        if (l && "9" === g && 2 >= Number(Ch().Ha)) {
-                                            t.push({
+                                        if (l && "9" === g && 2 >= Number(Eh().Ha)) {
+                                            r.push({
                                                 doll: 1,
                                                 setId: Number(g) + 2
                                             });
                                             break
                                         }
-                                        if (l && "10" === g && 2 >= Number(Ch().oo)) {
-                                            t.push({
+                                        if (l && "10" === g && 2 >= Number(Eh().oo)) {
+                                            r.push({
                                                 doll: 1,
                                                 setId: Number(g) + 2
                                             });
                                             break
                                         }
                                         if (l && "11" === g) {
-                                            t.push({
+                                            r.push({
                                                 doll: 1,
                                                 setId: Number(g) + 2
                                             });
@@ -10893,25 +10926,51 @@ function Z(F, M) {
                                 if (!l) {
                                     const w = h[Number(localStorage.getItem("costumeBasic") - 1)].querySelector("#costumes_button_left input"),
                                         v = w.getAttribute("onclick");
-                                    w.classList.contains("disabled") || v.includes("dropCostume") || t.push({
+                                    w.classList.contains("disabled") || v.includes("dropCostume") || (12 === Number(localStorage.getItem("costumeBasic")) ? r.push({
+                                        doll: 1,
+                                        setId: localStorage.getItem("costumeBasic") - 3
+                                    }) : 13 === Number(localStorage.getItem("costumeBasic")) ? r.push({
+                                        doll: 1,
+                                        setId: localStorage.getItem("costumeBasic") - 3
+                                    }) : 14 === Number(localStorage.getItem("costumeBasic")) ? r.push({
+                                        doll: 1,
+                                        setId: localStorage.getItem("costumeBasic") - 3
+                                    }) : 15 === Number(localStorage.getItem("costumeBasic")) ? r.push({
+                                        doll: 1,
+                                        setId: localStorage.getItem("costumeBasic") -
+                                            3
+                                    }) : r.push({
                                         doll: 1,
                                         setId: localStorage.getItem("costumeBasic")
-                                    });
+                                    }));
                                     if (8 >= Number(localStorage.getItem("costumeDungeon"))) {
                                         const x = h[Number(localStorage.getItem("costumeDungeon") - 1)].querySelector("#costumes_button_right input"),
                                             C = x.getAttribute("onclick");
-                                        x.classList.contains("disabled") || C.includes("dropCostume") || t.push({
+                                        x.classList.contains("disabled") || C.includes("dropCostume") || (12 === Number(localStorage.getItem("costumeDungeon")) ? r.push({
+                                            doll: 2,
+                                            setId: localStorage.getItem("costumeDungeon") - 3
+                                        }) : 13 === Number(localStorage.getItem("costumeDungeon")) ? r.push({
+                                            doll: 2,
+                                            setId: localStorage.getItem("costumeDungeon") -
+                                                3
+                                        }) : 14 === Number(localStorage.getItem("costumeDungeon")) ? r.push({
+                                            doll: 2,
+                                            setId: localStorage.getItem("costumeDungeon") - 3
+                                        }) : 15 === Number(localStorage.getItem("costumeDungeon")) ? r.push({
+                                            doll: 2,
+                                            setId: localStorage.getItem("costumeDungeon") - 3
+                                        }) : r.push({
                                             doll: 2,
                                             setId: localStorage.getItem("costumeDungeon")
-                                        })
+                                        }))
                                     }
                                 }
-                                if (0 < t.length) {
+                                if (0 < r.length) {
                                     let {
                                         doll: w,
                                         setId: v
                                     } = {
-                                        ...t.pop()
+                                        ...r.pop()
                                     };
                                     (await fetch(G({
                                         mod: "costumes",
@@ -10919,9 +10978,10 @@ function Z(F, M) {
                                         doll: w,
                                         setId: v,
                                         sh: W("sh")
-                                    }))).ok && 0 < t.length && 9 > Number(v) && await ef.kn(t);
+                                    }))).ok && 0 < r.length && 9 > Number(v) && await ff.kn(r);
                                     Z("CheckDolls", 30)
-                                } else Z("CheckDolls", 15);
+                                } else Z("CheckDolls",
+                                    15);
                                 window.location.reload()
                             } catch {
                                 Z("CheckDolls", 15), window.location.reload(), E("Problem occurred while wearing a costume.")
@@ -10944,13 +11004,13 @@ function Z(F, M) {
                             setId: g,
                             sh: W("sh")
                         }), () => {
-                            0 < b.length ? ef.kn(b, c) : (Z("CheckDolls", 15), k())
+                            0 < b.length ? ff.kn(b, c) : (Z("CheckDolls", 15), k())
                         })
                     })
                 }
             };
         aa.player.Ed < new Date && aa.player.key != xa && gb();
-        if (va && "true" === localStorage.getItem("guildBattleEnable") && nf("guildBattleEnable")) try {
+        if (va && "true" === localStorage.getItem("guildBattleEnable") && of("guildBattleEnable")) try {
             const b = "true" === localStorage.getItem("guildBattleRandom"),
                 c = JSON.parse(localStorage.getItem("guildKeywords")) || [],
                 e = await jQuery.get(G({
@@ -10960,14 +11020,13 @@ function Z(F, M) {
                 g = (new DOMParser).parseFromString(e, "text/html"),
                 k = g.querySelectorAll('a[href*="mod=guild_warcamp&submod=guild_combat&gid="]'),
                 h = g.querySelectorAll("table.section-like tr:not(:first-child)");
-            let l =
-                null;
+            let l = null;
             0 < h.length && 0 < c.length ? h.forEach(q => {
                 const n = q.querySelector('td a[href*="mod=guild"]');
                 q = q.querySelector('a[href*="mod=guild_warcamp&submod=guild_combat&gid="]');
                 if (n && q) {
                     const m = n.textContent.trim().toLowerCase();
-                    c.some(t => m.includes(t.toLowerCase())) && (l = q.getAttribute("href"))
+                    c.some(r => m.includes(r.toLowerCase())) && (l = q.getAttribute("href"))
                 }
             }) : b && (l = k[Math.floor(Math.random() * k.length)].getAttribute("href"));
             if (l) {
@@ -10984,19 +11043,19 @@ function Z(F, M) {
                         combat: "Attack!"
                     });
                     E(`Guild attack initiated against guild ID: ${n}`);
-                    const t = JSON.parse(localStorage.getItem("Timers")) || {};
-                    Z("guildBattleEnable", t.guildBattleEnable || 120)
-                } catch (t) {
+                    const r = JSON.parse(localStorage.getItem("Timers")) || {};
+                    Z("guildBattleEnable", r.guildBattleEnable || 120)
+                } catch (r) {
                     E("Error initiating guild attack")
                 }
             } else E("No matching guilds found for the provided guild names.")
         } catch (b) {
             E("Error loading guild warcamp page")
         }
-        if (va && "true" === localStorage.getItem("GuildEnable") && nf("GuildDonate")) {
+        if (va &&
+            "true" === localStorage.getItem("GuildEnable") && of("GuildDonate")) {
             const b = parseInt(localStorage.getItem("GuildDonateMore") || 0, 10),
-                c = parseInt(localStorage.getItem("GuildDonateLess") ||
-                    0, 10),
+                c = parseInt(localStorage.getItem("GuildDonateLess") || 0, 10),
                 e = parseInt(localStorage.getItem("GuildDonateAmount") || 0, 10);
             if (ea.gold >= b && ea.gold <= c) {
                 await jQuery.post(G({
@@ -11012,7 +11071,8 @@ function Z(F, M) {
                 Z("GuildDonate", g.GuildDonate || 5)
             }
         }
-        if ("true" === localStorage.getItem("throwDice") && "true" === localStorage.getItem("doEventExpedition") && nf("throwDice") && "true" === sessionStorage.getItem("autoGoActive")) try {
+        if ("true" === localStorage.getItem("throwDice") &&
+            "true" === localStorage.getItem("doEventExpedition") && of("throwDice") && "true" === sessionStorage.getItem("autoGoActive")) try {
             const b = await jQuery.get(G({
                     mod: "craps",
                     sh: W("sh")
@@ -11023,13 +11083,13 @@ function Z(F, M) {
                 a: (new Date).getTime(),
                 sh: W("sh")
             }), E(`${d.Df}`)) : E("Used all the free dices today.") : E("Used all the free dices today.");
-            Z("throwDice", 10)
+            Z("throwDice",
+                10)
         } catch (b) {
             E("Please turn off throw dice feature."), localStorage.setItem("throwDice", !1)
         }
-        if (nf("sortSettings") && "true" == sessionStorage.getItem("autoGoActive")) {
-            const b =
-                await jQuery.get(G({
+        if (of("sortSettings") && "true" == sessionStorage.getItem("autoGoActive")) {
+            const b = await jQuery.get(G({
                     mod: "settings",
                     submod: "gameSettings",
                     sh: W("sh")
@@ -11044,39 +11104,40 @@ function Z(F, M) {
             localStorage.setItem("PackageSort", e)
         }
         if (window.location.href.includes("index.php?mod=location&loc=")) {
-            let b = 0,
+            let b =
+                0,
                 c = !1;
             const e = () => {
                     fetch(window.location.href).then(n => n.text()).then(n => {
                         n = (new DOMParser).parseFromString(n, "text/html");
                         if (n = Array.from(n.querySelectorAll("img[data-tooltip]")).find(m => {
-                                const t = m.getAttribute("data-tooltip").toLowerCase();
-                                return ["owned", "sahip", "propri", "posiad", "posees"].some(w => t.includes(w))
-                            })) n = (n = n.getAttribute("data-tooltip").match(/(Owned|Sahip[^:]*|Propri[^:]*|Posiad[^:]*|Posees[^:]*): (\d+)/i)) ? parseInt(n[2], 10) : 100, document.getElementById("hourglassesLeft").textContent = n, localStorage.setItem("hourglassesLeft", n)
+                                const r = m.getAttribute("data-tooltip").toLowerCase();
+                                return ["owned", "sahip", "propri", "posiad", "posees"].some(w => r.includes(w))
+                            })) n = (n = n.getAttribute("data-tooltip").match(/(Owned|Sahip[^:]*|Propri[^:]*|Posiad[^:]*|Posees[^:]*): (\d+)/i)) ? parseInt(n[2], 10) : 100, document.getElementById("hourglassesLeft").textContent =
+                            n, localStorage.setItem("hourglassesLeft", n)
                     }).catch(() => {
                         E("No hourglass left")
                     })
                 },
-                g = (n, m, t, w, v, x) => {
+                g = (n, m, r, w, v, x) => {
                     function C(A) {
-                        return new Promise((I,
-                            H) => {
-                            fetch(`${B}/game/index.php?mod=premium&submod=inventory&sh=${r}`).then(K => K.text()).then(K => {
+                        return new Promise((I, H) => {
+                            fetch(`${B}/game/index.php?mod=premium&submod=inventory&sh=${t}`).then(K => K.text()).then(K => {
                                 if (K = (new DOMParser).parseFromString(K, "text/html").querySelector(`div.premiumfeature_picture > img[src*="${A}"] + .premiumfeature_tokencount`)) return K.textContent.trim();
                                 throw Error("Token value not found!");
-                            }).then(K => fetch(`${B}/game/index.php?mod=premium&submod=inventoryActivate&feature=${"5fd403b4efa8ea7bc3ca5a852bfce9"===A?18:5}&token=${K}&sh=${r}`)).then(() => {
+                            }).then(K => fetch(`${B}/game/index.php?mod=premium&submod=inventoryActivate&feature=${"5fd403b4efa8ea7bc3ca5a852bfce9"===
+A?18:5}&token=${K}&sh=${t}`)).then(() => {
                                 I()
                             }).catch(K => {
                                 H(K)
                             })
                         })
                     }
-                    if (!c || b >=
-                        x) h();
+                    if (!c || b >= x) h();
                     else {
                         var D = new URL(window.location.href),
                             B = D.origin,
-                            r = D.searchParams.get("sh") || "",
+                            t = D.searchParams.get("sh") || "",
                             u = document.getElementById("useLifePotion").checked;
                         w = document.getElementById("useMobilizationExp2").checked;
                         var z = parseInt(document.getElementById("healPercentage2").value, 10);
@@ -11085,9 +11146,9 @@ function Z(F, M) {
                             submod: "attack",
                             location: n,
                             stage: m,
-                            premium: t ? 1 : 0,
+                            premium: r ? 1 : 0,
                             a: Date.now(),
-                            sh: r
+                            sh: t
                         });
                         fetch(`${B}/game/ajax.php?${D.toString()}`).then(A => A.text()).then(() => {
                             (u || w) && fetch(window.location.href).then(A => A.text()).then(async A => {
@@ -11099,10 +11160,10 @@ function Z(F, M) {
                                 if (w && (A = A.getElementById("expeditionpoints_value_point").innerText, 0 === Number(parseInt(A.replace("%", ""), 10)))) return await C("c9ce614bbc67a9e85aa0ee87cf2bb7")
                             }).then(async () => {
                                 b++;
-                                b >= Number(x) ? (h(), window.location.reload()) : (document.getElementById("attacksPerformed").textContent = b, localStorage.setItem("attackCount",
-                                    b), await e(), setTimeout(async () => {
-                                    await g(n, m, t, w, v, x)
-                                }, 1E3 * v))
+                                b >= Number(x) ? (h(), window.location.reload()) :
+                                    (document.getElementById("attacksPerformed").textContent = b, localStorage.setItem("attackCount", b), await e(), setTimeout(async () => {
+                                        await g(n, m, r, w, v, x)
+                                    }, 1E3 * v))
                             }).catch(() => {})
                         })
                     }
@@ -11113,11 +11174,10 @@ function Z(F, M) {
                     document.getElementById("stopExpedition").style.display = "block";
                     const n = (new URLSearchParams(window.location.search)).get("loc"),
                         m = document.getElementById("monsterSelection").value,
-                        t = document.getElementById("useHourglass").checked,
+                        r = document.getElementById("useHourglass").checked,
                         w = document.getElementById("attackInterval").value,
                         v = document.getElementById("numberOfAttacks").value;
-                    await g(n,
-                        m, t, useMobilizationExp2, w, v)
+                    await g(n, m, r, useMobilizationExp2, w, v)
                 }, h = () => {
                     c = !1;
                     document.getElementById("startExpedition").style.display = "block";
@@ -11166,9 +11226,9 @@ function Z(F, M) {
                     var m = document.querySelector(".section-header");
                     m.parentNode.insertBefore(n, m);
                     n.querySelector(".section-header").addEventListener("click", () => {
-                        const t = document.querySelector(".expedition-settings-content"),
-                            w = "none" === t.style.display;
-                        t.style.display = w ? "block" : "none";
+                        const r = document.querySelector(".expedition-settings-content"),
+                            w = "none" === r.style.display;
+                        r.style.display = w ? "block" : "none";
                         localStorage.setItem("expeditionSettingsHidden", w ? "false" : "true")
                     });
                     n = n.querySelector(".expedition-settings-content");
@@ -11223,16 +11283,16 @@ function Z(F, M) {
                 0 < n.length &&
                     (n = n.last().attr("href")) && (n = n.match(/page=(\d+)(?!.*page=)/)) && n[1] && (q = parseInt(n[1], 10));
                 n = [];
-                for (let t = 1; t <= q && 15 >= t; t++) {
-                    var m = await g(t);
+                for (let r = 1; r <= q && 15 >= r; r++) {
+                    var m = await g(r);
                     m = k(m, h, l);
                     0 < m.length && (n = n.concat(m))
                 }
                 if (0 < n.length) {
-                    const t = document.querySelector(".table-container tbody");
-                    t.innerHTML = "";
+                    const r = document.querySelector(".table-container tbody");
+                    r.innerHTML = "";
                     n.forEach(w => {
-                        t.appendChild(w)
+                        r.appendChild(w)
                     })
                 }
             }
@@ -11251,13 +11311,13 @@ function Z(F, M) {
 
             function k(h, l, q) {
                 let n = [];
-                jQuery(h).find(".table-container tr").each((m, t) => {
-                    var w = jQuery(t);
+                jQuery(h).find(".table-container tr").each((m, r) => {
+                    var w = jQuery(r);
                     m = window.location.href.includes("index.php?mod=reports&showExpeditions") || window.location.href.includes("index.php?mod=reports&showDungeons") ? w.find("td").eq(1).text().trim() :
                         w.find("td").eq(1).find("a").first().text().trim();
                     w = w.find("td").eq(2).text().trim().replace(/[.,]/g, "");
                     w = parseInt(w, 10) || 0;
-                    m.toLowerCase().includes(l.toLowerCase()) && w >= q && n.push(t)
+                    m.toLowerCase().includes(l.toLowerCase()) && w >= q && n.push(r)
                 });
                 return n
             }
@@ -11274,13 +11334,13 @@ function Z(F, M) {
             let b = !0;
             async function c() {
                 var m = document.getElementById("sortCriteria");
-                let t = Array.from(m.selectedOptions).map(C => C.value),
+                let r = Array.from(m.selectedOptions).map(C => C.value),
                     w = document.getElementById("shop");
                 m = Array.from(w.querySelectorAll(".ui-draggable")).map(C => {
                     let D = Fb(C),
                         B = parseInt(C.getAttribute("data-level"), 10) || 0,
-                        r = C.getAttribute("data-basis") || "",
-                        u = parseInt(r.split("-")[1],
+                        t = C.getAttribute("data-basis") || "",
+                        u = parseInt(t.split("-")[1],
                             10) || 0,
                         z = parseInt(C.getAttribute("data-quality"), 10) || 0,
                         A = parseInt(C.getAttribute("data-content-type"), 10) || 0,
@@ -11290,7 +11350,7 @@ function Z(F, M) {
                         element: C,
                         name: D,
                         level: B,
-                        ic: r,
+                        ic: t,
                         type: A,
                         jn: u,
                         quality: z,
@@ -11301,28 +11361,28 @@ function Z(F, M) {
                     }
                 });
                 m.sort((C, D) => {
-                    for (let B of t) {
-                        let r;
+                    for (let B of r) {
+                        let t;
                         switch (B) {
                             case "name":
-                                r = C.name.localeCompare(D.name);
+                                t = C.name.localeCompare(D.name);
                                 break;
                             case "level":
-                                r = C.level - D.level;
+                                t = C.level - D.level;
                                 break;
                             case "data-basis":
-                                r = C.jn - D.jn;
+                                t = C.jn - D.jn;
                                 break;
                             case "quality":
-                                r = C.quality - D.quality;
+                                t = C.quality - D.quality;
                                 break;
                             case "type":
-                                r = C.type - D.type;
+                                t = C.type - D.type;
                                 break;
                             default:
-                                r = 0
+                                t = 0
                         }
-                        if (0 !== r) return r
+                        if (0 !== t) return t
                     }
                     return 0
                 });
@@ -11377,32 +11437,32 @@ function Z(F, M) {
             })();
             async function e() {
                 if (b) {
-                    var m = Array.from(document.querySelectorAll("#inv .ui-draggable")).filter(t => {
-                        t = t.getAttribute("data-content-type");
-                        if (document.getElementById("chkWeapons").checked && "2" == t || document.getElementById("chkShields").checked && "4" == t || document.getElementById("chkChestArmour").checked && "8" == t || document.getElementById("chkHelmets").checked && "1" == t || document.getElementById("chkGloves").checked && "256" ==
-                            t || document.getElementById("chkShoes").checked && "512" == t || document.getElementById("chkRings").checked && "48" == t || document.getElementById("chkAmulets").checked && "1024" == t || document.getElementById("chkUsable").checked && "4096" == t || document.getElementById("chkUpgrades").checked && "4096" == t || document.getElementById("chkRecipes").checked && "8192" == t || document.getElementById("chkMercenary").checked && "16384" == t || document.getElementById("chkScroll").checked && "64" == t || document.getElementById("chkReinforcements").checked &&
-                            "4096" == t) return !0;
+                    var m = Array.from(document.querySelectorAll("#inv .ui-draggable")).filter(r => {
+                        r = r.getAttribute("data-content-type");
+                        if (document.getElementById("chkWeapons").checked && "2" == r || document.getElementById("chkShields").checked && "4" == r || document.getElementById("chkChestArmour").checked && "8" == r || document.getElementById("chkHelmets").checked && "1" == r || document.getElementById("chkGloves").checked && "256" ==
+                            r || document.getElementById("chkShoes").checked && "512" == r || document.getElementById("chkRings").checked && "48" == r || document.getElementById("chkAmulets").checked && "1024" == r || document.getElementById("chkUsable").checked && "4096" == r || document.getElementById("chkUpgrades").checked && "4096" == r || document.getElementById("chkRecipes").checked && "8192" == r || document.getElementById("chkMercenary").checked && "16384" == r || document.getElementById("chkScroll").checked && "64" == r || document.getElementById("chkReinforcements").checked &&
+                            "4096" == r) return !0;
                         if (b) return !1
                     });
-                    for (let t = 0; t < m.length && b; t++) await new Promise(w => setTimeout(w, 200)), da(m[t], "shop")
+                    for (let r = 0; r < m.length && b; r++) await new Promise(w => setTimeout(w, 200)), da(m[r], "shop")
                 }
             }
             async function g() {
                 if (b) {
                     var m = document.querySelectorAll("#inv .ui-draggable");
-                    for (let t = 0; t < m.length; t++) await new Promise(w => setTimeout(w, 200)), da(m[t], "shop")
+                    for (let r = 0; r < m.length; r++) await new Promise(w => setTimeout(w, 200)), da(m[r], "shop")
                 }
             }
             async function k() {
                 if (b) {
                     var m = document.querySelectorAll("#shop .ui-draggable");
-                    for (let t = 0; t < m.length; t++) await new Promise(w => setTimeout(w, 200)), da(m[t], "inv")
+                    for (let r = 0; r < m.length; r++) await new Promise(w => setTimeout(w, 200)), da(m[r], "inv")
                 }
             }
             async function h() {
                 if (b) {
                     var m = document.querySelectorAll("#shop .ui-draggable");
-                    for (let t = 0; 10 > t; t++) await new Promise(w => setTimeout(w, 200)), da(m[t], "inv")
+                    for (let r = 0; 10 > r; r++) await new Promise(w => setTimeout(w, 200)), da(m[r], "inv")
                 }
             }
             let l = document.querySelector(".actions .awesome-button:nth-child(2)"),
@@ -11433,16 +11493,16 @@ function Z(F, M) {
             })
         }
         if (window.location.href.includes("/index.php?mod=player&p") || window.location.href.includes("/index.php?mod=player&doll"))
-            if (cf = document.querySelector(".playername.ellipsis") || document.querySelector(".playername_achievement.ellipsis"),
-                tb = cf.textContent.trim(), 2 < tb.length) {
-                df = document.getElementById("char");
+            if (df = document.querySelector(".playername.ellipsis") || document.querySelector(".playername_achievement.ellipsis"),
+                tb = df.textContent.trim(), 2 < tb.length) {
+                ef = document.getElementById("char");
 
                 function b(c, e, g, k) {
                     var h = document.createElement("a");
                     h.className = "gladbot-button gladbot-" + c;
                     h.textContent = e;
                     h.setAttribute("data-tooltip", g);
-                    df.appendChild(h);
+                    ef.appendChild(h);
                     (JSON.parse(localStorage.getItem(k)) || []).includes(tb) && (h.classList.add("added"), h.setAttribute("data-tooltip", "Remove from " + ("autoAttackList" === k ? "Arena" : "Circus")));
                     h.addEventListener("click", function() {
                         var l = tb,
@@ -11464,11 +11524,11 @@ function Z(F, M) {
             ec = JSON.parse(localStorage.getItem("resetColors")) || {
                 colors: []
             };
-        "true" == localStorage.getItem("pauseBotEnable") && nf("pauseBot") && (sessionStorage.setItem("autoGoActive", "false"), localStorage.setItem("pauseBotEnable", "false"), alert("Bot has been paused!"), window.location.reload());
-        1 == va && nf("storeForgeResources") && bj();
-        !0 === va && nf("Training") && "true" == localStorage.getItem("trainEnable") && dj() && await cj();
+        "true" == localStorage.getItem("pauseBotEnable") && of("pauseBot") && (sessionStorage.setItem("autoGoActive", "false"), localStorage.setItem("pauseBotEnable", "false"), alert("Bot has been paused!"), window.location.reload());
+        1 == va && of("storeForgeResources") && dj();
+        !0 === va && of("Training") && "true" == localStorage.getItem("trainEnable") && fj() && await ej();
         "true" === sessionStorage.getItem("autoGoActive") &&
-            bb.href.includes("submod=showCombatReport") && ej();
+            bb.href.includes("submod=showCombatReport") && gj();
         if ("true" === localStorage.getItem("HighlightUnderworldItems")) {
             function b(e) {
                 e.querySelectorAll("div[data-basis]").forEach(g => {
@@ -11505,29 +11565,29 @@ function Z(F, M) {
                 e = JSON.parse(localStorage.getItem("Timers")),
                 g = new DOMParser;
 
-            function k(n, m, t) {
+            function k(n, m, r) {
                 let w = [],
                     v = [];
                 Array.from(n).forEach(x => {
                     const C = x.getAttribute("data-tooltip");
                     var D = x.getAttribute("data-content-type");
                     const B = x.getAttribute("data-quality"),
-                        r = m.some(u => {
+                        t = m.some(u => {
                             const z = $e(C);
                             return z ? z.toLowerCase().split(/\s+/).includes(u.toLowerCase()) : !1
                         });
-                    D = t.includes("9999") || t.includes(D);
-                    "2" == B || "3" == B ? v.push(x) : r && D && w.push(x)
+                    D = r.includes("9999") || r.includes(D);
+                    "2" == B || "3" == B ? v.push(x) : t && D && w.push(x)
                 });
                 return {
                     Mn: w,
                     Pn: v
                 }
             }
-            if (nf("ShopSearch")) {
-                const n = await Hf();
+            if (of("ShopSearch")) {
+                const n = await If();
                 let m = [],
-                    t = [];
+                    r = [];
                 for (const x of n) {
                     const C = k(x.querySelectorAll("#shop .ui-draggable"), b, c);
                     C.Mn.forEach(D => {
@@ -11537,39 +11597,39 @@ function Z(F, M) {
                         D.setAttribute("data-original-url", x.Tm)
                     });
                     m = m.concat(C.Mn);
-                    t = t.concat(C.Pn)
+                    r = r.concat(C.Pn)
                 }
                 const w =
                     m.map(x => x.outerHTML);
                 localStorage.setItem("MatchingShopItems", JSON.stringify(w));
-                const v = t.map(x => x.outerHTML);
+                const v = r.map(x => x.outerHTML);
                 localStorage.setItem("UniqueShopResults", JSON.stringify(v));
                 Z("ShopSearch", e.SearchTimer || 5)
             }
-            if (nf("AuctionSearch")) {
-                const n = await dh(),
-                    m = await dh(3),
-                    t = x => Array.from(x.querySelectorAll('#auction_table [class^="item-i-"]')).filter(C => {
+            if (of("AuctionSearch")) {
+                const n = await eh(),
+                    m = await eh(3),
+                    r = x => Array.from(x.querySelectorAll('#auction_table [class^="item-i-"]')).filter(C => {
                         const D = C.getAttribute("data-tooltip");
                         var B = C.getAttribute("data-content-type");
-                        C = b.some(r => {
+                        C = b.some(t => {
                             const u = $e(D);
-                            return u ? u.toLowerCase().split(/\s+/).includes(r.toLowerCase()) :
+                            return u ? u.toLowerCase().split(/\s+/).includes(t.toLowerCase()) :
                                 !1
                         });
                         B = c.includes("9999") || c.includes(B);
                         return C && B
                     }),
-                    w = t(n);
+                    w = r(n);
                 localStorage.setItem("MatchingAuctionItems", JSON.stringify(w.map(x => x.outerHTML)));
-                const v = t(m);
+                const v = r(m);
                 localStorage.setItem("MatchingMercAuctionItems", JSON.stringify(v.map(x => x.outerHTML)));
                 Z("AuctionSearch", e.SearchTimer || 5)
             }
 
-            function h(n, m, t) {
+            function h(n, m, r) {
                 const w = document.createElement("div");
-                w.setAttribute("id", t);
+                w.setAttribute("id", r);
                 w.classList.add("search_results_panel");
                 var v = document.createElement("div");
                 v.classList.add("panel-header");
@@ -11578,7 +11638,7 @@ function Z(F, M) {
                 w.style.cssText = "\n                position: fixed;\n                left: 0;\n                top: 0;\n                width: 300px;\n                height: 400px; /* Set a default height */\n                overflow-y: auto; /* Allow both vertical and horizontal scrolling if needed */\n                overflow-x: hidden;\n                z-index: 500;\n                box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.3);\n                font-family: 'Arial', sans-serif;\n                background: rgba(221, 213, 180, 0.95);\n                background-size: cover;\n                border-radius: 8px;\n            ";
                 n = w.querySelector(".panel-header");
                 n.style.cssText = `
-                background-color: ${"auction_items_panel"===t?"#bead79":"#8b6a45"};
+                background-color: ${"auction_items_panel"===r?"#bead79":"#8b6a45"};
                 padding: 10px;
                 cursor: move; /* Set cursor to move only on the header */
                 user-select: none;
@@ -11586,15 +11646,15 @@ function Z(F, M) {
                 border-top-right-radius: 8px;
             `;
                 n.querySelector("h2").style.cssText = "\n                margin: 0;\n                font-size: 16px;\n                color: #fff;\n            ";
-                n = localStorage.getItem(`${t}_top`);
-                v = localStorage.getItem(`${t}_left`);
-                let x = localStorage.getItem(`${t}_width`),
-                    C = localStorage.getItem(`${t}_height`);
-                n && v ? (w.style.top = n + "px", w.style.left = v + "px") : "auction_items_panel" === t ? (w.style.top = "50px", w.style.left = "20px") : "shop_items_panel" === t && (w.style.top = "50px", w.style.left = "350px");
+                n = localStorage.getItem(`${r}_top`);
+                v = localStorage.getItem(`${r}_left`);
+                let x = localStorage.getItem(`${r}_width`),
+                    C = localStorage.getItem(`${r}_height`);
+                n && v ? (w.style.top = n + "px", w.style.left = v + "px") : "auction_items_panel" === r ? (w.style.top = "50px", w.style.left = "20px") : "shop_items_panel" === r && (w.style.top = "50px", w.style.left = "350px");
                 x && (w.style.width =
                     x + "px");
                 C && (w.style.height = C + "px");
-                q(w, t);
+                q(w, r);
                 m = l(m);
                 w.appendChild(m);
                 document.body.appendChild(w);
@@ -11605,7 +11665,7 @@ function Z(F, M) {
                 const m = document.createElement("div");
                 m.classList.add("items-container");
                 n.forEach(({
-                    key: t,
+                    key: r,
                     label: w
                 }) => {
                     const v = document.createElement("div");
@@ -11618,7 +11678,7 @@ function Z(F, M) {
                     x.style.gridTemplateColumns = "repeat(auto-fill, minmax(50px, 1fr))";
                     x.style.Qp = "5px";
                     x.style.padding = "10px";
-                    w = localStorage.getItem(t);
+                    w = localStorage.getItem(r);
                     (JSON.parse(w) || []).forEach(C => {
                         const D = g.parseFromString(C, "text/html").body.firstChild.cloneNode(!0);
                         D.style.left = "";
@@ -11627,7 +11687,7 @@ function Z(F, M) {
                         C = D.getAttribute("data-tooltip");
                         var B = JSON.parse(C.replace(/&quot;/g, '"'));
                         C = B[0][0][1].split(";")[0];
-                        const r = encodeURIComponent(B[0][0][0].split(" ")[0]);
+                        const t = encodeURIComponent(B[0][0][0].split(" ")[0]);
                         B = new URL(window.location.href);
                         const u = B.origin,
                             z = B.searchParams.get("sh") || "";
@@ -11643,10 +11703,10 @@ function Z(F, M) {
                         B.addEventListener("click", () => {
                             var A = D.getAttribute("data-hash");
                             localStorage.setItem("highlightedItemHash", A);
-                            if (["UniqueShopResults", "MatchingShopItems"].includes(t)) {
+                            if (["UniqueShopResults", "MatchingShopItems"].includes(r)) {
                                 if (A = D.getAttribute("data-original-url")) location.href = A
-                            } else A = `${u}/game/index.php?mod=auction&qry=${r}&itemLevel=1&itemType=0&itemQuality=-1&sh=${z}`,
-                                "MatchingMercAuctionItems" === t && (A += "&ttype=3"), location.href = A
+                            } else A = `${u}/game/index.php?mod=auction&qry=${t}&itemLevel=1&itemType=0&itemQuality=-1&sh=${z}`,
+                                "MatchingMercAuctionItems" === r && (A += "&ttype=3"), location.href = A
                         });
                         x.appendChild(B)
                     });
@@ -11657,9 +11717,9 @@ function Z(F, M) {
             }
 
             function q(n, m) {
-                const t = n.querySelector(".panel-header");
+                const r = n.querySelector(".panel-header");
                 $(n).draggable({
-                    handle: t,
+                    handle: r,
                     Cp: "window",
                     stop: function(w, v) {
                         localStorage.setItem(`${m}_top`, v.position.top);
@@ -11701,10 +11761,10 @@ function Z(F, M) {
                 } catch (b) {}
             },
             6E4);
-        var zj = btoa("autoGoActive"),
-            Aj = btoa("false");
+        var Aj = btoa("autoGoActive"),
+            Bj = btoa("false");
         await async function() {
-            "516b3c397bff62274adfd0e8280cb1e35f0cee3d5dc8dbb28f52fd891214a1da" !== await fj(ta) && sessionStorage.setItem(atob(zj), atob(Aj))
+            "82f70bcf117227216f1c2de756c2f5db44c7ed74f3087ac18405d2417ea235bd" !== await hj(ta) && sessionStorage.setItem(atob(Aj), atob(Bj))
         }();
         setInterval(() => {
             const b = JSON.parse(localStorage.getItem("timeConditions")) || [];
@@ -11720,8 +11780,8 @@ function Z(F, M) {
         }, 15E3);
         var Ub = (new Date).getTime();
         if (!xa !== Jc) {
-            "true" === localStorage.getItem("activateAuction2") && kf();
-            var ff = {
+            "true" === localStorage.getItem("activateAuction2") && lf();
+            var gf = {
                 cn(b) {
                     let c = localStorage.getItem("MarketboughtItems");
                     c ? c = JSON.parse(c) : c = [];
@@ -11782,8 +11842,8 @@ function Z(F, M) {
                         q = Math.min(...q);
                         c = await this.ln(c, e, q);
                         for (const [n, m] of Object.entries(l)) {
-                            const [t, w] = n.split("-");
-                            await this.En(m, t, w, c, b)
+                            const [r, w] = n.split("-");
+                            await this.En(m, r, w, c, b)
                         }
                     }
                 },
@@ -11805,32 +11865,32 @@ function Z(F, M) {
                     let n = 0;
                     for (let B = 1; B <= c; B++) {
                         var m = `${k}&p=${B}`;
-                        await new Promise(r => setTimeout(r, 250));
+                        await new Promise(t => setTimeout(t, 250));
                         m = await (await fetch(m)).text();
-                        await new Promise(r => setTimeout(r, 250));
+                        await new Promise(t => setTimeout(t, 250));
                         m = b.parseFromString(m, "text/html").querySelectorAll("#market_item_table tr");
-                        for (let r of m) {
-                            var t = r.querySelectorAll("td");
-                            if (t && 0 < t.length && (m = t[0].querySelector("div"))) {
+                        for (let t of m) {
+                            var r = t.querySelectorAll("td");
+                            if (r && 0 < r.length && (m = r[0].querySelector("div"))) {
                                 var w = ub(m),
                                     v = Ba(m),
                                     x = Fb(m),
                                     C = vb(m);
                                 let u = m.getAttribute("data-item-id"),
                                     z = m.getAttribute("data-soulbound-to");
-                                t = parseInt(t[2].innerText.replace(/\./g, ""), 10);
+                                r = parseInt(r[2].innerText.replace(/\./g, ""), 10);
                                 var D =
                                     parseInt(m.getAttribute("data-amount"), 10) || 1;
-                                D = t / D;
-                                if (g && "64" === w && t <= l && (!z || null === z) && Number(C) >= Number(q)) {
-                                    if (n + t > h) break;
-                                    n += t;
+                                D = r / D;
+                                if (g && "64" === w && r <= l && (!z || null === z) && Number(C) >= Number(q)) {
+                                    if (n + r > h) break;
+                                    n += r;
                                     e.push({
                                         itemRarity: v,
                                         itemName: x,
                                         itemDataId: u,
                                         itemSoulbound: z,
-                                        itemPrice: t,
+                                        itemPrice: r,
                                         pricePerItem: D,
                                         page: B
                                     })
@@ -11839,8 +11899,8 @@ function Z(F, M) {
                                     itemName: v,
                                     itemDataId: x,
                                     itemSoulbound: C,
-                                    itemPrice: t,
-                                    pricePerItem: t / m,
+                                    itemPrice: r,
+                                    pricePerItem: r / m,
                                     page: B
                                 }))
                             }
@@ -11856,7 +11916,7 @@ function Z(F, M) {
                         const q = h.itemSoulbound,
                             n = h.itemPrice,
                             m = h.pricePerItem,
-                            t = h.page,
+                            r = h.page,
                             w = {
                                 Yn: "-1",
                                 Sn: "0",
@@ -11876,13 +11936,13 @@ function Z(F, M) {
                             fl: 12,
                             fq: e,
                             s: "",
-                            p: t,
+                            p: r,
                             buy: "Buy"
                         }).then(x => {
                             x = (new DOMParser).parseFromString(x, "text/html").getElementById("sstat_gold_val").innerText;
                             x = parseInt(x.replace(/\./g, ""), 10);
                             if (document.getElementById("sstat_gold_val").innerText = x) ea.gold = x;
-                            ff.cn(l);
+                            gf.cn(l);
                             E(`Bought ${l} for ${n} gold`)
                         }) : b.some(x => {
                             const C = w[x.um] || "0";
@@ -11897,13 +11957,13 @@ function Z(F, M) {
                             fl: 12,
                             fq: e,
                             s: "",
-                            p: t,
+                            p: r,
                             buy: "Buy"
                         }).then(x => {
                             x = (new DOMParser).parseFromString(x, "text/html").getElementById("sstat_gold_val").innerText;
                             x = parseInt(x.replace(/\./g, ""), 10);
                             if (document.getElementById("sstat_gold_val").innerText = x) ea.gold = x;
-                            ff.cn(l);
+                            gf.cn(l);
                             E(`Bought ${l} for ${n} gold`)
                         })
                     }
@@ -11911,8 +11971,8 @@ function Z(F, M) {
                 }
             };
             (window.location.href.includes("/index.php?mod=forge&submod=workbench") || window.location.href.includes("/index.php?mod=forge&doll=1&submod=workbench") || window.location.href.includes("index.php?mod=forge&doll=2&submod=workbench") ||
-                window.location.href.includes("index.php?mod=forge&doll=3&submod=workbench") || window.location.href.includes("index.php?mod=forge&doll=4&submod=workbench") || window.location.href.includes("index.php?mod=forge&doll=5&submod=workbench") || window.location.href.includes("index.php?mod=forge&doll=6&submod=workbench")) && hj();
-            var Bj = {
+                window.location.href.includes("index.php?mod=forge&doll=3&submod=workbench") || window.location.href.includes("index.php?mod=forge&doll=4&submod=workbench") || window.location.href.includes("index.php?mod=forge&doll=5&submod=workbench") || window.location.href.includes("index.php?mod=forge&doll=6&submod=workbench")) && jj();
+            var Cj = {
                     async start() {
                         try {
                             const b = aa.workbench.repairArena,
@@ -11952,7 +12012,7 @@ function Z(F, M) {
                         }
                     },
                     async qn(b, c) {
-                        lf !== b ? Gf(b) : (await this.u(), 0 < this.F().spaces ? await this.sm(c) : this.Jn("workbench"))
+                        mf !== b ? Hf(b) : (await this.u(), 0 < this.F().spaces ? await this.sm(c) : this.Jn("workbench"))
                     },
                     Jn(b) {
                         "space" === b ? E("Not enough inventory space for repair. Retrying in 10 minutes.") : "workbench" === b ? E("Not enough empty slots in workbench. Retrying in 10 minutes.") : "material" === b ? E(`${d.ua}`) : E("Repair: Retrying in 10 minutes.");
@@ -12135,8 +12195,8 @@ function Z(F, M) {
                             b[h].type = b[h].type - 18E3;
                             await new Promise(w => setTimeout(w, 800));
                             let m = await this.Ao(b[h].type);
-                            const t = Number(localStorage.getItem("repairMaxQuality"));
-                            for (; l <= t;) {
+                            const r = Number(localStorage.getItem("repairMaxQuality"));
+                            for (; l <= r;) {
                                 var k = m[l] || 0;
                                 if (0 === k) l++;
                                 else {
@@ -12153,7 +12213,7 @@ function Z(F, M) {
                                                 sh: W("sh")
                                             })), await this.Hl(b[h].type, l, e, k), q = !0, 0 >= n) break
                                     } catch (w) {
-                                        if (l++, l > t) {
+                                        if (l++, l > r) {
                                             g = !1;
                                             break
                                         }
@@ -12200,8 +12260,8 @@ function Z(F, M) {
                                     page: k,
                                     sh: W("sh")
                                 })),
-                                t = jQuery(m).find(".packageItem");
-                            0 === t.length ? k++ : (t.each(async (w, v) => {
+                                r = jQuery(m).find(".packageItem");
+                            0 === r.length ? k++ : (r.each(async (w, v) => {
                                     try {
                                         let x = jQuery(v).find(".ui-draggable"),
                                             C = Ea(x[0]).split("-")[1],
@@ -12210,7 +12270,7 @@ function Z(F, M) {
                                         if (Number(C) == Number(b) && Number(D) == Number(c)) {
                                             h = !0;
                                             try {
-                                                const r = await jQuery.post(U({
+                                                const t = await jQuery.post(U({
                                                         mod: "inventory",
                                                         submod: "move",
                                                         from: "-" + B,
@@ -12224,7 +12284,7 @@ function Z(F, M) {
                                                         a: (new Date).getTime(),
                                                         sh: W("sh")
                                                     }),
-                                                    u = JSON.parse(r).to.data.itemId;
+                                                    u = JSON.parse(t).to.data.itemId;
                                                 try {
                                                     await jQuery.post(U({
                                                         mod: "forge",
@@ -12239,8 +12299,8 @@ function Z(F, M) {
                                                 } catch (z) {
                                                     E(`Error moving material to workbench: ${z}`)
                                                 }
-                                            } catch (r) {
-                                                E(`Error moving material from package to bag: ${r}`)
+                                            } catch (t) {
+                                                E(`Error moving material from package to bag: ${t}`)
                                             }
                                             return !1
                                         }
@@ -12340,9 +12400,9 @@ function Z(F, M) {
                                 C.getAttribute("data-soulbound-to");
                                 var n = D.getAttribute("data-measurement-x"),
                                     m = D.getAttribute("data-measurement-y"),
-                                    t = C.querySelector("[data-container-number]").getAttribute("data-container-number"),
+                                    r = C.querySelector("[data-container-number]").getAttribute("data-container-number"),
                                     w = C.querySelector('input[name="packages[]"]').value;
-                                if (q === e.name && e.container === w || q === e.name && t.includes(e.container) || q === e.name && e.quality === l) h = !0, c.selectedItem.status = "toInv", localStorage.setItem("workbenchItem", JSON.stringify(c)), await this.An(C, g, k, t, n, m)
+                                if (q === e.name && e.container === w || q === e.name && r.includes(e.container) || q === e.name && e.quality === l) h = !0, c.selectedItem.status = "toInv", localStorage.setItem("workbenchItem", JSON.stringify(c)), await this.An(C, g, k, r, n, m)
                             }
                             3 < b ? this.handleError() : h || await this.Ia(++b, !0)
                         } catch (v) {
@@ -12378,10 +12438,10 @@ function Z(F, M) {
                                 C.getAttribute("data-soulbound-to");
                                 var n = D.getAttribute("data-measurement-x"),
                                     m = D.getAttribute("data-measurement-y"),
-                                    t = C.querySelector("[data-container-number]").getAttribute("data-container-number"),
+                                    r = C.querySelector("[data-container-number]").getAttribute("data-container-number"),
                                     w = C.querySelector('input[name="packages[]"]').value;
                                 if (q === e.name &&
-                                    e.container === w || q === e.name && t.includes(e.container) || q === e.name && e.quality === l) h = !0, c.selectedItem.status = "toInv", localStorage.setItem("workbenchItem", JSON.stringify(c)), await this.An(C, g, k, t, n, m)
+                                    e.container === w || q === e.name && r.includes(e.container) || q === e.name && e.quality === l) h = !0, c.selectedItem.status = "toInv", localStorage.setItem("workbenchItem", JSON.stringify(c)), await this.An(C, g, k, r, n, m)
                             }
                             3 < b ? this.handleError() : h || await this.Ia(++b, !0)
                         } catch (v) {
@@ -12480,7 +12540,7 @@ function Z(F, M) {
                         this.Jn()
                     }
                 },
-                xj = {
+                yj = {
                     gm: [],
                     async Wo(b) {
                         try {
@@ -12642,14 +12702,14 @@ function Z(F, M) {
                                 k++;
                                 continue
                             }
-                            let t = !1;
+                            let r = !1;
                             m.each((w, v) => {
                                 try {
                                     let x = jQuery(v).find(".ui-draggable"),
                                         C = Ea(x[0]).split("-")[1],
                                         D = Ba(x[0]),
                                         B = x.context.querySelector("input").getAttribute("value");
-                                    if (C == b && D == c) return t = h = !0, jQuery.post(U({
+                                    if (C == b && D == c) return r = h = !0, jQuery.post(U({
                                         mod: "inventory",
                                         submod: "move",
                                         from: "-" + B,
@@ -12663,9 +12723,9 @@ function Z(F, M) {
                                     }), {
                                         a: (new Date).getTime(),
                                         sh: W("sh")
-                                    }).then(r => {
+                                    }).then(t => {
                                         try {
-                                            const u = JSON.parse(r).to.data.itemId;
+                                            const u = JSON.parse(t).to.data.itemId;
                                             jQuery.post(U({
                                                 mod: "forge",
                                                 submod: "toWarehouse",
@@ -12680,7 +12740,7 @@ function Z(F, M) {
                                     }).catch(() => {}), !1
                                 } catch (x) {}
                             });
-                            t || k++
+                            r || k++
                         } catch (n) {
                             E(`Error fetching materials from the package on page ${k}: ${n}`), k++
                         }
@@ -12788,15 +12848,15 @@ function Z(F, M) {
                             localStorage.setItem("packages", JSON.stringify(h))
                         }
                         document.getElementById("ConfirmGetGold").addEventListener("click", async function() {
-                            async function c(m, t) {
-                                t = await jQuery.post(U({
+                            async function c(m, r) {
+                                r = await jQuery.post(U({
                                     mod: "inventory",
                                     submod: "move",
                                     from: m[0].closest("[data-container-number]").getAttribute("data-container-number"),
                                     fromX: 1,
                                     fromY: 1,
                                     to: 512,
-                                    toX: 21 + t,
+                                    toX: 21 + r,
                                     toY: 21,
                                     amount: 1
                                 }), {
@@ -12804,7 +12864,7 @@ function Z(F, M) {
                                     sh: k
                                 });
                                 m[0].closest(".packageItem").remove();
-                                m = JSON.parse(t).header.gold.text || "0";
+                                m = JSON.parse(r).header.gold.text || "0";
                                 m = parseInt(m.replace(/[^0-9]/g, ""), 10);
                                 q += m - l;
                                 l = m;
@@ -12819,8 +12879,8 @@ function Z(F, M) {
                                     page: h,
                                     sh: k
                                 }));
-                                let t = jQuery(m).find(".ui-draggable").filter((w, v) => (w = parseInt(jQuery(v).attr("data-price-gold"), 10)) && w <= n - l).get();
-                                for (let [w, v] of t.entries())
+                                let r = jQuery(m).find(".ui-draggable").filter((w, v) => (w = parseInt(jQuery(v).attr("data-price-gold"), 10)) && w <= n - l).get();
+                                for (let [w, v] of r.entries())
                                     if (await c(jQuery(v), w), l >= n) {
                                         document.getElementById("goldMovedIndicator").textContent +=
                                             " - Completed";
@@ -13007,7 +13067,7 @@ function Z(F, M) {
                             c = $b(b);
                         let e = Math.min(40 - Xb(c), this.arr.length);
                         b = this.arr.shift();
-                        0 < e && !R.stop ? ((c = jf(b, c)) ? ua(b, c) : da(b, "inv"), setTimeout(() => {
+                        0 < e && !R.stop ? ((c = kf(b, c)) ? ua(b, c) : da(b, "inv"), setTimeout(() => {
                             R.move()
                         }, 500)) : setTimeout(R.enableButtons, 500)
                     },
@@ -13080,19 +13140,19 @@ function Z(F, M) {
                         var q = JSON.parse(localStorage.getItem("auctionPrefixes")) || [],
                             n = JSON.parse(localStorage.getItem("auctionSuffixes")) || [];
                         const m = new Set(JSON.parse(localStorage.getItem("playerEquipmentIDs") || "[]")),
-                            t = new Set(JSON.parse(localStorage.getItem("mercenaryEquipmentIDs") || "[]"));
+                            r = new Set(JSON.parse(localStorage.getItem("mercenaryEquipmentIDs") || "[]"));
                         let w = !1;
                         if (R.Gm) R.Gm && (R.stop && window.location.reload(), v = document.querySelectorAll("#packages .packageItem"), b = document.getElementById("sellspinner"), b.classList.remove("hidden"), c = document.getElementById("statusMessage"), c ||
                             (c = document.createElement("div"), c.id = "statusMessage", c.classList.add("status-message"), b.insertAdjacentElement("afterend", c)), 0 < v.length ? (c.textContent = `Processing ${v.length} items from the current page...`, v = Array.from(v).map(async x => {
                                 var C = x.querySelector("input").value,
                                     D = x.querySelector(".ui-draggable");
                                 const B = D.getAttribute("data-basis");
-                                var r = D.getAttribute("data-hash"),
+                                var t = D.getAttribute("data-hash"),
                                     u = Ea(D).split("-");
                                 const z = parseInt(u[0]);
                                 var A = u[1] ? parseInt(u[1]) : null;
-                                u = wb(B, r);
-                                r = 14 === z;
+                                u = wb(B, t);
+                                t = 14 === z;
                                 var I = Eb(D);
                                 const H = Fb(D);
                                 var K =
@@ -13112,7 +13172,7 @@ function Z(F, M) {
                                 C = e.type.some(O => L ? O === B || O === String(z) : O === B || O === String(z) || B.startsWith(`${O}-`));
                                 D = e.quality.map(Number).includes(Number(Ba(D)));
                                 u = !h && u;
-                                if (m.has(H) || t.has(H)) w = !0;
+                                if (m.has(H) || r.has(H)) w = !0;
                                 K = l.some(O => {
                                     var Y = O.prefix && 2 < O.prefix.length ? O.prefix.toLowerCase() : null;
                                     O = O.suffix && 2 < O.suffix.length ? O.suffix.toLowerCase() : null;
@@ -13124,7 +13184,7 @@ function Z(F, M) {
                                 A = q.some(O => H.toLowerCase().includes(O.toLowerCase()));
                                 I = n.some(O => H.toLowerCase().includes(O.toLowerCase()));
                                 K = k && K;
-                                k ? !C || !D || K || w || A || I || u ? C && r && !w && !u && R.g.push(x) : R.g.push(x) : C && D && !w && !u ? R.g.push(x) : C && r && !w && !u && R.g.push(x)
+                                k ? !C || !D || K || w || A || I || u ? C && t && !w && !u && R.g.push(x) : R.g.push(x) : C && D && !w && !u ? R.g.push(x) : C && t && !w && !u && R.g.push(x)
                             }), await Promise.all(v), 0 < R.g.length ? (c.textContent = `Selling ${R.g.length} items...`, await R.Wn()) : (c.textContent = "No items to sell. Please refresh the page.", b.classList.add("hidden"), R.enableButtons()), R.g = []) : (c.textContent = "No items found in the current page.", b.classList.add("hidden")));
                         else {
                             c = document.getElementById("sellspinner");
@@ -13135,14 +13195,14 @@ function Z(F, M) {
                             for (let C = 1; C <= b; C += 10) {
                                 const D = Array.from({
                                     length: Math.min(10, b - C + 1)
-                                }, (B, r) => C + r);
+                                }, (B, t) => C + t);
                                 console.log(`Fetching batch pages: ${D.join(", ")}`);
                                 v.textContent = `Reading pages ${D[0]} to ${D[D.length-1]}...`;
                                 await Promise.all(D.map(async B => {
                                     g.page = B;
                                     try {
-                                        const r = await jQuery.get(G(g)),
-                                            u = jQuery(r).find(".packageItem");
+                                        const t = await jQuery.get(G(g)),
+                                            u = jQuery(t).find(".packageItem");
                                         0 < u.length && (x += u.length, u.each((z, A) => {
                                             var I = jQuery(A).find("input").val(),
                                                 H = jQuery(A).find(".ui-draggable")[0];
@@ -13172,7 +13232,7 @@ function Z(F, M) {
                                             H =
                                                 e.quality.map(Number).includes(Number(Ba(H)));
                                             L = !h && L;
-                                            if (m.has(ma) || t.has(ma)) w = !0;
+                                            if (m.has(ma) || r.has(ma)) w = !0;
                                             ca = l.some(ba => {
                                                 var qa = ba.prefix && 2 < ba.prefix.length ? ba.prefix.toLowerCase() : null;
                                                 ba = ba.suffix && 2 < ba.suffix.length ? ba.suffix.toLowerCase() : null;
@@ -13187,7 +13247,7 @@ function Z(F, M) {
                                             k ? !I || !H || w || ca || Y || fa || L ? I && z && !w && !L && R.g.push(A) : R.g.push(A) :
                                                 I && !w && H && !L ? R.g.push(A) : I && z && !w && !L && R.g.push(A)
                                         }))
-                                    } catch (r) {}
+                                    } catch (t) {}
                                 }));
                                 await new Promise(B => setTimeout(B, 1E3))
                             }
@@ -13417,11 +13477,11 @@ function Z(F, M) {
                                 try {
                                     const n = jQuery(q).find("#shop")[0],
                                         m = n.getAttribute("data-container-number"),
-                                        t = $b(n);
+                                        r = $b(n);
                                     e[m] = {
-                                        zm: 48 - Xb(t),
-                                        grid: ac(8, 6, t),
-                                        items: t
+                                        zm: 48 - Xb(r),
+                                        grid: ac(8, 6, r),
+                                        items: r
                                     };
                                     h()
                                 } catch (n) {
@@ -13669,10 +13729,10 @@ function Z(F, M) {
                     document.getElementById("sell-food-btn").addEventListener("click", w);
                     document.querySelector(".custom-market-header").addEventListener("click", k);
                     document.querySelector(".switch-section").addEventListener("click", l);
-                    document.querySelectorAll(".time-selection button").forEach(r => {
-                        r.addEventListener("click", function() {
-                            h(r,
-                                r.textContent)
+                    document.querySelectorAll(".time-selection button").forEach(t => {
+                        t.addEventListener("click", function() {
+                            h(t,
+                                t.textContent)
                         })
                     })
                 }
@@ -13681,23 +13741,23 @@ function Z(F, M) {
 
                 function k() {
                     const B = document.querySelector(".custom-market-content"),
-                        r = document.querySelector(".custom-market-header");
-                    r.classList.toggle("collapsed");
-                    B.style.display = r.classList.contains("collapsed") ? "none" : "block";
-                    localStorage.setItem("sellItemsSectionCollapsed", r.classList.contains("collapsed"))
+                        t = document.querySelector(".custom-market-header");
+                    t.classList.toggle("collapsed");
+                    B.style.display = t.classList.contains("collapsed") ? "none" : "block";
+                    localStorage.setItem("sellItemsSectionCollapsed", t.classList.contains("collapsed"))
                 }
 
-                function h(B, r) {
+                function h(B, t) {
                     B.parentElement.querySelectorAll("button").forEach(u => {
                         u.classList.remove("selected")
                     });
                     B.classList.add("selected");
-                    localStorage.setItem("selectedTime_" + B.closest("div").parentElement.id, r)
+                    localStorage.setItem("selectedTime_" + B.closest("div").parentElement.id, t)
                 }
 
                 function l() {
-                    e.forEach(r => {
-                        document.getElementById(r).classList.add("hidden")
+                    e.forEach(t => {
+                        document.getElementById(t).classList.add("hidden")
                     });
                     g = (g + 1) % e.length;
                     document.getElementById(e[g]).classList.remove("hidden");
@@ -13705,7 +13765,7 @@ function Z(F, M) {
                     "item-sell-form" === e[g] ? B.textContent = `${d.Aa}` : "material-sell-form" === e[g] ? B.textContent = `${d.Gb}` : "food-sell-form" === e[g] && (B.textContent = `${d.Hb}`);
                     localStorage.setItem("currentSection", e[g])
                 }
-                async function q(B, r, u) {
+                async function q(B, t, u) {
                     return new Promise(async z => {
                         let A = !1;
                         const I = Array.from(document.querySelectorAll("#inventory_nav a.awesome-tabs"));
@@ -13722,7 +13782,7 @@ function Z(F, M) {
                                     K = Fb(O);
                                     const Y = O.getAttribute("data-item-id"),
                                         fa = Ba(O);
-                                    if (K.toLowerCase() === B.toLowerCase() && r === fa) {
+                                    if (K.toLowerCase() === B.toLowerCase() && t === fa) {
                                         b.push(Y);
                                         A = !0;
                                         H++;
@@ -13735,7 +13795,7 @@ function Z(F, M) {
                         z(A)
                     })
                 }
-                async function n(B, r, u, z, A) {
+                async function n(B, t, u, z, A) {
                     try {
                         let I = 1,
                             H = parseInt(u, 10);
@@ -13743,7 +13803,7 @@ function Z(F, M) {
                             const K = await jQuery.get(G({
                                     mod: "packages",
                                     f: z ? "18" : "0",
-                                    fq: r,
+                                    fq: t,
                                     qry: z ? "" : B,
                                     page: I.toString(),
                                     sh: W("sh")
@@ -13760,11 +13820,11 @@ function Z(F, M) {
                                     qa = fa.getAttribute("data-container-number"),
                                     ya = Fb(Y).toLowerCase();
                                 pa || (ba.includes("white") && (pa = "-1"), ba.includes("lime") && (pa = "0"));
-                                const Oa = ya === B.toLowerCase() && r === pa;
+                                const Oa = ya === B.toLowerCase() && t === pa;
                                 if (z) {
                                     const xb = Y.getAttribute("data-basis"),
                                         Ib = xb.startsWith("18") && xb.split("-")[1] === A.toString();
-                                    r === pa && Ib && (await v(qa, ca, ma), u = !0, H--)
+                                    t === pa && Ib && (await v(qa, ca, ma), u = !0, H--)
                                 } else Oa && (await v(qa, ca, ma), u = !0, H--)
                             }
                             I++
@@ -13774,7 +13834,7 @@ function Z(F, M) {
                         return !1
                     }
                 }
-                async function m(B, r = -1, u) {
+                async function m(B, t = -1, u) {
                     try {
                         let z = !0,
                             A = 0;
@@ -13785,11 +13845,11 @@ function Z(F, M) {
                                         mod: "forge",
                                         submod: "storageOut",
                                         type: B,
-                                        quality: r,
+                                        quality: t,
                                         amount: 1,
                                         a: (new Date).getTime(),
                                         sh: W("sh")
-                                    })), await n(B, r, 1, !0, B), A++, A >= parseInt(u, 10)) break
+                                    })), await n(B, t, 1, !0, B), A++, A >= parseInt(u, 10)) break
                             } catch (H) {
                                 A++
                             }
@@ -13800,7 +13860,7 @@ function Z(F, M) {
                         return !1
                     }
                 }
-                async function t(B, r, u, z) {
+                async function r(B, t, u, z) {
                     try {
                         let A = 1,
                             I = parseInt(z, 10);
@@ -13822,7 +13882,7 @@ function Z(F, M) {
                                     ca = O.getAttribute("data-measurement-y"),
                                     ma = vb(O),
                                     pa = Ba(O);
-                                if (parseInt(ma) >= B && parseInt(ma) <= r && pa === u) {
+                                if (parseInt(ma) >= B && parseInt(ma) <= t && pa === u) {
                                     const ba = Y.getAttribute("data-container-number");
                                     await v(ba, fa, ca);
                                     z = !0;
@@ -13838,19 +13898,19 @@ function Z(F, M) {
                 }
                 async function w() {
                     var B = parseInt(document.getElementById("food-level-min").value, 10);
-                    const r = parseInt(document.getElementById("food-level-max").value, 10),
+                    const t = parseInt(document.getElementById("food-level-max").value, 10),
                         u =
                         document.getElementById("food-quality").value,
                         z = parseInt(document.getElementById("food-howmany").value, 10),
                         A = parseInt(document.getElementById("food-price-min").value, 10),
                         I = parseInt(document.getElementById("food-price-max").value, 10),
                         H = document.getElementById("loadingSpinner4");
-                    if (isNaN(B) || isNaN(r) || B > r || isNaN(A) || isNaN(I) || A > I || 1 > z) alert(`${d.xa}`);
+                    if (isNaN(B) || isNaN(t) || B > t || isNaN(A) || isNaN(I) || A > I || 1 > z) alert(`${d.xa}`);
                     else {
                         H.style.display = "block";
                         try {
                             let fa = !1;
-                            if (fa = await t(B, r, u, z)) {
+                            if (fa = await r(B, t, u, z)) {
                                 var K = document.querySelector("#food-sell-form .time-selection button.selected"),
                                     L =
                                     K ? parseInt(K.value, 10) : 2,
@@ -13873,19 +13933,19 @@ function Z(F, M) {
                                 b = [];
                                 alert(`${d.za}`);
                                 await new Promise(ca => setTimeout(ca, 250));
-                                Gf("mod=market&f=7")
+                                Hf("mod=market&f=7")
                             } else alert(`${d.ya}`)
                         } catch (fa) {} finally {
                             H.style.display = "none"
                         }
                     }
                 }
-                async function v(B, r, u) {
+                async function v(B, t, u) {
                     try {
                         let {
                             spot: z,
                             bag: A
-                        } = await Zb(r, u);
+                        } = await Zb(t, u);
                         const I = await jQuery.post(U({
                                 mod: "inventory",
                                 submod: "move",
@@ -13908,7 +13968,7 @@ function Z(F, M) {
                 }
                 async function x() {
                     const B = document.getElementById("item-name").value;
-                    var r = document.getElementById("item-color").value;
+                    var t = document.getElementById("item-color").value;
                     const u = document.getElementById("item-howmany").value,
                         z = parseInt(document.getElementById("price-min").value, 10),
                         A = parseInt(document.getElementById("price-max").value, 10),
@@ -13920,15 +13980,15 @@ function Z(F, M) {
                         I.style.display = "block";
                         try {
                             let ca = !1;
-                            H && (ca = await q(B, r, u));
-                            !ca && K && (ca = await n(B, r, u));
+                            H && (ca = await q(B, t, u));
+                            !ca && K && (ca = await n(B, t, u));
                             if (ca) {
                                 var L = document.querySelector(".time-selection button.selected"),
                                     O = L ? parseInt(L.value, 10) : 2,
                                     Y = document.querySelector('input[name="anbieten"]'),
                                     fa = Y ? Y.value : "Offer";
-                                for (r = 0; r < b.length; r++) {
-                                    const ma = b[r],
+                                for (t = 0; t < b.length; t++) {
+                                    const ma = b[t],
                                         pa = z === A ? z : Math.floor(Math.random() * (A -
                                             z + 1)) + z,
                                         ba = G({
@@ -13945,7 +14005,7 @@ function Z(F, M) {
                                 b = [];
                                 alert(`${d.za}`);
                                 await new Promise(ma => setTimeout(ma, 250));
-                                Gf("mod=market&qry=" + B)
+                                Hf("mod=market&qry=" + B)
                             } else alert(`${d.ya}`)
                         } catch (ca) {} finally {
                             I.style.display = "none"
@@ -13954,8 +14014,8 @@ function Z(F, M) {
                 }
                 async function C() {
                     var B = document.getElementById("material-select").value,
-                        r = document.getElementById("material-select");
-                    r = r.options[r.selectedIndex].textContent;
+                        t = document.getElementById("material-select");
+                    t = t.options[t.selectedIndex].textContent;
                     const u = document.getElementById("material-color").value,
                         z = document.getElementById("mat-item-howmany").value,
                         A = parseInt(document.getElementById("material-price-min").value, 10),
@@ -13990,7 +14050,7 @@ function Z(F, M) {
                                 b = [];
                                 alert(`${d.za}`);
                                 await new Promise(ma => setTimeout(ma, 250));
-                                Gf("mod=market&qry=" + r)
+                                Hf("mod=market&qry=" + t)
                             } else alert(`${d.ya}`)
                         } catch (ca) {} finally {
                             H.style.display = "none"
@@ -13999,8 +14059,8 @@ function Z(F, M) {
                 }
                 const D = localStorage.getItem("currentSection");
                 if (D && e.includes(D)) {
-                    e.forEach(r => {
-                        document.getElementById(r).classList.add("hidden")
+                    e.forEach(t => {
+                        document.getElementById(t).classList.add("hidden")
                     });
                     document.getElementById(D).classList.remove("hidden");
                     g = e.indexOf(D);
@@ -14008,9 +14068,9 @@ function Z(F, M) {
                     "item-sell-form" === e[g] ? B.textContent = `${d.Aa}` : "material-sell-form" === e[g] ? B.textContent = `${d.Gb}` : "food-sell-form" === e[g] && (B.textContent = `${d.Hb}`)
                 } else document.getElementById("item-sell-form").classList.remove("hidden"), g = 0;
                 e.forEach(B => {
-                    const r = localStorage.getItem("selectedTime_" + B);
-                    r && document.querySelectorAll("#" + B + " .time-selection button").forEach(u => {
-                        u.textContent === r && u.classList.add("selected")
+                    const t = localStorage.getItem("selectedTime_" + B);
+                    t && document.querySelectorAll("#" + B + " .time-selection button").forEach(u => {
+                        u.textContent === t && u.classList.add("selected")
                     })
                 });
                 "true" === localStorage.getItem("sellItemsSectionCollapsed") &&
@@ -14363,8 +14423,8 @@ ${d.zj}
                         q = JSON.parse(localStorage.getItem("auctionSuffixes")) || [],
                         n = JSON.parse(localStorage.getItem("smeltingSettings")) || [];
                     const m = g.querySelector("[data-tooltip]"),
-                        t = m ? m.getAttribute("data-tooltip") : null;
-                    if (t) {
+                        r = m ? m.getAttribute("data-tooltip") : null;
+                    if (r) {
                         var {
                             itemName: w,
                             sn: v,
@@ -14372,10 +14432,10 @@ ${d.zj}
                             itemColor: C,
                             itemType: D,
                             itemLevel: B,
-                            mn: r
-                        } = fh(t, m);
+                            mn: t
+                        } = gh(r, m);
                         try {
-                            JSON.parse(t.replace(/&quot;/g, '"'))
+                            JSON.parse(r.replace(/&quot;/g, '"'))
                         } catch (u) {
                             return
                         }
@@ -14401,7 +14461,7 @@ ${d.zj}
                                 condition: "nameContains",
                                 prefix: v,
                                 suffix: x,
-                                om: r,
+                                om: t,
                                 colors: ["white", "green"],
                                 itemTypes: [D],
                                 hammerState: "none",
@@ -14428,8 +14488,8 @@ ${d.zj}
                 const c = b.querySelectorAll(".packageItem");
                 if (!c || 0 === c.length) return;
                 c.forEach(e => {
-                    const g = eh("\ud83d\udd28", "auction-icon", "pointer", "16px", "1px", `${d.Li}`),
-                        k = eh("\ud83d\udd25",
+                    const g = fh("\ud83d\udd28", "auction-icon", "pointer", "16px", "1px", `${d.Li}`),
+                        k = fh("\ud83d\udd25",
                             "smelt-icon", "pointer", "16px", "40px", `${d.bk}`),
                         h = JSON.parse(localStorage.getItem("auctionPrefixes")) || [],
                         l = JSON.parse(localStorage.getItem("auctionSuffixes")) || [],
@@ -14438,29 +14498,29 @@ ${d.zj}
                         m = n ? n.getAttribute("data-tooltip") : null;
                     if (m) {
                         var {
-                            itemName: t,
+                            itemName: r,
                             sn: w,
                             tn: v,
                             itemColor: x,
                             itemType: C,
                             itemLevel: D,
                             mn: B
-                        } = fh(m, n);
-                        t && (h.includes(w) && l.includes(v) && (g.innerHTML = "\u2705"), q.some(r => {
-                            const u = "" != r.prefix && w.includes(r.prefix) || "" != r.suffix &&
-                                v.includes(r.suffix);
-                            r = "white" == x || r.colors.includes(x);
-                            return u && r
+                        } = gh(m, n);
+                        r && (h.includes(w) && l.includes(v) && (g.innerHTML = "\u2705"), q.some(t => {
+                            const u = "" != t.prefix && w.includes(t.prefix) || "" != t.suffix &&
+                                v.includes(t.suffix);
+                            t = "white" == x || t.colors.includes(x);
+                            return u && t
                         }) && (k.innerHTML = "\u2705"), g.addEventListener("click", () => {
-                            let r = JSON.parse(localStorage.getItem("auctionPrefixes")) || [],
+                            let t = JSON.parse(localStorage.getItem("auctionPrefixes")) || [],
                                 u = JSON.parse(localStorage.getItem("auctionSuffixes")) || [];
-                            r.includes(w) || (r.push(w), localStorage.setItem("auctionPrefixes", JSON.stringify(r)));
+                            t.includes(w) || (t.push(w), localStorage.setItem("auctionPrefixes", JSON.stringify(t)));
                             u.includes(v) || (u.push(v), localStorage.setItem("auctionSuffixes", JSON.stringify(u)));
-                            ab(`Item "${t[0]}" added to the auction list!`);
+                            ab(`Item "${r[0]}" added to the auction list!`);
                             g.innerHTML = "\u2705"
                         }), k.addEventListener("click",
                             () => {
-                                const r = {
+                                const t = {
                                         condition: "nameContains",
                                         prefix: w,
                                         suffix: v,
@@ -14472,9 +14532,9 @@ ${d.zj}
                                         isEnabled: !0
                                     },
                                     u = JSON.parse(localStorage.getItem("smeltingSettings")) || [];
-                                u.push(r);
+                                u.push(t);
                                 localStorage.setItem("smeltingSettings", JSON.stringify(u));
-                                ab(`Item "${t[0]}" added to the smelting list!`);
+                                ab(`Item "${r[0]}" added to the smelting list!`);
                                 k.innerHTML = "\u2705"
                             }), e = e.querySelector('[data-no-combine="true"]')) && (e.appendChild(g), e.appendChild(k))
                     }
@@ -14497,12 +14557,12 @@ ${d.zj}
                                 };
                                 let e = JSON.parse(localStorage.getItem("itemsToReset2") || "[]").map(g => c[g]).filter(g => void 0 !== g);
                                 if (0 < e.length) {
-                                    Gf(`mod=auction&itemType=${e[0]}`);
+                                    Hf(`mod=auction&itemType=${e[0]}`);
                                     return
                                 }
                             }
                             lb.A.I = [];
-                            lb.A.ol = Math.floor(Ch().gold - Number(localStorage.getItem("storeGoldinAuctionholdGold")));
+                            lb.A.ol = Math.floor(Eh().gold - Number(localStorage.getItem("storeGoldinAuctionholdGold")));
                             lb.A.form = document.querySelectorAll("#auction_table form");
                             lb.A.ol && await this.list(async () => {
                                 0 < this.I.length ? await this.buy() :
@@ -14527,7 +14587,7 @@ ${d.zj}
                                 h = e.indexOf(g),
                                 l = h === e.length - 1;
                             "3" === k ? l ? (E("Auction Store: Last type reached, reloading and setting timeout for next cycle."),
-                                Z("enableHideGold", b.AuctionHoldGold || 5), window.location.reload()) : Gf(`mod=auction&itemType=${e[h+1]}`) : -1 !== h && (E("Auction Store: Toggling to mercenary mode for current type:", g), Gf(`mod=auction&itemType=${g}&ttype=3`))
+                                Z("enableHideGold", b.AuctionHoldGold || 5), window.location.reload()) : Hf(`mod=auction&itemType=${e[h+1]}`) : -1 !== h && (E("Auction Store: Toggling to mercenary mode for current type:", g), Hf(`mod=auction&itemType=${g}&ttype=3`))
                         },
                         async list(b = !1) {
                             E(`${d.Mf}`);
@@ -14580,14 +14640,14 @@ ${d.zj}
                         }
                     }
                 },
-                ph = localStorage.getItem("OillastRan"),
-                qh = Date.now(),
+                rh = localStorage.getItem("OillastRan"),
+                th = Date.now(),
                 Ua = {
                     H: "minerva diana vulcanus mars apollo merkur".split(" "),
                     ko: [20, 60, 150, 0],
                     en: [],
                     async start() {
-                        "mod=gods" != lf ? Gf("mod=gods") : Ua.Um(0)
+                        "mod=gods" != mf ? Hf("mod=gods") : Ua.Um(0)
                     },
                     io() {
                         let b = (new Date).getTime(),
@@ -14636,7 +14696,7 @@ ${d.zj}
                         return !1
                     }
                 },
-                gh, Cj = {
+                hh, Dj = {
                     async start() {
                         const b = localStorage.getItem("healPercentage") || 25;
                         var c = JSON.parse(localStorage.getItem("underworld")).isUnderworld;
@@ -14645,18 +14705,18 @@ ${d.zj}
                             k = localStorage.getItem("useVillaMedici"),
                             h = localStorage.getItem("useHealingPotion"),
                             l = "true" === localStorage.getItem("usePray");
-                        if ("true" == e && ea.o <= Number(b) || "true" == e && ea.o <= parseInt(g) || "true" == k && aa.player.key == xa && ea.o <= b && 1 == c || e && "true" == h && ea.o <= b && 1 == c || e && !c && 3 >= Number(Ch().Ha) && localStorage.getItem("autoEnterHell") && ea.o <= localStorage.getItem("hellEnterHP")) {
+                        if ("true" == e && ea.o <= Number(b) || "true" == e && ea.o <= parseInt(g) || "true" == k && aa.player.key == xa && ea.o <= b && 1 == c || e && "true" == h && ea.o <= b && 1 == c || e && !c && 3 >= Number(Eh().Ha) && localStorage.getItem("autoEnterHell") && ea.o <= localStorage.getItem("hellEnterHP")) {
                             c = document.createElement("div");
                             c.setAttribute("id", "lowHealth");
                             c.setAttribute("style", "\n                display: block;\n                position: absolute;\n                top: 140px;\n                left: 50%;\n                transform: translateX(-30%);\n                width: 115px;\n                color: rgba(234, 20, 20, 0.9);\n                background-color: rgba(0, 0, 0, 0.8);\n                font-size: 20px;\n                border-radius: 5px;\n                border-left: 10px solid rgba(234, 20, 20, 0.9);\n                border-right: 10px solid rgba(234, 20, 20, 0.9);\n                will-change: transform, opacity;\n                z-index: 999;\n            ");
                             c.innerHTML = '<span class="span-new">Low Health!</span>';
                             document.getElementById("header_game").insertBefore(c, document.getElementById("header_game").children[0]);
                             async function q() {
-                                if ("inventoryPage" !== document.body.id) Gf("mod=inventory&sub=3&subsub=1");
+                                if ("inventoryPage" !== document.body.id) Hf("mod=inventory&sub=3&subsub=1");
                                 else {
                                     await new Promise(L => setTimeout(L, 500));
                                     var D = Array.from(document.querySelectorAll("#shop .ui-draggable"));
-                                    const r = ea.gold,
+                                    const t = ea.gold,
                                         u = bb.searchParams.get("doll") || "";
                                     let z = !1,
                                         A = 0,
@@ -14668,7 +14728,7 @@ ${d.zj}
                                         if (A >= Number(localStorage.getItem("FoodAmount"))) break;
                                         D = parseInt(L.getAttribute("data-price-gold"), 10);
                                         (B = (B = L.getAttribute("data-basis")) && "7" === B.split("-")[0]) && (z = !0);
-                                        if (r >= D && B) {
+                                        if (t >= D && B) {
                                             z = !0;
                                             localStorage.removeItem("healingStateX");
                                             D = Array.from(document.querySelectorAll('#inventory_nav a.awesome-tabs[data-available="true"]'));
@@ -14679,7 +14739,7 @@ ${d.zj}
                                                     A++;
                                                     await new Promise(O => setTimeout(O, 370));
                                                     if (A >= Number(localStorage.getItem("FoodAmount")) && "1" !== u) {
-                                                        Gf("mod=overview&doll=1");
+                                                        Hf("mod=overview&doll=1");
                                                         return
                                                     }
                                                     continue
@@ -14691,7 +14751,7 @@ ${d.zj}
                                                     await new Promise(Y => setTimeout(Y, 500));
                                                     D = document.getElementById("inv");
                                                     if (Hc(D, L) && (da(L, "inv"), A++, await new Promise(Y => setTimeout(Y, 370)), A >= Number(localStorage.getItem("FoodAmount")) && "1" !== u)) {
-                                                        Gf("mod=overview&doll=1");
+                                                        Hf("mod=overview&doll=1");
                                                         return
                                                     }
                                                 }
@@ -14710,7 +14770,7 @@ ${d.zj}
                                                 await jQuery.post(`${O}?mod=inventory&sub=3&subsub=1&sh=${Y}`, {
                                                     bestechen: L.value
                                                 }) ? E(`${d.wb}`) : E(`${d.xb}`)
-                                            } else 0 < Ch().In && "true" === localStorage.getItem("HealRubyToggle") && !document.querySelector('img[src*="91e0372cccc24f52758be611a10a3b"]') ? (L = jQuery('form[action*="index.php?mod=inventory&sub=3&subsub=1"]'), O = L.attr("action"), L = L.find('input[name="bestechen"]')[0],
+                                            } else 0 < Eh().In && "true" === localStorage.getItem("HealRubyToggle") && !document.querySelector('img[src*="91e0372cccc24f52758be611a10a3b"]') ? (L = jQuery('form[action*="index.php?mod=inventory&sub=3&subsub=1"]'), O = L.attr("action"), L = L.find('input[name="bestechen"]')[0],
                                                 Y = W("sh"), await jQuery.post(`${O}?mod=inventory&sub=3&subsub=1&sh=${Y}`, {
                                                     bestechen: L.value
                                                 }) ? E(`${d.wb}`) : E(`${d.xb}`)) : (E(`${d.Jf}`), localStorage.setItem("HealClothToggle", "false"), localStorage.setItem("HealRubyToggle", "false"));
@@ -14723,31 +14783,31 @@ ${d.zj}
                                 }
                             }
                             async function n() {
-                                if ("guild" == W("mod")) localStorage.setItem("useVillaMedici", "false"), Gf("mod=overview");
-                                else if ("guild_medic" != W("mod")) Gf("mod=guild_medic");
+                                if ("guild" == W("mod")) localStorage.setItem("useVillaMedici", "false"), Hf("mod=overview");
+                                else if ("guild_medic" != W("mod")) Hf("mod=guild_medic");
                                 else {
                                     var D = Array.from(document.querySelectorAll("#content a")).filter(({
                                         href: B
                                     }) => B.includes("mod=guild_medic"));
-                                    0 < D.length ? window.location.href = D[0].href : (D = Math.min(...Array.from(document.querySelectorAll("span[data-ticker-time-left]")).map(B => parseInt(B.getAttribute("data-ticker-time-left"), 10))), isFinite(D) && Z("VillaMedici", Math.ceil(D / 6E4)), l ? (E(`${d.va}`), Gf("mod=underworld&submod=prayStart")) : window.location.reload())
+                                    0 < D.length ? window.location.href = D[0].href : (D = Math.min(...Array.from(document.querySelectorAll("span[data-ticker-time-left]")).map(B => parseInt(B.getAttribute("data-ticker-time-left"), 10))), isFinite(D) && Z("VillaMedici", Math.ceil(D / 6E4)), l ? (E(`${d.va}`), Hf("mod=underworld&submod=prayStart")) : window.location.reload())
                                 }
                             }
                             async function m() {
                                 let D = !1;
-                                if ("mod=premium&submod=inventory" != lf) Gf("mod=premium&submod=inventory");
+                                if ("mod=premium&submod=inventory" != mf) Hf("mod=premium&submod=inventory");
                                 else {
                                     await new Promise(B => setTimeout(B, 500));
-                                    for (let B = 0, r = document.querySelectorAll(".contentboard_paper_repeat"); B < r.length; B++)
-                                        if (r[B].querySelector("img").src && r[B].querySelector("img").src.includes("5fd403b4efa8ea7bc3ca5a852bfce9") || r[B].querySelector("img").src && r[B].querySelector("img").src.includes("token/18") || r[B].querySelector("img").src.includes("5fd403b4efa8ea7bc3ca5a852bfce9")) {
+                                    for (let B = 0, t = document.querySelectorAll(".contentboard_paper_repeat"); B < t.length; B++)
+                                        if (t[B].querySelector("img").src && t[B].querySelector("img").src.includes("5fd403b4efa8ea7bc3ca5a852bfce9") || t[B].querySelector("img").src && t[B].querySelector("img").src.includes("token/18") || t[B].querySelector("img").src.includes("5fd403b4efa8ea7bc3ca5a852bfce9")) {
                                             D = !0;
-                                            r[B].querySelector("input").click();
-                                            Ff(1E3);
+                                            t[B].querySelector("input").click();
+                                            Gf(1E3);
                                             return
                                         } D || (localStorage.setItem("useHealingPotion", "false"),
-                                        l ? (E(`${d.va}`), Gf("mod=underworld&submod=prayStart")) : Ff(1E3))
+                                        l ? (E(`${d.va}`), Hf("mod=underworld&submod=prayStart")) : Gf(1E3))
                                 }
                             }
-                            async function t() {
+                            async function r() {
                                 try {
                                     let A = document.getElementById("inv"),
                                         I = 0,
@@ -14755,9 +14815,9 @@ ${d.zj}
                                     var D = localStorage.getItem("HealPickBag") || 2,
                                         B = localStorage.getItem("PackageSort") || "del_asc";
                                     H = D ? 511 + Number(D) || 512 : 512;
-                                    var r = Array.from(document.querySelectorAll(`#inventory_nav a.awesome-tabs[data-bag-number="${H}"]`));
-                                    0 < r.length && r[0].click();
-                                    r = 1;
+                                    var t = Array.from(document.querySelectorAll(`#inventory_nav a.awesome-tabs[data-bag-number="${H}"]`));
+                                    0 < t.length && t[0].click();
+                                    t = 1;
                                     let K = 0,
                                         L = !1;
                                     D = [];
@@ -14772,18 +14832,18 @@ ${d.zj}
                                         packageSorting: "del_asc"
                                     });
                                     u = !1;
-                                    r = await ja.pm(-1, "", 7);
+                                    t = await ja.pm(-1, "", 7);
                                     for (u = !0; !L && 5 > K;) {
                                         const fa = await jQuery.get(G({
                                                 mod: "packages",
                                                 f: "7",
                                                 fq: "-1",
                                                 qry: "",
-                                                page: r.toString(),
+                                                page: t.toString(),
                                                 sh: W("sh")
                                             })),
                                             ca = jQuery(fa).find(".packageItem");
-                                        if (0 === ca.length) K++, u ? r-- : r++;
+                                        if (0 === ca.length) K++, u ? t-- : t++;
                                         else {
                                             D = [];
                                             for (let ma = 0; ma < ca.length; ma++) {
@@ -14794,7 +14854,7 @@ ${d.zj}
                                                 (![30, 35].includes(ya) &&
                                                     isNaN(qa) || ![30, 35].includes(ya) && qa === Number(xa)) && D.push(pa)
                                             }
-                                            0 < D.length ? L = !0 : (E(`${d.yb} (Page ${r})`), K++, u ? r-- : r++)
+                                            0 < D.length ? L = !0 : (E(`${d.yb} (Page ${t})`), K++, u ? t-- : t++)
                                         }
                                     }
                                     var z = G({
@@ -14874,7 +14934,7 @@ ${d.zj}
                             async function v() {
                                 var D = JSON.parse(localStorage.getItem("underworld")).isUnderworld,
                                     B = "true" === localStorage.getItem("useSacrifice");
-                                const r = "true" === localStorage.getItem("HealShop"),
+                                const t = "true" === localStorage.getItem("HealShop"),
                                     u = localStorage.getItem("HellHealHP") ||
                                     15,
                                     z = "true" === localStorage.getItem("healingStateX"),
@@ -14882,15 +14942,15 @@ ${d.zj}
                                     I = document.getElementById("sstat_ruby_val");
                                 let H = 0;
                                 I && (H = I.textContent.trim().replace(/\./g, ""), H = parseInt(H, 10));
-                                if (z && r) await q() ? await v() : (localStorage.removeItem("healingStateX"), await C());
-                                else if (!0 === D || "true" === h && !0 === D || !0 === B && !0 === D) "true" === localStorage.getItem("useVillaMedici") && nf("VillaMedici") ? n() : "true" === localStorage.getItem("useHealingPotion") ? await m() : B && 5 <= Number(H) ? (E("Sacrificing for heal."),
-                                    Gf("mod=underworld&submod=offering")) : l && "mod=underworld&submod=pray" != lf && ("true" === localStorage.getItem("HealEnabled") ? ea.o <= Number(u) : 1) ? (E(`${d.va}`), Gf("mod=underworld&submod=prayStart")) : l && "mod=underworld&submod=pray" == lf && ("true" === localStorage.getItem("HealEnabled") ? ea.o <= Number(u) : 1) ? (await new Promise(K => setTimeout(K, 6E4)), E(`${d.Xf}`), window.location.reload()) : (E(`${d.Yf}`), Ff(6E4));
+                                if (z && t) await q() ? await v() : (localStorage.removeItem("healingStateX"), await C());
+                                else if (!0 === D || "true" === h && !0 === D || !0 === B && !0 === D) "true" === localStorage.getItem("useVillaMedici") && of("VillaMedici") ? n() : "true" === localStorage.getItem("useHealingPotion") ? await m() : B && 5 <= Number(H) ? (E("Sacrificing for heal."),
+                                    Hf("mod=underworld&submod=offering")) : l && "mod=underworld&submod=pray" != mf && ("true" === localStorage.getItem("HealEnabled") ? ea.o <= Number(u) : 1) ? (E(`${d.va}`), Hf("mod=underworld&submod=prayStart")) : l && "mod=underworld&submod=pray" == mf && ("true" === localStorage.getItem("HealEnabled") ? ea.o <= Number(u) : 1) ? (await new Promise(K => setTimeout(K, 6E4)), E(`${d.Xf}`), window.location.reload()) : (E(`${d.Yf}`), Gf(6E4));
                                 else if (0 == D)
                                     if ("1" !== ((new URL(window.location.href)).searchParams.get("doll") || "")) "mod=overview&doll=1" !=
-                                        lf && Gf("mod=overview&doll=1");
-                                    else if (B = await C(), !B && ea.o <= Number(b) || !B && !D && 3 >= Number(Ch().Ha) && localStorage.getItem("autoEnterHell") && ea.o <= localStorage.getItem("hellEnterHP")) A ? (D = await t(), !D && r ? (localStorage.setItem("healingStateX", "true"), q()) : (D || (E(`${d.vb}`), await new Promise(K => setTimeout(K, 3E4))), window.location.reload())) : r ? (localStorage.setItem("healingStateX", "true"), q()) : (E(`${d.vb}`), await new Promise(K => setTimeout(K, 3E4)), window.location.reload())
+                                        mf && Hf("mod=overview&doll=1");
+                                    else if (B = await C(), !B && ea.o <= Number(b) || !B && !D && 3 >= Number(Eh().Ha) && localStorage.getItem("autoEnterHell") && ea.o <= localStorage.getItem("hellEnterHP")) A ? (D = await r(), !D && t ? (localStorage.setItem("healingStateX", "true"), q()) : (D || (E(`${d.vb}`), await new Promise(K => setTimeout(K, 3E4))), window.location.reload())) : t ? (localStorage.setItem("healingStateX", "true"), q()) : (E(`${d.vb}`), await new Promise(K => setTimeout(K, 3E4)), window.location.reload())
                             }
-                            async function x(D, B, r) {
+                            async function x(D, B, t) {
                                 let u =
                                     null,
                                     z = 0,
@@ -14899,12 +14959,12 @@ ${d.zj}
                                     H = "true" === localStorage.getItem("HealCervisia"),
                                     K = "true" === localStorage.getItem("HealEggs");
                                 let L = !1;
-                                H && (L = await sf());
+                                H && (L = await tf());
                                 D.forEach(O => {
                                     var Y = O.getAttribute("data-basis");
                                     const fa = parseInt(O.getAttribute("data-soulbound-to"), 10);
                                     var ca = (ca = O.getAttribute("data-tooltip").match(/Heals ([\d,\.]+) of life/)) ? parseInt(ca[1].replace(/\./g, ""), 10) : 0;
-                                    const ma = r - (B + ca);
+                                    const ma = t - (B + ca);
                                     if (!fa || fa === parseInt(I, 10)) {
                                         if (Y.startsWith("7-")) {
                                             Y = parseInt(Y.split("-")[1],
@@ -14922,20 +14982,20 @@ ${d.zj}
                                 return new Promise(async D => {
                                     let B = !1;
                                     const {
-                                        lo: r,
+                                        lo: t,
                                         Ko: u
                                     } = await w();
                                     var z = new URL(window.location.href);
                                     const A = z.origin;
                                     z = z.searchParams.get("sh");
-                                    if ("mod=overview&doll=1" != lf) Gf("mod=overview&doll=1");
+                                    if ("mod=overview&doll=1" != mf) Hf("mod=overview&doll=1");
                                     else {
                                         const Y = "true" === localStorage.getItem("HealPackage"),
                                             fa = "true" === localStorage.getItem("HealShop"),
                                             ca = "true" === localStorage.getItem("HealCervisia"),
                                             ma = "true" === localStorage.getItem("HealEggs");
                                         let pa = !1;
-                                        ca && (pa = await sf());
+                                        ca && (pa = await tf());
                                         var I = Array.from(document.querySelectorAll("#inventory_nav a.awesome-tabs")),
                                             H = I.findIndex(ba => ba.classList.contains("current"));
                                         I = I.slice(H).concat(I.slice(0, H));
@@ -14976,7 +15036,7 @@ ${d.zj}
                                                             if (ba) await new Promise(qa => setTimeout(qa, 250)), await da(ba, "avatar"), await new Promise(qa => setTimeout(qa, 450)), E(`${d.tb}`), O++, 2 <= O && window.location.reload();
                                                             else {
                                                                 K = !1;
-                                                                Y && (K = await t());
+                                                                Y && (K = await r());
                                                                 if (!K && fa) return localStorage.setItem("healingStateX",
                                                                     "true"), q(), !0;
                                                                 window.location.reload()
@@ -14984,8 +15044,8 @@ ${d.zj}
                                                 } else
                                                     for (const ba of K) {
                                                         B = !0;
-                                                        if (O = await x(K, r, u)) await new Promise(qa => setTimeout(qa, 250)), await da(O, "avatar"), await new Promise(qa => setTimeout(qa, 450)), E(`${d.tb}`);
-                                                        else if (O = !1, Y && (O = await t()), !O && fa) {
+                                                        if (O = await x(K, t, u)) await new Promise(qa => setTimeout(qa, 250)), await da(O, "avatar"), await new Promise(qa => setTimeout(qa, 450)), E(`${d.tb}`);
+                                                        else if (O = !1, Y && (O = await r()), !O && fa) {
                                                             localStorage.setItem("healingStateX", "true");
                                                             q();
                                                             return
@@ -15209,22 +15269,22 @@ ${d.zj}
                         }
                         this.location = Array.from(document.querySelectorAll("#submenu2 a")).pop().href;
                         var m = "true" === localStorage.getItem("farmEnable"),
-                            t = localStorage.getItem("farmLocation") || 1;
+                            r = localStorage.getItem("farmLocation") || 1;
                         const w = localStorage.getItem("farmEnemy") || 1;
                         var v = "true" === localStorage.getItem("useGodPowersHell");
                         const x = "true" === localStorage.getItem("usedGodPowers");
                         var C = localStorage.getItem("hellLimit") || 0;
                         const D = "true" === localStorage.getItem("EnableHellLimit");
                         if (v && !x) {
-                            if ("mod=overview&doll=1" != lf) {
-                                Gf("mod=overview&doll=1");
+                            if ("mod=overview&doll=1" != mf) {
+                                Hf("mod=overview&doll=1");
                                 return
                             }
                             await c()
                         }
-                        if (nf("underworldArmorBuffs")) {
-                            if ("mod=overview&doll=1" != lf) {
-                                Gf("mod=overview&doll=1");
+                        if (of("underworldArmorBuffs")) {
+                            if ("mod=overview&doll=1" != mf) {
+                                Hf("mod=overview&doll=1");
                                 return
                             }
                             await c(!0)
@@ -15237,32 +15297,32 @@ ${d.zj}
                             submod: "prayEnd",
                             sh: W("sh")
                         }));
-                        if ("true" == localStorage.getItem("exitUnderworld") && 0 == Number(Ch().Ha)) C = JSON.parse(localStorage.getItem("underworld")), C.isUnderworld = !1, localStorage.setItem("underworld",
+                        if ("true" == localStorage.getItem("exitUnderworld") && 0 == Number(Eh().Ha)) C = JSON.parse(localStorage.getItem("underworld")), C.isUnderworld = !1, localStorage.setItem("underworld",
                             JSON.stringify(C)), await jQuery.get(G({
                             mod: "underworld",
                             submod: "exit",
                             sh: W("sh")
                         })), E(`${d.Zf}`), location.reload();
                         else {
-                            if (0 == Number(Ch().Ha) && "true" == localStorage.getItem("UnderworldUseMobi")) {
-                                if ("mod=premium&submod=inventory" !== lf) {
-                                    Gf("mod=premium&submod=inventory");
+                            if (0 == Number(Eh().Ha) && "true" == localStorage.getItem("UnderworldUseMobi")) {
+                                if ("mod=premium&submod=inventory" !== mf) {
+                                    Hf("mod=premium&submod=inventory");
                                     return
                                 }
                                 v = document.querySelectorAll(".contentboard_paper_repeat");
-                                for (var r = 0; r < v.length;) {
-                                    v[r].querySelector("img").src && (v[r].querySelector("img").src.includes("c9ce614bbc67a9e85aa0ee87cf2bb7") || v[r].querySelector("img").src.includes("c9ce614bbc67a9e85aa0ee87cf2bb7")) ?
-                                        v[r].querySelector("input").click() : localStorage.setItem("UnderworldUseMobi", "false");
-                                    Ff(500);
+                                for (var t = 0; t < v.length;) {
+                                    v[t].querySelector("img").src && (v[t].querySelector("img").src.includes("c9ce614bbc67a9e85aa0ee87cf2bb7") || v[t].querySelector("img").src.includes("c9ce614bbc67a9e85aa0ee87cf2bb7")) ?
+                                        v[t].querySelector("input").click() : localStorage.setItem("UnderworldUseMobi", "false");
+                                    Gf(500);
                                     return
                                 }
                             }
-                            r = document.querySelector("#submenu2");
-                            v = r.querySelector(`#location_inactive_${t}`);
-                            r = r.querySelector(`a[href*="loc=${t}"]`);
+                            t = document.querySelector("#submenu2");
+                            v = t.querySelector(`#location_inactive_${r}`);
+                            t = t.querySelector(`a[href*="loc=${r}"]`);
                             v = v && v.classList.contains("inactive");
-                            if (!m || v && !r || lf === `mod=location&loc=${t}`)
-                                if (m && lf == `mod=location&loc=${t}` && B && (!D || D && 0 < C)) m = parseInt(w, 10), t = document.getElementsByClassName("expedition_button"), D && (C--, localStorage.setItem("hellLimit", C)), t[m - 1].click(), Ff(5E3);
+                            if (!m || v && !t || mf === `mod=location&loc=${r}`)
+                                if (m && mf == `mod=location&loc=${r}` && B && (!D || D && 0 < C)) m = parseInt(w, 10), r = document.getElementsByClassName("expedition_button"), D && (C--, localStorage.setItem("hellLimit", C)), r[m - 1].click(), Gf(5E3);
                                 else if (window.location.href !=
                                 this.location) window.location.href = this.location;
                             else {
@@ -15275,9 +15335,9 @@ ${d.zj}
                                 Array.from(document.querySelectorAll(".expedition_box")).forEach(z => {
                                     z.querySelector(".expedition_picture img") && z.querySelector("img").src.includes("904194973d21066c96cb414d04d676") && u++
                                 });
-                                document.querySelector("#content .icon_expeditionpoints") && 0 < Number(Ch().Ha) || "true" == localStorage.getItem("UnderWorldUseRuby") && "0" == Ch().Ha ? (ka("underworldAttacks", 0), document.querySelectorAll(".expedition_button")[Math.floor(3 -
-                                    u)].click()) : (E(`${d.$f}`), await new Promise(z => setTimeout(z, 6E4)), Ff())
-                            } else Gf(`mod=location&loc=${t}`)
+                                document.querySelector("#content .icon_expeditionpoints") && 0 < Number(Eh().Ha) || "true" == localStorage.getItem("UnderWorldUseRuby") && "0" == Eh().Ha ? (ka("underworldAttacks", 0), document.querySelectorAll(".expedition_button")[Math.floor(3 -
+                                    u)].click()) : (E(`${d.$f}`), await new Promise(z => setTimeout(z, 6E4)), Gf())
+                            } else Hf(`mod=location&loc=${r}`)
                         }
                     },
                     async qo() {
@@ -15303,12 +15363,12 @@ ${d.zj}
                                     const m = URL.createObjectURL(new Blob(["\n                            const timers = {};\n                            self.onmessage = function(event) {\n                                const { type, id, delay } = event.data;\n                                if (type === 'setTimeout') {\n                                    timers[id] = setTimeout(() => {\n                                        self.postMessage({ type: 'timeout', id });\n                                        delete timers[id];\n                                    }, delay);\n                                }\n                                if (type === 'clearTimeout') {\n                                    if (timers[id]) {\n                                        clearTimeout(timers[id]);\n                                        delete timers[id];\n                                    }\n                                }\n                            };\n                        "], {
                                             type: "application/javascript"
                                         })),
-                                        t = new Worker(m),
+                                        r = new Worker(m),
                                         w = v => {
-                                            "timeout" === v.data.type && v.data.id === h && (k(), t.removeEventListener("message", w), t.terminate(), URL.revokeObjectURL(m))
+                                            "timeout" === v.data.type && v.data.id === h && (k(), r.removeEventListener("message", w), r.terminate(), URL.revokeObjectURL(m))
                                         };
-                                    t.addEventListener("message", w);
-                                    t.postMessage({
+                                    r.addEventListener("message", w);
+                                    r.postMessage({
                                         type: "setTimeout",
                                         id: h,
                                         delay: l
@@ -15330,36 +15390,36 @@ ${d.zj}
             } else Vb = parseInt(xc.split(" ")[0], 10);
             xc.includes("minute") && (Vb *= 60);
             var yc = 1E3 * Vb,
-                Dj = localStorage.getItem("costumeUnderworld"),
-                Ej = ["9", "10", "11"],
+                Ej = localStorage.getItem("costumeUnderworld"),
+                Fj = ["9", "10", "11"],
                 zc = "true" === localStorage.getItem("activateAuction2"),
-                rh = "true" === localStorage.getItem("auctionTURBO"),
+                uh = "true" === localStorage.getItem("auctionTURBO"),
                 Ac = "true" === localStorage.getItem("bidFood"),
-                th = 9 < ea.level,
-                uh = "true" === localStorage.getItem("enableCircusWithoutHeal"),
-                Fj = "true" === localStorage.getItem("resetUnderworld"),
-                vh = "true" === localStorage.getItem("auctiongladiatorenable"),
-                wh = "true" === localStorage.getItem("auctionmercenaryenable"),
+                vh = 9 < ea.level,
+                wh = "true" === localStorage.getItem("enableCircusWithoutHeal"),
+                Gj = "true" === localStorage.getItem("resetUnderworld"),
+                xh = "true" === localStorage.getItem("auctiongladiatorenable"),
+                yh = "true" === localStorage.getItem("auctionmercenaryenable"),
                 Bc = "true" === localStorage.getItem("enableMercenarySearch"),
-                gf = "true" === localStorage.getItem("EnableArenaHell"),
-                Gj = "true" === localStorage.getItem("dontEnterUnderworld"),
+                hf = "true" === localStorage.getItem("EnableArenaHell"),
+                Hj = "true" === localStorage.getItem("dontEnterUnderworld"),
                 Cc = 0 < JSON.parse(localStorage.getItem("auctionPrefixes")).length || 0 < JSON.parse(localStorage.getItem("auctionSuffixes")).length,
                 Cb = localStorage.getItem("auctionStatus") >= localStorage.getItem("bidStatus"),
-                xh = localStorage.getItem("auctionMStatus") >= localStorage.getItem("bidStatus"),
+                zh = localStorage.getItem("auctionMStatus") >= localStorage.getItem("bidStatus"),
                 eb = JSON.parse(localStorage.getItem("underworld")),
-                Db = nf("auction"),
-                yh = nf("auctionM"),
-                zh = localStorage.getItem("MarketlastRan"),
-                Hj = localStorage.getItem("MarketSearchInterval") || 5,
-                Ij = JSON.parse(localStorage.getItem("activeItemsGladiator") || "{}"),
-                Jj = JSON.parse(localStorage.getItem("activeItemsMercenary") || "{}"),
-                Ah = JSON.parse(localStorage.getItem("itemsToReset") || "[]"),
-                hf = eb.mj;
-            hf = hf ? !1 : !0;
-            va && "true" === localStorage.getItem("activateRepair") && oj();
+                Db = of("auction"),
+                Ah = of("auctionM"),
+                Bh = localStorage.getItem("MarketlastRan"),
+                Ij = localStorage.getItem("MarketSearchInterval") || 5,
+                Jj = JSON.parse(localStorage.getItem("activeItemsGladiator") || "{}"),
+                Kj = JSON.parse(localStorage.getItem("activeItemsMercenary") || "{}"),
+                Ch = JSON.parse(localStorage.getItem("itemsToReset") || "[]"),
+                jf = eb.mj;
+            jf = jf ? !1 : !0;
+            va && "true" === localStorage.getItem("activateRepair") && qj();
             0 < yc && (E(`Waiting for ${Vb} seconds...`), await new Promise(b =>
                 setTimeout(b, yc)));
-            if (va && (0 < Object.keys(Ij).length || 0 < Object.keys(Jj).length) && "true" === localStorage.getItem("activateRepair") && nf("repair") && !window.location.href.includes("/index.php?mod=hermit&submod=underworld") && aa.player.key == xa && 2E3 < Ch().gold && ("true" === localStorage.getItem("HealEnabled") ? ea.o > Number(localStorage.getItem("healPercentage")) : 1)) {
+            if (va && (0 < Object.keys(Jj).length || 0 < Object.keys(Kj).length) && "true" === localStorage.getItem("activateRepair") && of("repair") && !window.location.href.includes("/index.php?mod=hermit&submod=underworld") && aa.player.key == xa && 2E3 < Eh().gold && ("true" === localStorage.getItem("HealEnabled") ? ea.o > Number(localStorage.getItem("healPercentage")) : 1)) {
                 const b = "true" === localStorage.getItem("repairGladiator"),
                     c = "true" === localStorage.getItem("repairMercenary");
                 let e = [],
@@ -15374,7 +15434,7 @@ ${d.zj}
                     v = (new DOMParser).parseFromString(v, "text/html").getElementById("char").querySelectorAll("div[data-tooltip]");
                     C = (C = localStorage.getItem("workbenchItem")) ? JSON.parse(C) : {};
                     C.selectedItem = C.selectedItem || {};
-                    let r = [];
+                    let t = [];
                     v.forEach(u => {
                         if (u.classList.contains("ui-draggable")) {
                             let z =
@@ -15383,7 +15443,7 @@ ${d.zj}
                                 I = u.getAttribute("data-measurement-x"),
                                 H = u.getAttribute("data-measurement-y"),
                                 K = JSON.parse(u.getAttribute("data-tooltip")).pop().pop()[0].match(/\d+/g);
-                            null != K && K[0] / K[1] < B && r.push({
+                            null != K && K[0] / K[1] < B && t.push({
                                 type: Da(u),
                                 quality: Ba(u),
                                 name: z,
@@ -15394,7 +15454,7 @@ ${d.zj}
                             })
                         }
                     });
-                    return r
+                    return t
                 }
                 const q = bb.origin,
                     n = bb.searchParams.get("sh") || "";
@@ -15403,12 +15463,12 @@ ${d.zj}
                 b && (e = await l(q, 1, n), localStorage.setItem("itemList1", JSON.stringify(e)), aa.workbench.itemList1 =
                     e);
                 c && (g = await l(q, 2, n), localStorage.setItem("itemList2", JSON.stringify(g)), aa.workbench.itemList2 = g);
-                const t = JSON.parse(localStorage.getItem("Timers"));
-                m.selectedItem || (b && c ? 0 === e.length && 0 === g.length && Z("repair", t.Repair || 10) : b ? 0 === e.length && Z("repair", t.Repair || 10) : c ? 0 === g.length && Z("repair", t.Repair || 10) : Z("repair", t.Repair || 10));
+                const r = JSON.parse(localStorage.getItem("Timers"));
+                m.selectedItem || (b && c ? 0 === e.length && 0 === g.length && Z("repair", r.Repair || 10) : b ? 0 === e.length && Z("repair", r.Repair || 10) : c ? 0 === g.length && Z("repair", r.Repair || 10) : Z("repair", r.Repair || 10));
 
                 function w(v, x, C) {
                     return Array.isArray(v) && 0 !== v.length ? v.filter(D => {
-                        const B = Object.keys(x).find(r => x[r] === D.container);
+                        const B = Object.keys(x).find(t => x[t] === D.container);
                         return B ? !1 !== C[B] : !0
                     }) : v
                 }
@@ -15445,30 +15505,30 @@ ${d.zj}
                     localStorage.setItem("itemList1", JSON.stringify(e));
                     localStorage.setItem("itemList2", JSON.stringify(g))
                 }
-                if (b && 0 < e.length || c && 0 < g.length || m.selectedItem && 0 < Object.keys(m.selectedItem).length) await Bj.start();
+                if (b && 0 < e.length || c && 0 < g.length || m.selectedItem && 0 < Object.keys(m.selectedItem).length) await Cj.start();
                 else {
                     const v = JSON.parse(localStorage.getItem("Timers"));
                     Z("repair", v.Repair || 10);
                     window.location.reload()
                 }
-            } else if (0 == await gj(xa, cc, aa.player.supportDevelopersPlease)) gb();
-            else if ((zc || Ac || Bc) && rh && zc && va && th && (vh && Cc && Cb && Db && nf("AuctionEmpty") ||
-                    Ac && Cb && Db && nf("AuctionEmpty") || Bc && Cb && Db && nf("AuctionMEmpty") || wh && Cc && xh && yh && nf("AuctionMEmpty"))) await za.start();
-            else if (va && "true" === localStorage.getItem("EnableSmelt") && ja.gn() && 1E3 < ea.gold && nf("smelt")) nf("smeltCheck") && (ja.slots = await ja.u(), await ja.Em(ja.slots), await ja.Vm(ja.slots), "true" === localStorage.getItem("EnableSmelt") && 1E3 < ea.gold & ja.gn() && nf("smelt") && await ja.start());
-            else if (va && 3 >= Number(Ch().Ha) && !0 === Fa && "true" === localStorage.getItem("autoEnterHell") && 100 <= ea.level && 8E3 <=
-                ea.gold && ea.o > Number(localStorage.getItem("hellEnterHP")) && Va.cooldown() && (Gj ? hf : 1)) await Va.qo();
-            else if (1 == va && "true" === localStorage.getItem("OilEnable") && Ua.io() && (!ph || 36E5 <= qh - ph)) {
+            } else if (0 == await ij(xa, cc, aa.player.supportDevelopersPlease)) gb();
+            else if ((zc || Ac || Bc) && uh && zc && va && vh && (xh && Cc && Cb && Db && of("AuctionEmpty") ||
+                    Ac && Cb && Db && of("AuctionEmpty") || Bc && Cb && Db && of("AuctionMEmpty") || yh && Cc && zh && Ah && of("AuctionMEmpty"))) await za.start();
+            else if (va && "true" === localStorage.getItem("EnableSmelt") && ja.gn() && 1E3 < ea.gold && of("smelt")) of("smeltCheck") && (ja.slots = await ja.u(), await ja.Em(ja.slots), await ja.Vm(ja.slots), "true" === localStorage.getItem("EnableSmelt") && 1E3 < ea.gold & ja.gn() && of("smelt") && await ja.start());
+            else if (va && 3 >= Number(Eh().Ha) && !0 === Fa && "true" === localStorage.getItem("autoEnterHell") && 100 <= ea.level && 8E3 <=
+                ea.gold && ea.o > Number(localStorage.getItem("hellEnterHP")) && Va.cooldown() && (Hj ? jf : 1)) await Va.qo();
+            else if (1 == va && "true" === localStorage.getItem("OilEnable") && Ua.io() && (!rh || 36E5 <= th - rh)) {
                 E(`${d.Nf}`);
-                localStorage.setItem("OillastRan", qh.toString());
+                localStorage.setItem("OillastRan", th.toString());
                 const b = await Ua.so();
                 for (let c = 0; c < Ua.H.length; c++) await Ua.Um(c, b);
                 E(`${d.Of}`);
                 af()
-            } else if (va && (ea.o <= Number(localStorage.getItem("healPercentage")) && "true" === localStorage.getItem("HealEnabled") && !Va.isUnderworld() || 3 >= Number(Ch().Ha) && !Va.isUnderworld() &&
-                    Va.cooldown() && "true" === localStorage.getItem("autoEnterHell") && ea.o <= Number(localStorage.getItem("hellEnterHP")) || Va.isUnderworld() && "true" === localStorage.getItem("autoEnterHell") && ea.o <= Number(localStorage.getItem("HellHealHP")))) await Cj.start();
-            else if (va && Fa && "true" === localStorage.getItem("autoEnterHell") && Va.isUnderworld() && Ch().ro) await Va.start();
-            else if (va && "true" == localStorage.getItem("useCostume") && (!window.location.href.includes("/index.php?mod=hermit") && nf("CheckDolls") && Ej.some(b => Dj.includes(b)) ||
-                    !window.location.href.includes("/index.php?mod=hermit") && nf("CheckDolls"))) await ef.start();
+            } else if (va && (ea.o <= Number(localStorage.getItem("healPercentage")) && "true" === localStorage.getItem("HealEnabled") && !Va.isUnderworld() || 3 >= Number(Eh().Ha) && !Va.isUnderworld() &&
+                    Va.cooldown() && "true" === localStorage.getItem("autoEnterHell") && ea.o <= Number(localStorage.getItem("hellEnterHP")) || Va.isUnderworld() && "true" === localStorage.getItem("autoEnterHell") && "true" === localStorage.getItem("HealEnabled") && ea.o <= Number(localStorage.getItem("HellHealHP")))) await Dj.start();
+            else if (va && Fa && "true" === localStorage.getItem("autoEnterHell") && Va.isUnderworld() && Eh().ro) await Va.start();
+            else if (va && "true" == localStorage.getItem("useCostume") && (!window.location.href.includes("/index.php?mod=hermit") &&
+                    of("CheckDolls") && Fj.some(b => Ej.includes(b)) || !window.location.href.includes("/index.php?mod=hermit") && of("CheckDolls"))) await ff.start();
             else if (va && (!0 === Sa && V() && aa.player.key == xa || !0 === Sa && ("true" === localStorage.getItem("HealEnabled") ? ea.o > Number(localStorage.getItem("healPercentage")) : 1) && Tb < Ub && aa.player.key == xa)) {
                 localStorage.setItem("nextQuestTime.timeOut", 0);
                 localStorage.setItem("nextQuestTime", 0);
@@ -15492,10 +15552,10 @@ ${d.zj}
 
                 function c(k) {
                     var h = JSON.parse(localStorage.getItem("acceptQuestKeywords") || "[]").map(q => q.toLowerCase());
-                    const l = parseInt(localStorage.getItem("questrewardvalue"), 10);
+                    const l = parseInt(localStorage.getItem("questrewardvalue"),
+                        10);
                     if (k = $(k).find(".quest_slot_reward_item")[0]) {
-                        const q =
-                            k.outerHTML.toLowerCase();
+                        const q = k.outerHTML.toLowerCase();
                         if (h.some(n => q.includes(n)) && (h = q.match(/(\d+\.\d+)/)) && parseFloat(h[0].replace(".", "")) >= l) return !0
                     }
                     return !1
@@ -15507,30 +15567,30 @@ ${d.zj}
                     const q = "true" === localStorage.getItem("skipTimeCircusQuests"),
                         n = "true" === localStorage.getItem("skipTimeOtherQuests"),
                         m = "true" === localStorage.getItem("acceptnotfilter"),
-                        t = "true" === localStorage.getItem("UnderworldQuests"),
+                        r = "true" === localStorage.getItem("UnderworldQuests"),
                         w = JSON.parse(localStorage.getItem("questKeywords") || "[]"),
                         v = JSON.parse(localStorage.getItem("acceptQuestKeywords") || "[]"),
                         x = JSON.parse(localStorage.getItem("underworldQuestKeywords") || "[]"),
                         C = JSON.parse(localStorage.getItem("underworld") || "{}");
                     var D = $("#content .contentboard_slot_inactive").toArray();
                     if (h.length) {
-                        function B(r) {
-                            return r.includes("8aada67d4c5601e009b9d2a88f478c") ? "combat" : r.includes("00f1a594723515a77dcd6d66c918fb") ? "arena" : r.includes("586768e942030301c484347698bc5e") ? "circus" : r.includes("4e41ab43222200aa024ee177efef8f") ?
-                                "expedition" : r.includes("dc366909fdfe69897d583583f6e446") ? "dungeon" : r.includes("5a358e0a030d8551a5a65d284c8730") ? "items" : null
+                        function B(t) {
+                            return t.includes("8aada67d4c5601e009b9d2a88f478c") ? "combat" : t.includes("00f1a594723515a77dcd6d66c918fb") ? "arena" : t.includes("586768e942030301c484347698bc5e") ?
+                                "circus" : t.includes("4e41ab43222200aa024ee177efef8f") ? "expedition" : t.includes("dc366909fdfe69897d583583f6e446") ? "dungeon" : t.includes("5a358e0a030d8551a5a65d284c8730") ? "items" : null
                         }
                         h = !1;
-                        for (const r of D) {
-                            let u = r.getElementsByClassName("quest_slot_title")[0].innerText;
-                            D = B(r.getElementsByClassName("quest_slot_icon")[0].style.backgroundImage);
-                            if (!(l && 0 < r.getElementsByClassName("quest_slot_time").length && "arena" == D || q && 0 < r.getElementsByClassName("quest_slot_time").length && "circus" == D || n && 0 < r.getElementsByClassName("quest_slot_time").length && "circus" !== D &&
-                                    "arena" !== D)) {
-                                if (1 == C.isUnderworld && t && !h && 0 < x.length && Na[D] && t) {
-                                    const z = $(r).find(".quest_slot_reward_item img[data-tooltip]")[0];
+                        for (const t of D) {
+                            let u = t.getElementsByClassName("quest_slot_title")[0].innerText;
+                            D = B(t.getElementsByClassName("quest_slot_icon")[0].style.backgroundImage);
+                            if (!(l && 0 < t.getElementsByClassName("quest_slot_time").length && "arena" == D || q && 0 < t.getElementsByClassName("quest_slot_time").length && "circus" == D || n && 0 < t.getElementsByClassName("quest_slot_time").length &&
+                                    "circus" !== D && "arena" !== D)) {
+                                if (1 == C.isUnderworld && r && !h && 0 < x.length && Na[D] && r) {
+                                    const z = $(t).find(".quest_slot_reward_item img[data-tooltip]")[0];
                                     if (z) {
                                         D = z.getAttribute("data-tooltip");
                                         const A = JSON.parse(D.replace(/&quot;/g, '"'))[0][0][0].toLowerCase();
                                         if (x.some(I => A.includes(I.toLowerCase()))) {
-                                            l = r.getElementsByClassName("quest_slot_button_accept")[0].getAttribute("href");
+                                            l = t.getElementsByClassName("quest_slot_button_accept")[0].getAttribute("href");
                                             await jQuery.get(l).done();
                                             h = !0;
                                             break
@@ -15538,24 +15598,24 @@ ${d.zj}
                                     }
                                 }
                                 if (!w.some(z => u.includes(z))) {
-                                    if (Na[D] && b(r)) {
-                                        l = r.getElementsByClassName("quest_slot_button_accept")[0].getAttribute("href");
+                                    if (Na[D] && b(t)) {
+                                        l = t.getElementsByClassName("quest_slot_button_accept")[0].getAttribute("href");
                                         await jQuery.get(l).done();
                                         h = !0;
                                         break
                                     }
-                                    if (Na[D] && c(r) && !m) {
-                                        l = r.getElementsByClassName("quest_slot_button_accept")[0].getAttribute("href");
+                                    if (Na[D] && c(t) && !m) {
+                                        l = t.getElementsByClassName("quest_slot_button_accept")[0].getAttribute("href");
                                         await jQuery.get(l).done();
                                         h = !0;
                                         break
                                     }
                                     if (Na[D] && v.some(z => u.includes(z))) {
-                                        l = r.getElementsByClassName("quest_slot_button_accept")[0].getAttribute("href");
+                                        l = t.getElementsByClassName("quest_slot_button_accept")[0].getAttribute("href");
                                         await jQuery.get(l).done();
                                         h = !0;
                                         break
-                                    }!h && Na[D] && m || h || !Na[D] || m || 0 !== v.length || (h = r.getElementsByClassName("quest_slot_button_accept")[0].getAttribute("href"), await jQuery.get(h).done(), h = !0)
+                                    }!h && Na[D] && m || h || !Na[D] || m || 0 !== v.length || (h = t.getElementsByClassName("quest_slot_button_accept")[0].getAttribute("href"), await jQuery.get(h).done(), h = !0)
                                 }
                             }
                         }
@@ -15593,7 +15653,7 @@ ${d.zj}
                     window.location.reload()
                 }
                 await async function() {
-                    if ("mod=quests" != lf) Gf("mod=quests");
+                    if ("mod=quests" != mf) Hf("mod=quests");
                     else {
                         let k = [];
                         const h = [],
@@ -15610,12 +15670,12 @@ ${d.zj}
                         async function q(m) {
                             try {
                                 m < k.length && (await jQuery.get(k[m]), await q(m + 1))
-                            } catch (t) {}
+                            } catch (r) {}
                         }
                         async function n(m) {
                             try {
                                 m < h.length && (await jQuery.get(h[m]), await n(m + 1))
-                            } catch (t) {}
+                            } catch (r) {}
                         }
                         await async function() {
                             0 <
@@ -15626,16 +15686,16 @@ ${d.zj}
                         }()
                     }
                 }()
-            } else if (va && Dh() && "true" === localStorage.getItem("doKasa") && nf("gold") && Ch().gold > Math.floor(localStorage.getItem("KasaHoldGold"))) await Th();
-            else if (va && 5 < ea.level && "true" == localStorage.getItem("storeGoldinAuction") && Number(Ch().gold) > Math.floor(Number(localStorage.getItem("storeGoldinAuctionmaxGold"))) && nf("enableHideGold")) await lb.A.start();
+            } else if (va && Fh() && "true" === localStorage.getItem("doKasa") && of("gold") && Eh().gold > Math.floor(localStorage.getItem("KasaHoldGold"))) await Vh();
+            else if (va && 5 < ea.level && "true" == localStorage.getItem("storeGoldinAuction") && Number(Eh().gold) > Math.floor(Number(localStorage.getItem("storeGoldinAuctionmaxGold"))) && of("enableHideGold")) await lb.A.start();
             else if (va && Ic() && !0 === Fa && 0 == eb.isUnderworld && aa.player.key == xa && 0 == Ab.isUnderworld &&
                 aa.player.Ed >= new Date && ("true" === localStorage.getItem("HealEnabled") ? ea.o > Number(localStorage.getItem("healPercentage")) : 1) && !0 === document.getElementById("cooldown_bar_fill_expedition").classList.contains("cooldown_bar_fill_ready")) await async function() {
                 function b() {
                     const l = document.getElementById("errorText");
-                    "false" === localStorage.getItem("HealEnabled") ? (Ya("Your expedition/dungeon settings are incorrect!"), localStorage.setItem("HealEnabled", "true"), Ff(5E3)) : l && "" !== l.innerText.trim() && location.reload()
+                    "false" === localStorage.getItem("HealEnabled") ? (Ya("Your expedition/dungeon settings are incorrect!"), localStorage.setItem("HealEnabled", "true"), Gf(5E3)) : l && "" !== l.innerText.trim() && location.reload()
                 }
                 var c = localStorage.getItem("expeditionLocation");
-                if (lf != `mod=location&loc=${c}`) Gf(`mod=location&loc=${c}`);
+                if (mf != `mod=location&loc=${c}`) Hf(`mod=location&loc=${c}`);
                 else if ("true" === localStorage.getItem("nana_lcn") && cc) {
                     var e = "true" === localStorage.getItem("autoCollectBonuses"),
                         g = localStorage.getItem("selectedEnemy") || 0;
@@ -15660,7 +15720,7 @@ ${d.zj}
                     }
                 }
             }();
-            else if (va && !0 === Ka && !eb.isUnderworld && aa.player.key == xa && 9 < ea.level && ("true" === localStorage.getItem("HealEnabled") ? ea.o > Number(localStorage.getItem("healPercentage")) : 1) && Ch().po && "none" !== document.getElementById("cooldown_bar_dungeon").style.display && !0 === document.getElementById("cooldown_bar_fill_dungeon").classList.contains("cooldown_bar_fill_ready")) await async function() {
+            else if (va && !0 === Ga && !eb.isUnderworld && aa.player.key == xa && 9 < ea.level && ("true" === localStorage.getItem("HealEnabled") ? ea.o > Number(localStorage.getItem("healPercentage")) : 1) && Eh().po && "none" !== document.getElementById("cooldown_bar_dungeon").style.display && !0 === document.getElementById("cooldown_bar_fill_dungeon").classList.contains("cooldown_bar_fill_ready")) await async function() {
                 if ("true" ===
                     localStorage.getItem("nana_lcn") && cc) {
                     var b = localStorage.getItem("dungeonLocation") || "1",
@@ -15669,7 +15729,7 @@ ${d.zj}
                         g = "true" === localStorage.getItem("loose"),
                         k = "true" === localStorage.getItem("dungeonFocusQuest"),
                         h = "chefe Chefe \u0161\u00e9f chef chef juht boss Boss jefe jefe jefe patron capo vad\u012bt\u0101js vadovas f\u0151n\u00f6k patron Patron \u0428\u0435\u0444 baas sjef szef chefe \u0219ef \u0161\u00e9f \u0161ef pomo chef patron \u0645\u062f\u064a\u0631 \u03b1\u03c6\u03b5\u03bd\u03c4\u03b9\u03ba\u03cc \u0448\u0435\u0444 \u0431\u043e\u0441\u0441 \u8001\u677f".split(" ");
-                    if (lf != `mod=dungeon&loc=${b}`) Gf(`mod=dungeon&loc=${b}`);
+                    if (mf != `mod=dungeon&loc=${b}`) Hf(`mod=dungeon&loc=${b}`);
                     else {
                         b = !document.getElementById("content").getElementsByTagName("area")[0];
                         const n = document.getElementById("content").getElementsByClassName("button1");
@@ -15692,7 +15752,7 @@ ${d.zj}
                                     }), {
                                         dif2: Hb
                                     }), n[1].click(), window.location.reload()) : (Ya("Incorrect dungeon/expedition settings"), setTimeout(() => {
-                                        Ff()
+                                        Gf()
                                     }, 1E4))
                                 }
                             } catch (m) {
@@ -15701,12 +15761,12 @@ ${d.zj}
                         } else if (b) window.location.reload();
                         else try {
                             const m = document.querySelector("#content .map_label"),
-                                t = m && m.textContent.toLowerCase(),
+                                r = m && m.textContent.toLowerCase(),
                                 w = Array.from(document.querySelectorAll("#content .map_label")).find(v => h.some(x => x === v.textContent));
                             ka("dungeonAttacks", 0);
                             if (e && g) localStorage.setItem("loose", "false"), document.querySelectorAll("#content .button1")[0].click();
-                            else if (c && t && w) document.querySelectorAll("#content .button1")[0].click();
-                            else if (t && w && "true" === localStorage.getItem("dungeonAB")) w.click();
+                            else if (c && r && w) document.querySelectorAll("#content .button1")[0].click();
+                            else if (r && w && "true" === localStorage.getItem("dungeonAB")) w.click();
                             else if (k) {
                                 var l = 0,
                                     q = null;
@@ -15722,8 +15782,8 @@ ${d.zj}
                     }
                 }
             }();
-            else if (va && nf("arena") &&
-                (!0 === La || eb.isUnderworld && gf) && (!eb.isUnderworld || eb.isUnderworld && gf) && aa.player.key == xa && xa === Jc && aa.player.Ed >= new Date && (eb.isUnderworld || "true" !== localStorage.getItem("HealEnabled") || ea.o > Number(localStorage.getItem("healPercentage")) || eb.isUnderworld && ea.o > Number(localStorage.getItem("HellHealHP"))) && !0 === document.getElementById("cooldown_bar_fill_arena").classList.contains("cooldown_bar_fill_ready")) {
+            else if (va && of("arena") &&
+                (!0 === Ha || eb.isUnderworld && hf) && (!eb.isUnderworld || eb.isUnderworld && hf) && aa.player.key == xa && xa === Jc && aa.player.Ed >= new Date && (eb.isUnderworld || "true" !== localStorage.getItem("HealEnabled") || ea.o > Number(localStorage.getItem("healPercentage")) || eb.isUnderworld && ea.o > Number(localStorage.getItem("HellHealHP"))) && !0 === document.getElementById("cooldown_bar_fill_arena").classList.contains("cooldown_bar_fill_ready")) {
                 async function b() {
                     var k = new URL(window.location.href),
                         h = k.origin;
@@ -15738,7 +15798,7 @@ ${d.zj}
                     if (0 === q.length) return console.log("No players available to attack"), !1;
                     h = JSON.parse(localStorage.getItem("avoidAttackList")) || [];
                     l = function(n) {
-                        for (var m = n.length, t, w; 0 !== m;) w = Math.floor(Math.random() * m), --m, t = n[m], n[m] = n[w], n[w] = t;
+                        for (var m = n.length, r, w; 0 !== m;) w = Math.floor(Math.random() * m), --m, r = n[m], n[m] = n[w], n[w] = r;
                         return n
                     }(q);
                     q = 0;
@@ -15748,7 +15808,7 @@ ${d.zj}
                             if (l.includes("index.php?mod=reports")) {
                                 k = (new URLSearchParams(l)).get("reportId");
                                 E(`${d.sa}` + n.textContent);
-                                Gf(`mod=reports&submod=showCombatReport&t=2&reportId=${k}`);
+                                Hf(`mod=reports&submod=showCombatReport&t=2&reportId=${k}`);
                                 await new Promise(m => setTimeout(m, 500));
                                 return
                             }
@@ -15763,7 +15823,7 @@ ${d.zj}
                             method: "POST"
                         })).text()
                     } catch {
-                        Ff(1E3)
+                        Gf(1E3)
                     }
                 }
                 async function e(k) {
@@ -15806,23 +15866,23 @@ ${d.zj}
                         q = JSON.parse(localStorage.getItem("avoidAttackList")) || [];
                         if ("true" === localStorage.getItem("leaguerandom")) {
                             n = n.sort(() => Math.random() - .5);
-                            for (var t of n) {
-                                var w = t.querySelector("a");
+                            for (var r of n) {
+                                var w = r.querySelector("a");
                                 w = w ? w.innerText : null;
-                                if (!k(t) && !q.includes(w)) {
-                                    m = t;
+                                if (!k(r) && !q.includes(w)) {
+                                    m = r;
                                     break
                                 }
                             }
                         } else if ("true" === localStorage.getItem("leaguelowtohigh")) {
                             n = n.sort((v,
                                 x) => parseInt(v.querySelector("th") ? v.querySelector("th").textContent : "0", 10) - parseInt(x.querySelector("th") ? x.querySelector("th").textContent : "0", 10));
-                            t = null;
+                            r = null;
                             m = -1;
-                            for (w of n) n = (n = w.querySelector("a")) ? n.innerText : null, k(w) || q.includes(n) || (n = parseInt(w?.querySelector("th")?.textContent, 10), n > m && (m = n, t = w));
-                            m = t
+                            for (w of n) n = (n = w.querySelector("a")) ? n.innerText : null, k(w) || q.includes(n) || (n = parseInt(w?.querySelector("th")?.textContent, 10), n > m && (m = n, r = w));
+                            m = r
                         }
-                        if (null === m) localStorage.setItem("leaguelowtohigh", "false"), localStorage.setItem("leaguerandom", "false"), localStorage.setItem("leagueattackenable", "false"), Ff(500);
+                        if (null === m) localStorage.setItem("leaguelowtohigh", "false"), localStorage.setItem("leaguerandom", "false"), localStorage.setItem("leagueattackenable", "false"), Gf(500);
                         else if (m)
                             if (q = m.querySelector(".attack").getAttribute("onclick").match(/\d+/)[0],
                                 w = (new Date).getTime(), h = h.searchParams.get("sh") || "", await new Promise(v => setTimeout(v, 250)), h = await (await fetch(`${l}/game/ajax/doArenaFight.php?did=${q}&a=${w}&sh=${h}`)).text(), (q = h.match(/document\.location\.href\s*=\s*'([^']+)'/)) && q[1]) window.location = `${l}/game/${q[1]}`;
@@ -15834,44 +15894,44 @@ ${d.zj}
                             }
                     } else localStorage.setItem("leagueattackenable", "false"), location.reload()
                 }
-                eb.isUnderworld && gf && await jQuery.get(G({
+                eb.isUnderworld && hf && await jQuery.get(G({
                     mod: "underworld",
                     submod: "prayEnd",
                     sh: W("sh")
                 }));
                 await async function() {
                     function k(B) {
-                        const r = Date.now(),
-                            u = v.findIndex(z => z.playerName === B); - 1 < u ? v[u].timeout = r : v.push({
+                        const t = Date.now(),
+                            u = v.findIndex(z => z.playerName === B); - 1 < u ? v[u].timeout = t : v.push({
                             playerName: B,
-                            timeout: r
+                            timeout: t
                         });
                         localStorage.setItem("playerTimeouts",
                             JSON.stringify(v))
                     }
 
-                    function h(B, r) {
+                    function h(B, t) {
                         const u = Date.now();
                         if (Array.isArray(v)) {
                             const z = v.find(A => A.playerName === B);
-                            return !z || u - z.timeout > r
+                            return !z || u - z.timeout > t
                         }
-                        return !v[B] || u - v[B] > r
+                        return !v[B] || u - v[B] > t
                     }
 
                     function l(B) {
-                        for (var r = B.length - 1; 0 < r; r--) {
-                            const u = Math.floor(Math.random() * (r + 1));
-                            [B[r], B[u]] = [B[u], B[r]]
+                        for (var t = B.length - 1; 0 < t; t--) {
+                            const u = Math.floor(Math.random() * (t + 1));
+                            [B[t], B[u]] = [B[u], B[t]]
                         }
-                        2 < B.length && (r = B.splice(0, 2), B.push(...r));
+                        2 < B.length && (t = B.splice(0, 2), B.push(...t));
                         return B
                     }
-                    async function q(B, r, u) {
+                    async function q(B, t, u) {
                         try {
-                            const z = r.match(/\d+/)[0],
-                                A = r.match(/\w+/g)[2],
-                                I = (new URLSearchParams(r)).get("p");
+                            const z = t.match(/\d+/)[0],
+                                A = t.match(/\w+/g)[2],
+                                I = (new URLSearchParams(t)).get("p");
                             localStorage.setItem("tempOpponentDetails", JSON.stringify({
                                 playerName: u,
                                 aType: B,
@@ -15891,9 +15951,9 @@ ${d.zj}
                                 })),
                                 K = (new URLSearchParams(H)).get("reportId");
                             K || window.location.reload();
-                            Gf(`mod=reports&submod=showCombatReport&t=${B}&reportId=${K}`)
+                            Hf(`mod=reports&submod=showCombatReport&t=${B}&reportId=${K}`)
                         } catch (z) {
-                            document.getElementById("content").querySelector("form > input").click(), Ff(1E3)
+                            document.getElementById("content").querySelector("form > input").click(), Gf(1E3)
                         }
                     }
                     "true" === localStorage.getItem("leagueattackenable") && await g();
@@ -15901,26 +15961,26 @@ ${d.zj}
                         await b();
                     var n = (new URL(window.location.href)).searchParams.get("sh") || "",
                         m = JSON.parse(localStorage.getItem("autoAttackList")) || [];
-                    let t = JSON.parse(localStorage.getItem("autoAttackServerList")) || [];
+                    let r = JSON.parse(localStorage.getItem("autoAttackServerList")) || [];
                     const w = JSON.parse(localStorage.getItem("avoidAttackList")) || [];
                     let v = JSON.parse(localStorage.getItem("playerTimeouts")) || [];
                     const x = "true" === localStorage.getItem("onlyArena"),
                         C = "true" === localStorage.getItem("onlyPlayerListArena");
-                    if (nf("arena") && 0 < m.length || nf("arena") && 0 < t.length || x || C) try {
+                    if (of("arena") && 0 < m.length || of("arena") && 0 < r.length || x || C) try {
                         l(m);
                         localStorage.setItem("autoAttackList",
                             JSON.stringify(m));
-                        l(t);
-                        localStorage.setItem("autoAttackServerList", JSON.stringify(t));
+                        l(r);
+                        localStorage.setItem("autoAttackServerList", JSON.stringify(r));
                         let B = 0,
-                            r = 2,
+                            t = 3,
                             u = 0,
                             z = 0;
-                        const A = m.length + t.length;
-                        x && (r = 15);
-                        for (C && (r = A); B < r && (u < m.length || z < t.length);) {
+                        const A = m.length + r.length;
+                        x && (t = 15);
+                        for (C && (t = A); B < t && (u < m.length || z < r.length);) {
                             let I, H, K;
-                            (K = u < m.length && z < t.length ? .5 > Math.random() : z < t.length) ? (H = t[z], I = H.playerName, z++) : (I = m[u], u++);
+                            (K = u < m.length && z < r.length ? .5 > Math.random() : z < r.length) ? (H = r[z], I = H.playerName, z++) : (I = m[u], u++);
                             if (!w.includes(I) && (h(I, 6E4 * (10 + Math.floor(36 * Math.random()))) || x)) {
                                 let L;
                                 L = K ? await e(H) : await c(I, n);
@@ -15930,7 +15990,7 @@ ${d.zj}
                             B++
                         }
                         if (B ===
-                            r && C) {
+                            t && C) {
                             E("Tried to attack arena list. Timing out 1min.");
                             Z("arena", 1);
                             window.location.reload();
@@ -15939,11 +15999,11 @@ ${d.zj}
                     } catch (B) {
                         window.location.reload()
                     }
-                    if ("mod=arena&submod=serverArena&aType=2" != lf) Gf("mod=arena&submod=serverArena&aType=2");
+                    if ("mod=arena&submod=serverArena&aType=2" != mf) Hf("mod=arena&submod=serverArena&aType=2");
                     else try {
-                        let B = [...m, ...t].map(z => z.playerName);
+                        let B = [...m, ...r].map(z => z.playerName);
                         var D = Array.from(document.querySelectorAll("#own2 tr")).slice(1);
-                        const r = "true" === localStorage.getItem("circusAttackGM") || "true" === localStorage.getItem("arenaAttackGM"),
+                        const t = "true" === localStorage.getItem("circusAttackGM") || "true" === localStorage.getItem("arenaAttackGM"),
                             u = "true" === localStorage.getItem("attackRandomly");
                         n = null;
                         m =
@@ -15962,7 +16022,7 @@ ${d.zj}
                                     L = w.includes(H),
                                     O = null !== A.querySelector("span[style*='color:green;']"),
                                     Y = "green" === A.style.color;
-                                if (!(L || !r && O && Y)) {
+                                if (!(L || !t && O && Y)) {
                                     if (B.includes(H)) {
                                         E(`${d.sa}` + H);
                                         n = A;
@@ -15981,7 +16041,7 @@ ${d.zj}
                         window.location.reload()
                     }
                 }()
-            } else if (va && nf("circus") && !0 === Ma && 9 < ea.level && aa.player.key == xa && !0 === document.getElementById("cooldown_bar_fill_ct").classList.contains("cooldown_bar_fill_ready")) {
+            } else if (va && of("circus") && !0 === Ma && 9 < ea.level && aa.player.key == xa && !0 === document.getElementById("cooldown_bar_fill_ct").classList.contains("cooldown_bar_fill_ready")) {
                 async function b() {
                     var h = new URL(window.location.href),
                         l = h.origin;
@@ -15995,18 +16055,18 @@ ${d.zj}
                     if (0 === n.length) return console.log("No players available to attack"), !1;
                     l = JSON.parse(localStorage.getItem("avoidAttackCircusList")) || [];
                     q = function(m) {
-                        for (var t = m.length, w, v; 0 !== t;) v = Math.floor(Math.random() * t), --t, w = m[t], m[t] = m[v], m[v] = w;
+                        for (var r = m.length, w, v; 0 !== r;) v = Math.floor(Math.random() * r), --r, w = m[r], m[r] = m[v], m[v] = w;
                         return m
                     }(n);
                     n = 0;
                     for (let m of q)
-                        if (q = m.textContent.toLowerCase(), !l.map(t => t.toLowerCase()).includes(q)) {
+                        if (q = m.textContent.toLowerCase(), !l.map(r => r.toLowerCase()).includes(q)) {
                             q = await c(m.textContent, h);
                             if (q.includes("index.php?mod=reports")) {
                                 h = (new URLSearchParams(q)).get("reportId");
                                 E(`${d.ta}` + m.textContent);
-                                Gf(`mod=reports&submod=showCombatReport&t=3&reportId=${h}`);
-                                await new Promise(t => setTimeout(t, 500));
+                                Hf(`mod=reports&submod=showCombatReport&t=3&reportId=${h}`);
+                                await new Promise(r => setTimeout(r, 500));
                                 return
                             }
                             n++;
@@ -16021,7 +16081,7 @@ ${d.zj}
                             method: "POST"
                         })).text()
                     } catch {
-                        Ff(1E3)
+                        Gf(1E3)
                     }
                 }
                 async function e(h) {
@@ -16061,7 +16121,7 @@ ${d.zj}
                         "text/html");
                     var m = Array.from(n.querySelectorAll('table[width="80%"] tbody tr')).filter(x => x.querySelector(".attack"));
                     if (m.length && 1 !== m.length) {
-                        var t = null;
+                        var r = null;
                         n = JSON.parse(localStorage.getItem("avoidAttackCircusList")) || [];
                         if ("true" === localStorage.getItem("leaguecircusrandom")) {
                             m = m.sort(() => Math.random() - .5);
@@ -16069,7 +16129,7 @@ ${d.zj}
                                 var v = w.querySelector("a");
                                 v = v ? v.innerText : null;
                                 if (!h(w) && !n.includes(v)) {
-                                    t = w;
+                                    r = w;
                                     break
                                 }
                             }
@@ -16077,13 +16137,13 @@ ${d.zj}
                             m = m.sort((x, C) => parseInt(x.querySelector("th") ?
                                 x.querySelector("th").textContent : "0", 10) - parseInt(C.querySelector("th") ? C.querySelector("th").textContent : "0", 10));
                             w = null;
-                            t = -1;
-                            for (v of m) m = (m = v.querySelector("a")) ? m.innerText : null, h(v) || n.includes(m) || (m = parseInt(v?.querySelector("th")?.textContent, 10), m > t && (t = m, w = v));
-                            t = w
+                            r = -1;
+                            for (v of m) m = (m = v.querySelector("a")) ? m.innerText : null, h(v) || n.includes(m) || (m = parseInt(v?.querySelector("th")?.textContent, 10), m > r && (r = m, w = v));
+                            r = w
                         }
-                        if (null === t) localStorage.setItem("leaguecircuslowtohigh", "false"), localStorage.setItem("leaguecircusrandom", "false"), localStorage.setItem("leaguecircusattackenable", "false"), Ff(500);
-                        else if (t)
-                            if (n = t.querySelector(".attack").getAttribute("onclick").match(/\d+/)[0],
+                        if (null === r) localStorage.setItem("leaguecircuslowtohigh", "false"), localStorage.setItem("leaguecircusrandom", "false"), localStorage.setItem("leaguecircusattackenable", "false"), Gf(500);
+                        else if (r)
+                            if (n = r.querySelector(".attack").getAttribute("onclick").match(/\d+/)[0],
                                 v = (new Date).getTime(), l = l.searchParams.get("sh") || "", await new Promise(x => setTimeout(x, 250)), l = await (await fetch(`${q}/game/ajax/doGroupFight.php?did=${n}&a=${v}&sh=${l}`)).text(), (n = l.match(/document\.location\.href\s*=\s*'([^']+)'/)) && n[1]) window.location = `${q}/game/${n[1]}`;
                             else {
                                 l.includes("5") && ("true" === localStorage.getItem("leaguecircuslowtohigh") ? (localStorage.setItem("leaguecircuslowtohigh", "false"), localStorage.setItem("leaguecircusrandom", "true")) : "true" === localStorage.getItem("leaguecircusrandom") &&
@@ -16094,41 +16154,41 @@ ${d.zj}
                     } else localStorage.setItem("leaguecircusattackenable", "false"), location.reload()
                 }
                 async function k() {
-                    function h(r) {
+                    function h(t) {
                         const u = Date.now(),
-                            z = x.findIndex(A => A.playerName === r); - 1 < z ? x[z].timeout = u : x.push({
-                            playerName: r,
+                            z = x.findIndex(A => A.playerName === t); - 1 < z ? x[z].timeout = u : x.push({
+                            playerName: t,
                             timeout: u
                         });
                         localStorage.setItem("playerTimeouts",
                             JSON.stringify(x))
                     }
 
-                    function l(r, u) {
+                    function l(t, u) {
                         const z = Date.now();
                         if (Array.isArray(x)) {
-                            const A = x.find(I => I.playerName === r);
+                            const A = x.find(I => I.playerName === t);
                             return !A || z - A.timeout > u
                         }
-                        return !x[r] || z - x[r] > u
+                        return !x[t] || z - x[t] > u
                     }
 
-                    function q(r) {
-                        for (var u = r.length - 1; 0 < u; u--) {
+                    function q(t) {
+                        for (var u = t.length - 1; 0 < u; u--) {
                             const z = Math.floor(Math.random() * (u + 1));
-                            [r[u], r[z]] = [r[z], r[u]]
+                            [t[u], t[z]] = [t[z], t[u]]
                         }
-                        2 < r.length && (u = r.splice(0, 2), r.push(...u));
-                        return r
+                        2 < t.length && (u = t.splice(0, 2), t.push(...u));
+                        return t
                     }
-                    async function n(r, u, z) {
+                    async function n(t, u, z) {
                         try {
                             const A = u.match(/\d+/)[0],
                                 I = u.match(/\w+/g)[2],
                                 H = (new URLSearchParams(u)).get("p");
                             localStorage.setItem("tempOpponentDetails", JSON.stringify({
                                 playerName: z,
-                                aType: r,
+                                aType: t,
                                 opponentId: H,
                                 serverId: A,
                                 country: I
@@ -16136,7 +16196,7 @@ ${d.zj}
                             const K = await jQuery.get(U({
                                     mod: "arena",
                                     submod: "confirmDoCombat",
-                                    aType: r,
+                                    aType: t,
                                     opponentId: H,
                                     serverId: A,
                                     country: I,
@@ -16145,36 +16205,36 @@ ${d.zj}
                                 })),
                                 L = (new URLSearchParams(K)).get("reportId");
                             L || window.location.reload();
-                            Gf(`mod=reports&submod=showCombatReport&t=${r}&reportId=${L}`)
+                            Hf(`mod=reports&submod=showCombatReport&t=${t}&reportId=${L}`)
                         } catch (A) {
-                            document.getElementById("content").querySelector("form > input").click(), Ff(1E3)
+                            document.getElementById("content").querySelector("form > input").click(), Gf(1E3)
                         }
                     }
                     "true" === localStorage.getItem("leaguecircusattackenable") && await g();
                     "true" === localStorage.getItem("scoreboardcircusenable") &&
                         await b();
                     var m = (new URL(window.location.href)).searchParams.get("sh") || "",
-                        t = JSON.parse(localStorage.getItem("autoAttackCircusList")) || [];
+                        r = JSON.parse(localStorage.getItem("autoAttackCircusList")) || [];
                     let w = JSON.parse(localStorage.getItem("autoAttackCircusServerList")) || [];
                     const v = JSON.parse(localStorage.getItem("avoidAttackCircusList")) || [];
                     let x = JSON.parse(localStorage.getItem("playerTimeouts")) || [];
                     const C = "true" === localStorage.getItem("onlyCircus");
                     localStorage.getItem("CircusSimulatorAmount");
                     const D = "true" === localStorage.getItem("onlyPlayerListCircus");
-                    if (nf("circus") && 0 < t.length || nf("circus") && 0 < w.length || C || D) try {
-                        q(t);
-                        localStorage.setItem("autoAttackCircusList", JSON.stringify(t));
+                    if (of("circus") && 0 < r.length || of("circus") && 0 < w.length || C || D) try {
+                        q(r);
+                        localStorage.setItem("autoAttackCircusList", JSON.stringify(r));
                         q(w);
                         localStorage.setItem("autoAttackCircusServerList", JSON.stringify(w));
-                        let r = 0,
-                            u = 2,
+                        let t = 0,
+                            u = 3,
                             z = 0,
                             A = 0;
                         C && (u = 15);
-                        const I = t.length + w.length;
-                        for (D && (u = I); r < u && (z < t.length || A < w.length);) {
+                        const I = r.length + w.length;
+                        for (D && (u = I); t < u && (z < r.length || A < w.length);) {
                             let H, K, L;
-                            (L = z < t.length && A < w.length ? .5 > Math.random() : A < w.length) ? (K = w[A], H = K.playerName, A++) : (H = t[z], z++);
+                            (L = z < r.length && A < w.length ? .5 > Math.random() : A < w.length) ? (K = w[A], H = K.playerName, A++) : (H = r[z], z++);
                             if (!v.includes(H) && (l(H, 6E4 * (10 + Math.floor(36 * Math.random()))) || C)) {
                                 let O;
                                 O = L ? await e(K) :
@@ -16187,27 +16247,27 @@ ${d.zj}
                                     break
                                 }
                             }
-                            r++
+                            t++
                         }
-                        if (r === u && D) {
+                        if (t === u && D) {
                             E("Tried to attack circus list. Timing out 1min.");
                             Z("circus", 1);
                             window.location.reload();
                             return
                         }
-                    } catch (r) {
+                    } catch (t) {
                         window.location.reload()
                     }
-                    if ("mod=arena&submod=serverArena&aType=3" != lf) Gf("mod=arena&submod=serverArena&aType=3");
+                    if ("mod=arena&submod=serverArena&aType=3" != mf) Hf("mod=arena&submod=serverArena&aType=3");
                     else try {
                         if (document.querySelector(".messages .message.fail")) localStorage.setItem("doCircus", !1), window.location.reload();
                         else {
-                            let r = [...t, ...w].map(A => A.playerName);
+                            let t = [...r, ...w].map(A => A.playerName);
                             var B = Array.from(document.querySelectorAll("#own3 tr")).slice(1);
                             const u = "true" === localStorage.getItem("circusAttackGM") || "true" === localStorage.getItem("arenaAttackGM"),
                                 z = "true" === localStorage.getItem("attackRandomly");
                             m = null;
-                            t = Infinity;
+                            r = Infinity;
                             localStorage.getItem("Username");
                             localStorage.getItem("enableCircusSimulator");
                             for (let A of B) {
@@ -16223,11 +16283,11 @@ ${d.zj}
                                         Y = null !== I.querySelector("span[style*='color:green;']"),
                                         fa = "green" === I.style.color;
                                     if (!(O || !u && Y && fa)) {
-                                        if (r.includes(K)) {
+                                        if (t.includes(K)) {
                                             E(`${d.ta}` + K);
                                             m = I;
                                             break
-                                        }!m && L < t && (t = L, m = I)
+                                        }!m && L < r && (r = L, m = I)
                                     }
                                 }
                             }
@@ -16246,10 +16306,10 @@ ${d.zj}
                         submod: "prayEnd",
                         sh: W("sh")
                     })),
-                    await k()) : uh ? await k() : !uh && ("true" === localStorage.getItem("HealEnabled") ? ea.o > Number(localStorage.getItem("healPercentage")) : 1) && await k()
-            } else if (va && !0 === Ga && nf("eventPoints") && ("true" === localStorage.getItem("HealEnabled") ? ea.o > Number(localStorage.getItem("healPercentage")) : 1) && 0 < jQuery("#submenu2 a").filter(".glow").length) await async function() {
+                    await k()) : wh ? await k() : !wh && ("true" === localStorage.getItem("HealEnabled") ? ea.o > Number(localStorage.getItem("healPercentage")) : 1) && await k()
+            } else if (va && !0 === Ia && of("eventPoints") && ("true" === localStorage.getItem("HealEnabled") ? ea.o > Number(localStorage.getItem("healPercentage")) : 1) && 0 < jQuery("#submenu2 a").filter(".glow").length) await async function() {
                 var b = jQuery("#submenu2 a").filter(".glow") ? jQuery("#submenu2 a").filter(".glow")[0].href.match(/mod=.*&sh/)[0].slice(0, -3) : null;
-                if (lf != b) Gf(b);
+                if (mf != b) Hf(b);
                 else {
                     b =
                         document.querySelector("#content .ticker");
@@ -16260,19 +16320,19 @@ ${d.zj}
                         b = document.querySelector('[data-ticker-type="countdown"]').textContent.trim().split(" ").pop();
                         let [g, k, h] = b.split(":").map(Number);
                         (b = (new Date).getTime() + 1E3 * (3600 * g + 60 * k + h) + 1) ? localStorage.setItem("eventPoints.timeOut", b): Z("eventPoints", 5);
-                        setTimeout(Gf, 1E3, "mod=overview")
-                    } else !b && 0 < c ? (3 == e && 1 == c && (e = 2), setTimeout(Bh,
-                        1E3, document.querySelectorAll(".expedition_button")[e])) : !c && "true" === localStorage.getItem("renewEvent") && 0 < Ch().In ? ((new URL(window.location.href)).searchParams.get("loc"), setTimeout(Bh, 1E3, document.querySelectorAll(".expedition_button")[e])) : 0 == c && "false" === localStorage.getItem("renewEvent") ? (Z("eventPoints", 5), location.reload()) : 0 == c && setTimeout(Gf, 5E3, "mod=overview")
+                        setTimeout(Hf, 1E3, "mod=overview")
+                    } else !b && 0 < c ? (3 == e && 1 == c && (e = 2), setTimeout(Dh,
+                        1E3, document.querySelectorAll(".expedition_button")[e])) : !c && "true" === localStorage.getItem("renewEvent") && 0 < Eh().In ? ((new URL(window.location.href)).searchParams.get("loc"), setTimeout(Dh, 1E3, document.querySelectorAll(".expedition_button")[e])) : 0 == c && "false" === localStorage.getItem("renewEvent") ? (Z("eventPoints", 5), location.reload()) : 0 == c && setTimeout(Hf, 5E3, "mod=overview")
                 }
             }();
-            else if ((zc || Ac || Bc) && !rh && zc && va && th && (vh && Cc && Cb && Db && nf("AuctionEmpty") || Ac && Cb && Db && nf("AuctionEmpty") || Bc && Cb && Db && nf("AuctionMEmpty") ||
-                    wh && Cc && xh && yh && nf("AuctionMEmpty"))) await za.start();
-            else if (va && "true" === localStorage.getItem("resetExpiredItems") && (0 < Ah.length || Fj) && 5E3 <= ea.gold && nf("resetExpired")) await kj(localStorage.getItem("resetDays"), Ah);
+            else if ((zc || Ac || Bc) && !uh && zc && va && vh && (xh && Cc && Cb && Db && of("AuctionEmpty") || Ac && Cb && Db && of("AuctionEmpty") || Bc && Cb && Db && of("AuctionMEmpty") ||
+                    yh && Cc && zh && Ah && of("AuctionMEmpty"))) await za.start();
+            else if (va && "true" === localStorage.getItem("resetExpiredItems") && (0 < Ch.length || Gj) && 5E3 <= ea.gold && of("resetExpired")) await mj(localStorage.getItem("resetDays"), Ch);
             else if (va) {
-                if ("true" == localStorage.getItem("useCostume") && nf("CheckDolls")) await yj.start();
-                else if ("true" === localStorage.getItem("HealEnabled") && "true" == localStorage.getItem("BuffsEnable") && nf("BuffCheck")) await nj();
-                else if (!zh || Ub - zh >= 6E4 * Hj) localStorage.setItem("MarketlastRan", Ub.toString()),
-                    "true" == localStorage.getItem("enableMarketSearch") && aa.player.key == xa && "true" == sessionStorage.getItem("autoGoActive") && await ff.ho();
+                if ("true" == localStorage.getItem("useCostume") && of("CheckDolls")) await zj.start();
+                else if ("true" === localStorage.getItem("HealEnabled") && "true" == localStorage.getItem("BuffsEnable") && of("BuffCheck")) await pj();
+                else if (!Bh || Ub - Bh >= 6E4 * Ij) localStorage.setItem("MarketlastRan", Ub.toString()),
+                    "true" == localStorage.getItem("enableMarketSearch") && aa.player.key == xa && "true" == sessionStorage.getItem("autoGoActive") && await gf.ho();
                 11001 < yc && (E(`Waiting for ${Vb} seconds...`), await new Promise(b => setTimeout(b, yc)));
                 af()
             }
@@ -16280,7 +16340,7 @@ ${d.zj}
         }
     }
 })();
-const Fh = {
+const Hh = {
         ak: "Smelt Higher Colors First?",
         bc: "Only Attack to player list?",
         cc: "This option will only attack arena/circus list. If cant, bot will skip for a minute.",
@@ -16932,7 +16992,7 @@ const Fh = {
         kg: "Sell Food",
         Gb: "Switch to Food"
     },
-    Ih = {
+    Kh = {
         ak: "Once daha y\u00fcksek renkleri erit?",
         bc: "Sadece oyuncu listesine sald\u0131r?",
         cc: "Bu se\u00e7enek etkinle\u015ftirildi\u011finde, bot sadece oyuncu listesindeki oyunculara sald\u0131racak. Bu se\u00e7enek etkinle\u015ftirilmezse, bot rastgele oyunculara saldiracak.",
@@ -17584,7 +17644,7 @@ const Fh = {
         kg: "Yiyecek Sat",
         Gb: "Yiyeceklere Ge\u00e7"
     },
-    Lh = {
+    Nh = {
         ak: "Derreter cores mais altas primeiro?",
         bc: "Atacar apenas a lista de jogadores?",
         cc: "Quando esta op\u00e7\u00e3o \u00e9 ativada, o bot s\u00f3 atacar\u00e1 jogadores na lista de jogadores. Se esta op\u00e7\u00e3o n\u00e3o estiver ativada, o bot atacar\u00e1 jogadores aleat\u00f3rios.",
@@ -18236,7 +18296,7 @@ const Fh = {
         kg: "Vender Comida",
         Gb: "Mudar para Comida"
     },
-    Gh = {
+    Ih = {
         ak: "Roztopi\u0107 najpierw wy\u017csze kolory?",
         bc: "Atakowa\u0107 tylko list\u0119 graczy?",
         cc: "Kiedy ta opcja jest w\u0142\u0105czona, bot b\u0119dzie atakowa\u0142 tylko graczy z listy graczy. Je\u015bli ta opcja nie jest w\u0142\u0105czona, bot b\u0119dzie atakowa\u0142 losowych graczy.",
@@ -18888,7 +18948,7 @@ const Fh = {
         kg: "Sprzedaj \u017bywno\u015b\u0107",
         Gb: "Prze\u0142\u0105cz na \u017bywno\u015b\u0107"
     },
-    Hh = {
+    Jh = {
         ak: "\u00bfDerretir los colores m\u00e1s altos primero?",
         bc: "\u00bfAtacar solo a la lista de jugadores?",
         cc: "Cuando esta opci\u00f3n est\u00e9 habilitada, el bot solo atacar\u00e1 a los jugadores en la lista de jugadores. Si esta opci\u00f3n no est\u00e1 habilitada, el bot atacar\u00e1 a jugadores aleatorios.",
@@ -19539,7 +19599,7 @@ const Fh = {
         kg: "Vender Comida",
         Gb: "Cambiar a Comida"
     },
-    Jh = {
+    Lh = {
         ak: "Faire fondre d\u2019abord les couleurs plus \u00e9lev\u00e9es ?",
         bc: "Attaquer uniquement la liste de joueurs ?",
         cc: "Lorsque cette option est activ\u00e9e, le bot n\u2019attaquera que les joueurs figurant sur la liste des joueurs. Si cette option n\u2019est pas activ\u00e9e, le bot attaquera des joueurs al\u00e9atoires.",
@@ -20190,7 +20250,7 @@ const Fh = {
         kg: "Vendre de la Nourriture",
         Gb: "Vendre de la Nourriture"
     },
-    Kh = {
+    Mh = {
         ak: "El\u0151sz\u00f6r olvassza fel a magasabb sz\u00edneket?",
         bc: "Csak a j\u00e1t\u00e9koslist\u00e1ra t\u00e1madjunk?",
         cc: "Ha ez az opci\u00f3 be van kapcsolva, a bot csak a j\u00e1t\u00e9koslist\u00e1n szerepl\u0151 j\u00e1t\u00e9kosokat t\u00e1madja meg. Ha ez az opci\u00f3 nincs bekapcsolva, a bot v\u00e9letlenszer\u0171 j\u00e1t\u00e9kosokat t\u00e1mad meg.",
