@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lisans Paneli - Gladiatus Stili</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: url('https://i.imgur.com/3Tjz1MI.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      margin-top: 50px;
+      border: 5px solid #a05a2c;
+      border-radius: 15px;
+    }
+    h2 {
+      color: #e0b76a;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background-color: #a05a2c;
+      color: white;
+      cursor: pointer;
+    }
+    .license-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #e0b76a;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login-section">
+      <h2>Yönetici Girişi</h2>
+      <input type="password" id="admin-pass" placeholder="Şifre" />
+      <button onclick="login()">Giriş Yap</button>
+    </div>
+
+    <div id="panel-section" class="hidden">
+      <h2>Lisans Oluştur</h2>
+      <input type="text" id="player-id" placeholder="Player ID" />
+      <input type="number" id="days" placeholder="Gün Sayısı" />
+      <button onclick="createLicense()">Lisans Oluştur</button>
+
+      <h2>Lisansları Listele</h2>
+      <button onclick="listLicenses()">Yenile</button>
+      <div id="license-list"></div>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = 'admin123'; // Değiştirilebilir
+
+    function login() {
+      const pass = document.getElementById('admin-pass').value;
+      if (pass === ADMIN_PASSWORD) {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('panel-section').classList.remove('hidden');
+      } else {
+        alert('Hatalı şifre!');
+      }
+    }
+
+    function createLicense() {
+      const playerId = document.getElementById('player-id').value;
+      const days = parseInt(document.getElementById('days').value);
+      const licenseKey = generateUUID();
+
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + days);
+
+      fetch('/create-license', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ playerId, licenseKey, expirationDate }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          alert('Lisans oluşturuldu:\n' + data.token);
+        });
+    }
+
+    function listLicenses() {
+      fetch('/list-licenses')
+        .then(res => res.json())
+        .then(data => {
+          const list = document.getElementById('license-list');
+          list.innerHTML = '';
+          data.licenses.forEach(lic => {
+            const box = document.createElement('div');
+            box.className = 'license-box';
+            box.innerHTML = `
+              <b>Player:</b> ${lic.playerId}<br>
+              <b>Key:</b> ${lic.licenseKey}<br>
+              <b>Bitiş:</b> ${lic.expirationDate}<br>
+              <button onclick="deleteLicense('${lic.playerId}', '${lic.licenseKey}')">Sil</button>
+              <button onclick="extendLicense('${lic.playerId}', '${lic.licenseKey}')">15 Gün Ekle</button>
+            `;
+            list.appendChild(box);
+          });
+        });
+    }
+
+    function deleteLicense(playerId, licenseKey) {
+      fetch('/delete-license', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ playerId, licenseKey }),
+      }).then(() => listLicenses());
+    }
+
+    function extendLicense(playerId, licenseKey) {
+      const newDate = new Date();
+      newDate.setDate(newDate.getDate() + 15);
+
+      fetch('/update-license', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ playerId, licenseKey, newExpirationDate: newDate }),
+      }).then(() => listLicenses());
+    }
+
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      }).toUpperCase();
+    }
+  </script>
+</body>
+</html>
