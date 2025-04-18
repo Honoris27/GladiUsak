@@ -13,7 +13,7 @@ const JWT_SECRET_KEY = "your-secret-key";
 // LowDB setup
 const dbFile = path.join(__dirname, "db.json");
 const adapter = new JSONFile(dbFile);
-const db = new Low(adapter);
+const db = new Low(adapter, { licenses: [] }); // varsayılan veri ekleniyor
 
 app.use(cors());
 app.use(express.json());
