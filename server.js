@@ -8,17 +8,12 @@ const fs = require("fs");
 const LICENSE_FILE = "./licenses.json";
 const JWT_SECRET_KEY = "your-secret-key";
 
-// CORS ayarı (panelden erişim için)
-app.use(cors({
-  origin: "https://gladiusak-1.onrender.com", // Panel URL
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
+app.use(cors());
 app.use(express.json());
 
 // Lisans verilerini dosyadan yükle
 let licenses = [];
+
 if (fs.existsSync(LICENSE_FILE)) {
   try {
     const data = fs.readFileSync(LICENSE_FILE);
@@ -123,6 +118,11 @@ app.post("/validate-token", (req, res) => {
           valid: true,
           expired: true,
           newToken,
+          playerId,
+          supportDevs:
+            "3ff938e00689d2beb7274f3e5552adc2:961374bc74d60fa3822bdd387ca4e51251d2519d10f46777faf80239e260430fe0f3e5d669d6a10b42556cc543e9bab8d861c8ef9b2a8751ecf54e8e87f063a4",
+          announcement:
+            "3.4.3 is on! Let us know if there is any bug on Discord. Problem varsa lutfen Discorddan yazin.",
         });
       } else {
         res.json({
@@ -135,6 +135,11 @@ app.post("/validate-token", (req, res) => {
         valid: true,
         expired: false,
         newToken: null,
+        playerId,
+        supportDevs:
+          "3ff938e00689d2beb7274f3e5552adc2:961374bc74d60fa3822bdd387ca4e51251d2519d10f46777faf80239e260430fe0f3e5d669d6a10b42556cc543e9bab8d861c8ef9b2a8751ecf54e8e87f063a4",
+        announcement:
+          "3.4.3 is on! Let us know if there is any bug on Discord. Problem varsa lutfen Discorddan yazin.",
       });
     }
   });
@@ -216,27 +221,47 @@ app.post("/update-license", (req, res) => {
   }
 });
 
-// Lisans silme
-app.delete("/delete-license", (req, res) => {
-  const { licenseKey, playerId } = req.body;
+// Trial lisans oluşturma
+app.post("/get-trial", (req, res) => {
+  const { playerId } = req.body;
 
-  const licenseIndex = licenses.findIndex(
-    (l) => l.licenseKey === licenseKey && l.playerId === playerId
-  );
-
-  if (licenseIndex !== -1) {
-    licenses.splice(licenseIndex, 1);
-    saveLicensesToFile();
-
-    res.json({
-      message: "License deleted successfully",
-    });
-  } else {
-    res.json({
-      message: "License not found",
-    });
+  if (!playerId) {
+    return res.status(400).json({ success: false, message: "Missing playerId" });
   }
+
+  // Daha önce bu playerId'ye trial verilmiş mi kontrol et
+  const alreadyUsed = licenses.find((l) => l.playerId === playerId && l.licenseKey.startsWith("TRIAL-"));
+  if (alreadyUsed) {
+    return res.json({ success: false, message: "Trial already used" });
+  }
+
+  // 10 yıl sonrası
+  const expirationDate = new Date();
+  expirationDate.setFullYear(expirationDate.getFullYear() + 10);
+
+  const licenseKey = "TRIAL-" + uuid.v4(); // Benzersiz trial lisans key
+  const token = generateToken(playerId, licenseKey, expirationDate);
+  const refreshToken = generateRefreshToken();
+
+  const license = {
+    licenseKey,
+    playerId,
+    token,
+    refreshToken,
+    expirationDate,
+  };
+
+  licenses.push(license);
+  saveLicensesToFile();
+
+  res.json({
+    success: true,
+    trialKey: licenseKey,
+    token,
+    expirationDate,
+  });
 });
+
 
 app.listen(3000, () => {
   console.log("License server running on http://localhost:3000");
