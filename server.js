@@ -4,6 +4,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const uuid = require("uuid");
 const fs = require("fs");
+const API_URL = "https://gladiusak.onrender.com/";
 
 const LICENSE_FILE = "./licenses.json";
 const JWT_SECRET_KEY = "your-secret-key";
